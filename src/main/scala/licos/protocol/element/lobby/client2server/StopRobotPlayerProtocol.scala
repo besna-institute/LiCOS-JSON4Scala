@@ -7,6 +7,16 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class StopRobotPlayerProtocol(token: Seq[UUID]) extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521026
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: StopRobotPlayerProtocol =>
+        protocol.token == token
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonStopRobotPlayer] = {
     Some(
       new JsonStopRobotPlayer(

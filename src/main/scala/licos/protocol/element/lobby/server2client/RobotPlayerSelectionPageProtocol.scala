@@ -7,6 +7,16 @@ import play.api.libs.json.{JsValue, Json}
 final case class RobotPlayerSelectionPageProtocol(avatar: Seq[RobotPlayerInfoProtocol])
     extends Server2ClientLobbyMessageProtocol {
 
+  override def hashCode(): Int = 523009
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: RobotPlayerSelectionPageProtocol =>
+        protocol.avatar == avatar
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonRobotPlayerSelectionPage] = {
     Some(
       new JsonRobotPlayerSelectionPage(

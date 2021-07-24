@@ -31,6 +31,20 @@ final case class VoteProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Client2ServerVillageMessageProtocolForLogging {
 
+  override def hashCode(): Int = 531010
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: VoteProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.myCharacter == myCharacter &&
+          protocol.myRole == myRole &&
+          protocol.extensionalDisclosureRange == extensionalDisclosureRange
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonVote] = {
     Some(
       new JsonVote(

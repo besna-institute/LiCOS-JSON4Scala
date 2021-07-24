@@ -8,6 +8,19 @@ import licos.protocol.element.village.part.NameProtocol
 
 final case class ErrorProtocol(content: NameProtocol, severity: Severity, source: String, isFromServer: Boolean) {
 
+  override def hashCode(): Int = 522001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ErrorProtocol =>
+        protocol.content == content &&
+          protocol.severity == severity &&
+          protocol.source == source &&
+          protocol.isFromServer == isFromServer
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonSubError] = {
     Some(
       JsonSubError(

@@ -15,6 +15,20 @@ final case class AuthenticationAndAuthorizationRequestProtocol(
     sourceCode:   SourceCodeProtocol
 ) extends AuthMessageProtocol {
 
+  override def hashCode(): Int = 512001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: AuthenticationAndAuthorizationRequestProtocol =>
+        protocol.userEmail == userEmail &&
+          protocol.userPassword == userPassword &&
+          protocol.robotVersion == robotVersion &&
+          protocol.accessToken == accessToken &&
+          protocol.sourceCode == sourceCode
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonAuthenticationAndAuthorizationRequest] = {
     sourceCode.json.map { jsonSourceCode: JsonSourceCode =>
       new JsonAuthenticationAndAuthorizationRequest(

@@ -7,6 +7,18 @@ import licos.protocol.element.auth.AuthMessageProtocol
 import play.api.libs.json.{JsValue, Json}
 
 final case class AuthorizationRequestResponseProtocol(accessToken: UUID, response: String) extends AuthMessageProtocol {
+
+  override def hashCode(): Int = 513002
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: AuthorizationRequestResponseProtocol =>
+        protocol.accessToken == accessToken &&
+          protocol.response == response
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonAuthorizationRequestResponse] = {
     Some(
       new JsonAuthorizationRequestResponse(

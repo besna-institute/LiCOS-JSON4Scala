@@ -5,6 +5,16 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class EnterAvatarSelectionPageProtocol(lobby: Lobby) extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521013
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: EnterAvatarSelectionPageProtocol =>
+        protocol.lobby == lobby
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonEnterAvatarSelectionPage] = {
     Some(
       new JsonEnterAvatarSelectionPage(

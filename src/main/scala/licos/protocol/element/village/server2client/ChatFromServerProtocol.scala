@@ -31,6 +31,24 @@ final case class ChatFromServerProtocol(
     isOver:    Boolean
 ) extends Server2ClientVillageMessageProtocol {
 
+  override def hashCode(): Int = 535002
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ChatFromServerProtocol =>
+        protocol.village == village &&
+          protocol.channel == channel &&
+          protocol.character == character &&
+          protocol.isMine == isMine &&
+          protocol.id == id &&
+          protocol.counter == counter &&
+          protocol.interval == interval &&
+          protocol.text == text &&
+          protocol.isOver == isOver
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonChatFromServer] = {
     Some(
       new JsonChatFromServer(

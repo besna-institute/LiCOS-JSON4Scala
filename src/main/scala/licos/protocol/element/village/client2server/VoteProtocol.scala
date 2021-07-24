@@ -9,6 +9,19 @@ import play.api.libs.json.{JsValue, Json}
 final case class VoteProtocol(village: VillageInfo, character: Character, myCharacter: Character, myRole: Role)
     extends Client2ServerVillageMessageProtocol {
 
+  override def hashCode(): Int = 532016
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: VoteProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.myCharacter == myCharacter &&
+          protocol.myRole == myRole
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonVote] = {
     server2logger.VoteProtocol(village, character, myCharacter, myRole, Nil).json
   }

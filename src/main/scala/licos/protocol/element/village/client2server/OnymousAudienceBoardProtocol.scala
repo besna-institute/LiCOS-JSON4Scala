@@ -17,6 +17,21 @@ final case class OnymousAudienceBoardProtocol(
     myAvatarImage: URL
 ) extends Client2ServerVillageMessageProtocol {
 
+  override def hashCode(): Int = 532007
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: OnymousAudienceBoardProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.role == role &&
+          protocol.prediction == prediction &&
+          protocol.myAvatarName == myAvatarName &&
+          protocol.myAvatarImage == myAvatarImage
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonOnymousAudienceBoard] = {
     server2logger
       .OnymousAudienceBoardProtocol(village, character, role, prediction, myAvatarName, myAvatarImage, Nil)

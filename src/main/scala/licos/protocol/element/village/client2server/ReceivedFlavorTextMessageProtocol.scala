@@ -9,6 +9,19 @@ import play.api.libs.json.{JsValue, Json}
 final case class ReceivedFlavorTextMessageProtocol(token: UUID, villageId: Long, phase: Phase, day: Int)
     extends ReceivedMessageProtocol {
 
+  override def hashCode(): Int = 532012
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ReceivedFlavorTextMessageProtocol =>
+        protocol.token == token &&
+          protocol.villageId == villageId &&
+          protocol.phase == phase &&
+          protocol.day == day
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonReceivedFlavorTextMessage] = {
     Some(new JsonReceivedFlavorTextMessage(token.toString, villageId, phase.label, day))
   }

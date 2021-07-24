@@ -16,6 +16,21 @@ final case class BoardResultProtocol(
     language:  Locale
 ) {
 
+  override def hashCode(): Int = 533011
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: BoardResultProtocol =>
+        protocol.character == character &&
+          protocol.polarity == polarity &&
+          protocol.phase == phase &&
+          protocol.day == day &&
+          protocol.villageId == villageId &&
+          protocol.language == language
+      case _ => false
+    }
+  }
+
   def json(`@id`: String): JsonBoardResult = {
     JsonBoardResult(
       BoardResultContext.iri,

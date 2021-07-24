@@ -15,6 +15,20 @@ final case class StarInfoProtocol(
     isMarked:        Boolean
 ) {
 
+  override def hashCode(): Int = 533015
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: StarInfoProtocol =>
+        protocol.villageId == villageId &&
+          protocol.token == token &&
+          protocol.serverTimestamp == serverTimestamp &&
+          protocol.clientTimestamp == clientTimestamp &&
+          protocol.isMarked == isMarked
+      case _ => false
+    }
+  }
+
   lazy val json: JsonStarInfo = {
     JsonStarInfo(
       StarContext.iri,

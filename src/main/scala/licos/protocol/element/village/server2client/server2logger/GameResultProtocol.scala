@@ -33,6 +33,19 @@ final case class GameResultProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
+  override def hashCode(): Int = 534006
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: GameResultProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.role == role &&
+          protocol.extensionalDisclosureRange == extensionalDisclosureRange
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonGameResult] = {
     Some(
       new JsonGameResult(

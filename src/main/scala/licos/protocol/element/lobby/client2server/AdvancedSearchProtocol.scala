@@ -17,6 +17,23 @@ final case class AdvancedSearchProtocol(
     comment:       Option[String]
 ) extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: AdvancedSearchProtocol =>
+        protocol.token == token &&
+          protocol.lobby == lobby &&
+          protocol.villageName == villageName &&
+          protocol.hostName == hostName &&
+          protocol.minimum == minimum &&
+          protocol.maximum == maximum &&
+          protocol.avatarSetting == avatarSetting &&
+          protocol.comment == comment
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonAdvancedSearch] = {
     Some(
       JsonAdvancedSearch(

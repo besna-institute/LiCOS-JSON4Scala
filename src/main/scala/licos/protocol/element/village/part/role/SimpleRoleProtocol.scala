@@ -8,6 +8,18 @@ import licos.knowledge.Role
 
 final case class SimpleRoleProtocol(role: Role, villageId: Long, language: Locale) {
 
+  override def hashCode(): Int = 533008
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: SimpleRoleProtocol =>
+        protocol.role == role &&
+          protocol.villageId == villageId &&
+          protocol.language == language
+      case _ => false
+    }
+  }
+
   def json(`@id`: String): JsonSimpleRole = JsonSimpleRole(
     RoleContext.iri,
     `@id`.concat("/role"),

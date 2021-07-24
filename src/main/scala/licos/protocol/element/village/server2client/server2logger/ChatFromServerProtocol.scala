@@ -33,6 +33,25 @@ final case class ChatFromServerProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
+  override def hashCode(): Int = 534002
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ChatFromServerProtocol =>
+        protocol.village == village &&
+          protocol.channel == channel &&
+          protocol.character == character &&
+          protocol.isMine == isMine &&
+          protocol.id == id &&
+          protocol.counter == counter &&
+          protocol.interval == interval &&
+          protocol.text == text &&
+          protocol.isOver == isOver &&
+          protocol.extensionalDisclosureRange == extensionalDisclosureRange
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonChatFromServer] = {
     Some(
       new JsonChatFromServer(

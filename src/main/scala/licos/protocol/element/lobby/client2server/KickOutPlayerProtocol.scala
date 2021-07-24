@@ -9,6 +9,17 @@ import play.api.libs.json.{JsValue, Json}
 final case class KickOutPlayerProtocol(token: UUID, players: Seq[PlayerTokenInKickOutPlayerProtocol])
     extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521018
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: KickOutPlayerProtocol =>
+        protocol.token == token &&
+          protocol.players == players
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonKickOutPlayer] = {
     Some(
       new JsonKickOutPlayer(

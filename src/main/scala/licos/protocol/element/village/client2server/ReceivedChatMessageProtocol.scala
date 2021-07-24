@@ -13,6 +13,19 @@ final case class ReceivedChatMessageProtocol(
     clientTimestamp: OffsetDateTime
 ) extends ReceivedMessageProtocol {
 
+  override def hashCode(): Int = 532011
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ReceivedChatMessageProtocol =>
+        protocol.token == token &&
+          protocol.villageId == villageId &&
+          protocol.serverTimestamp == serverTimestamp &&
+          protocol.clientTimestamp == clientTimestamp
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonReceivedChatMessage] = {
     Some(new JsonReceivedChatMessage(token.toString, villageId, serverTimestamp.toString, clientTimestamp.toString))
   }

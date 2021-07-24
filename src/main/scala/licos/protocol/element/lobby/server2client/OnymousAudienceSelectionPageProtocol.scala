@@ -6,6 +6,16 @@ import play.api.libs.json.{JsValue, Json}
 final case class OnymousAudienceSelectionPageProtocol(avatar: Seq[AvatarInfoProtocol])
     extends Server2ClientLobbyMessageProtocol {
 
+  override def hashCode(): Int = 523006
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: OnymousAudienceSelectionPageProtocol =>
+        protocol.avatar == avatar
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonOnymousAudienceSelectionPage] = {
     Some(
       new JsonOnymousAudienceSelectionPage(

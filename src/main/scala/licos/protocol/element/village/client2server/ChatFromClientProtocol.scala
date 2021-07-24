@@ -15,6 +15,21 @@ final case class ChatFromClientProtocol(
     myRole:      Role
 ) extends Client2ServerVillageMessageProtocol {
 
+  override def hashCode(): Int = 532004
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ChatFromClientProtocol =>
+        protocol.village == village &&
+          protocol.channel == channel &&
+          protocol.text == text &&
+          protocol.isOver == isOver &&
+          protocol.myCharacter == myCharacter &&
+          protocol.myRole == myRole
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonChatFromClient] = {
     server2logger.ChatFromClientProtocol(village, channel, text, isOver, myCharacter, myRole, Nil).json
   }

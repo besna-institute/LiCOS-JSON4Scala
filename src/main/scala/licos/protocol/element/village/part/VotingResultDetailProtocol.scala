@@ -10,6 +10,18 @@ final case class VotingResultDetailProtocol(
     villageId:       Long
 ) {
 
+  override def hashCode(): Int = 533018
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: VotingResultDetailProtocol =>
+        protocol.sourceCharacter == sourceCharacter &&
+          protocol.targetCharacter == targetCharacter &&
+          protocol.villageId == villageId
+      case _ => false
+    }
+  }
+
   lazy val json: JsonVotingResultDetail = {
     val `@id`: String = LiCOSOnline
       .state(

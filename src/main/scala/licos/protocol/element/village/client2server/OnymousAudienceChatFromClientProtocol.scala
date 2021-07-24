@@ -14,6 +14,19 @@ final case class OnymousAudienceChatFromClientProtocol(
     myAvatarImage: URL
 ) extends Client2ServerVillageMessageProtocol {
 
+  override def hashCode(): Int = 532008
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: OnymousAudienceChatFromClientProtocol =>
+        protocol.village == village &&
+          protocol.text == text &&
+          protocol.myAvatarName == myAvatarName &&
+          protocol.myAvatarImage == myAvatarImage
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonOnymousAudienceChat] = {
     server2logger.OnymousAudienceChatFromClientProtocol(village, text, myAvatarName, myAvatarImage, Nil).json
   }

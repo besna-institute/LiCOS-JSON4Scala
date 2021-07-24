@@ -14,6 +14,20 @@ final case class VillageProtocol(
     chatSettings:         ChatSettingsProtocol
 ) {
 
+  override def hashCode(): Int = 533017
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: VillageProtocol =>
+        protocol.id == id &&
+          protocol.name == name &&
+          protocol.totalNumberOfPlayers == totalNumberOfPlayers &&
+          protocol.language == language &&
+          protocol.chatSettings == chatSettings
+      case _ => false
+    }
+  }
+
   lazy val json: JsonVillage = JsonVillage(
     VillageContext.iri,
     LiCOSOnline.stateVillage,

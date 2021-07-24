@@ -14,6 +14,18 @@ import play.api.libs.json.{JsValue, Json}
 final case class NoonPhaseProtocol(village: VillageInfo, character: Seq[CharacterProtocol], role: Seq[RoleProtocol])
     extends Server2ClientVillageMessageProtocol {
 
+  override def hashCode(): Int = 535011
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: NoonPhaseProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.role == role
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonPhase] = {
     server2logger.NoonPhaseProtocol(village, character, role, Nil).json
   }

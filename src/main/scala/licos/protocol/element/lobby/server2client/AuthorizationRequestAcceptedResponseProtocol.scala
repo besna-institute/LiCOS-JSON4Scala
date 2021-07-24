@@ -7,6 +7,18 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class AuthorizationRequestAcceptedResponseProtocol(accessToken: UUID, response: String)
     extends Server2ClientLobbyMessageProtocol {
+
+  override def hashCode(): Int = 523001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: AuthorizationRequestAcceptedResponseProtocol =>
+        protocol.accessToken == accessToken &&
+          protocol.response == response
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonAuthorizationRequestAcceptedResponse] = {
     Some(
       new JsonAuthorizationRequestAcceptedResponse(

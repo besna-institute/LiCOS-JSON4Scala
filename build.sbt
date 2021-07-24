@@ -4,16 +4,14 @@ name := jsonLibraryName
 
 //organization := "online.licos"
 
-//maintainer in Linux := "Kotaro Sakamoto <sakamoto-kotaro-pn@ynu.jp>"
-
-//sources in (Compile, doc) := Seq.empty
+//Compile / doc / sources := Seq.empty
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val javaVersion: String = "8"
 
 lazy val wartremoverSettings = Seq(
-  wartremoverWarnings in (Compile, compile) ++= Warts.allBut(Wart.Throw)
+  Compile / compile / wartremoverWarnings ++= Warts.allBut(Wart.Throw)
 )
 
 lazy val scalafmtSettings = Seq(
@@ -22,9 +20,9 @@ lazy val scalafmtSettings = Seq(
 )
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.5",
+  scalaVersion := "2.13.6",
   organization := "online.licos",
-  fork in run := true
+  run / fork := true
 ) ++ {
   scalacOptions ++= Seq(
     "-deprecation",
@@ -76,7 +74,7 @@ val pomExtraTemplate = {
     <developers>
       <developer>
         <id>ktr-skmt</id>
-        <name>sakamoto-kotaro-pn@ynu.jp</name>
+        <name>sakamoto.github@besna.institute</name>
         <url>https://linkedin.com/in/kotaro-sakamoto-19168b4a</url>
       </developer>
     </developers>
@@ -87,19 +85,19 @@ lazy val json = (project in file(".")).
   settings(wartremoverSettings: _*).
   settings(scalafmtSettings: _*).
   settings(
-    scalacOptions in (Compile, doc) ++= Seq(
+    Compile / doc / scalacOptions ++= Seq(
       "-groups",
       "-implicits",
-      "-doc-root-content", (sourceDirectory in Compile).value + "/rootdoc.txt"
+      "-doc-root-content", (Compile / sourceDirectory).value + "/rootdoc.txt"
     ),
     autoAPIMappings := true
   ).settings(
     isSnapshot := true,
-    version := "0.5.0",
+    version := "0.5.1",
     name := jsonLibraryName,
     publishMavenStyle := true,
-    publishArtifact in Test := false,
-    pomIncludeRepository := { _ => false},
+    Test / publishArtifact := false,
+    pomIncludeRepository := { _ => false },
     publishTo := getPublishTo(isSnapshot.value, name.value),
     licenses := licensesTemplate,
     homepage := homepageTemplate,
@@ -109,10 +107,10 @@ lazy val json = (project in file(".")).
       Seq(
         "com.typesafe.play" %% "play-json" % "2.9.2",
         "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
-        "org.slf4j" % "slf4j-api" % "1.7.30" % Compile,
-        "ch.qos.logback" % "logback-classic" % "1.2.3",
-        "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
-        "org.typelevel" %% "cats-core" % "2.4.2"
+        "org.slf4j" % "slf4j-api" % "1.7.32" % Compile,
+        "ch.qos.logback" % "logback-classic" % "1.2.4",
+        "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
+        "org.typelevel" %% "cats-core" % "2.6.1"
       )
     }
   ).settings(

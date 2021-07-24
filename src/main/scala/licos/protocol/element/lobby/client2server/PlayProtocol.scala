@@ -7,6 +7,17 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class PlayProtocol(token: UUID, villageId: Long) extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521020
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: PlayProtocol =>
+        protocol.token == token &&
+          protocol.villageId == villageId
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonPlay] = {
     Some(
       new JsonPlay(

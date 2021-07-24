@@ -31,6 +31,19 @@ final case class NoonPhaseProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
+  override def hashCode(): Int = 534009
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: NoonPhaseProtocol =>
+        protocol.village == village &&
+          protocol.character == character &&
+          protocol.role == role &&
+          protocol.extensionalDisclosureRange == extensionalDisclosureRange
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonPhase] = {
     Some(
       new JsonPhase(

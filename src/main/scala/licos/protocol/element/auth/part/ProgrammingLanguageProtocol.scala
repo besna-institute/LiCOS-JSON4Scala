@@ -4,6 +4,17 @@ import licos.json.element.auth.robot2server.JsonProgrammingLanguage
 
 final case class ProgrammingLanguageProtocol(name: String, version: String) {
 
+  override def hashCode(): Int = 511001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ProgrammingLanguageProtocol =>
+        name == protocol.name &&
+          version == protocol.version
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonProgrammingLanguage] = {
     Some(
       JsonProgrammingLanguage(

@@ -8,6 +8,18 @@ import play.api.libs.json.{JsValue, Json}
 final case class AnonymousAudienceChatFromServerProtocol(village: VillageInfo, isMine: Boolean, text: String)
     extends Server2ClientVillageMessageProtocol {
 
+  override def hashCode(): Int = 535001
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: AnonymousAudienceChatFromServerProtocol =>
+        protocol.village == village &&
+          protocol.isMine == isMine &&
+          protocol.text == text
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonAnonymousAudienceChat] = {
     server2logger.AnonymousAudienceChatFromServerProtocol(village, isMine, text, Nil).json
   }

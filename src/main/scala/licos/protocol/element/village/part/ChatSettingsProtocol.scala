@@ -9,6 +9,19 @@ final case class ChatSettingsProtocol(
     maxNumberOfChatMessages:      Int,
     maxLengthOfUnicodeCodePoints: Int
 ) {
+
+  override def hashCode(): Int = 533012
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: ChatSettingsProtocol =>
+        protocol.villageId == villageId &&
+          protocol.maxNumberOfChatMessages == maxNumberOfChatMessages &&
+          protocol.maxLengthOfUnicodeCodePoints == maxLengthOfUnicodeCodePoints
+      case _ => false
+    }
+  }
+
   lazy val json: JsonChatSettings =
     JsonChatSettings(
       ChatSettingsContext.iri,

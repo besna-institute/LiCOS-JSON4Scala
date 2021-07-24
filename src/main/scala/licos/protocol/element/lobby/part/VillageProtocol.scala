@@ -14,6 +14,23 @@ final case class VillageProtocol(
     comment:        Option[String]
 ) {
 
+  override def hashCode(): Int = 522013
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: VillageProtocol =>
+        protocol.name == name &&
+          protocol.id == id &&
+          protocol.idForSearching == idForSearching &&
+          protocol.hostPlayer == hostPlayer &&
+          protocol.playerSetting == playerSetting &&
+          protocol.roleSetting == roleSetting &&
+          protocol.avatar == avatar &&
+          protocol.comment == comment
+      case _ => false
+    }
+  }
+
   lazy val json: Option[JsonVillage] = {
     for {
       jsonHostPlayer    <- hostPlayer.json

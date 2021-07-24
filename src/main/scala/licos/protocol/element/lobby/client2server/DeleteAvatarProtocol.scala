@@ -8,6 +8,17 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class DeleteAvatarProtocol(token: Seq[UUID], lobby: Lobby) extends Client2ServerLobbyMessageProtocol {
 
+  override def hashCode(): Int = 521012
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: DeleteAvatarProtocol =>
+        protocol.token == token &&
+          protocol.lobby == lobby
+      case _ => false
+    }
+  }
+
   private lazy val json: Option[JsonDeleteAvatar] = {
     Some(
       new JsonDeleteAvatar(

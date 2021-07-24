@@ -28,6 +28,30 @@ final case class BaseProtocol(
     votingResultsDetails:       Option[Seq[VotingResultDetailProtocol]]
 ) {
 
+  override def hashCode(): Int = 533010
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case protocol: BaseProtocol =>
+        protocol.context == context &&
+          protocol.message == message &&
+          protocol.village == village &&
+          protocol.token == token &&
+          protocol.phase == phase &&
+          protocol.day == day &&
+          protocol.phaseTimeLimit == phaseTimeLimit &&
+          protocol.phaseStartTime == phaseStartTime &&
+          protocol.serverTimestamp == serverTimestamp &&
+          protocol.clientTimestamp == clientTimestamp &&
+          protocol.directionality == directionality &&
+          protocol.intensionalDisclosureRange == intensionalDisclosureRange &&
+          protocol.extensionalDisclosureRange == extensionalDisclosureRange &&
+          protocol.votingResultsSummary == votingResultsSummary &&
+          protocol.votingResultsDetails == votingResultsDetails
+      case _ => false
+    }
+  }
+
   lazy val json: JsonBase = JsonBase(
     context.map(_.iri),
     message.iri(village.id),
