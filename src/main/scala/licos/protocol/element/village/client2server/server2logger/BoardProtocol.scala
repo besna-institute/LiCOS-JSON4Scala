@@ -97,6 +97,7 @@ final case class BoardProtocol(
     myCharacter: Character,
     myRole:      Role
   )
+
 }
 
 object BoardProtocol {

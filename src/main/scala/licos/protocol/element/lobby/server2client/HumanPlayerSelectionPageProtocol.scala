@@ -17,6 +17,7 @@ final case class HumanPlayerSelectionPageProtocol(avatar: Seq[AvatarInfoProtocol
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object HumanPlayerSelectionPageProtocol {

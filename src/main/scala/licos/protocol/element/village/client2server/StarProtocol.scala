@@ -36,6 +36,7 @@ final case class StarProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object StarProtocol {

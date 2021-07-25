@@ -21,6 +21,7 @@ final case class KickOutPlayerProtocol(token: UUID, players: Seq[PlayerTokenInKi
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object KickOutPlayerProtocol {

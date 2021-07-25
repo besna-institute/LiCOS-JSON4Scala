@@ -16,6 +16,7 @@ final case class ReceivedSystemMessageProtocol(token: UUID, villageId: Long, pha
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ReceivedSystemMessageProtocol {

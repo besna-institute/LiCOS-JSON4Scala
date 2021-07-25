@@ -40,6 +40,7 @@ final case class OnymousAudienceBoardProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object OnymousAudienceBoardProtocol {

@@ -44,6 +44,7 @@ final case class PostMortemDiscussionProtocol(
       votingResultsDetail:        Seq[VotingResultDetailProtocol]
     )
   }
+
 }
 
 object PostMortemDiscussionProtocol {

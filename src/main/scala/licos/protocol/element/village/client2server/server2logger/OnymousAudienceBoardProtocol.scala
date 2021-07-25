@@ -94,6 +94,7 @@ final case class OnymousAudienceBoardProtocol(
     myAvatarName:  String,
     myAvatarImage: URL
   )
+
 }
 
 object OnymousAudienceBoardProtocol {

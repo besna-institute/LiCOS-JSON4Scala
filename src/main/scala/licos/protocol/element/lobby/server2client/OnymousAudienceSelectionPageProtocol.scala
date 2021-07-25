@@ -17,6 +17,7 @@ final case class OnymousAudienceSelectionPageProtocol(avatar: Seq[AvatarInfoProt
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object OnymousAudienceSelectionPageProtocol {

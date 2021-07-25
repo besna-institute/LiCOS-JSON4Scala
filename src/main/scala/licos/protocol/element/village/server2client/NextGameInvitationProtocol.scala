@@ -12,6 +12,7 @@ final case class NextGameInvitationProtocol(villageId: Long) extends Server2Clie
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object NextGameInvitationProtocol {

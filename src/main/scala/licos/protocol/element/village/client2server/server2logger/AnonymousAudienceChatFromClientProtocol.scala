@@ -74,6 +74,7 @@ final case class AnonymousAudienceChatFromClientProtocol(
     village: VillageInfo,
     text:    String
   )
+
 }
 
 object AnonymousAudienceChatFromClientProtocol {

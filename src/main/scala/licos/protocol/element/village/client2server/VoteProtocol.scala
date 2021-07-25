@@ -26,6 +26,7 @@ final case class VoteProtocol(village: VillageInfo, character: Character, myChar
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object VoteProtocol {

@@ -98,6 +98,7 @@ final case class ChatFromClientProtocol(
     myCharacter: Character,
     myRole:      Role
   )
+
 }
 
 object ChatFromClientProtocol {

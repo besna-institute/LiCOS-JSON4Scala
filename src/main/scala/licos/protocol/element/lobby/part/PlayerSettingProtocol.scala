@@ -17,6 +17,7 @@ final case class PlayerSettingProtocol(number: Int, current: Int, robot: RobotPr
       )
     }
   }
+
 }
 
 object PlayerSettingProtocol {

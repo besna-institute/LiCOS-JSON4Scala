@@ -94,6 +94,7 @@ final case class ChatFromServerProtocol(
     text:      String,
     isOver:    Boolean
   )
+
 }
 
 object ChatFromServerProtocol {

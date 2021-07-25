@@ -32,6 +32,7 @@ final case class VillageProtocol(
       )
     }
   }
+
 }
 
 object VillageProtocol {

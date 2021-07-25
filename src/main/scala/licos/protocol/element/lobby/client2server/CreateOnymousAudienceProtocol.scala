@@ -22,6 +22,7 @@ final case class CreateOnymousAudienceProtocol(name: String, image: URL, languag
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object CreateOnymousAudienceProtocol {

@@ -21,6 +21,7 @@ final case class LobbyProtocol(lobby: Lobby, villages: Seq[VillageProtocol], err
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object LobbyProtocol {

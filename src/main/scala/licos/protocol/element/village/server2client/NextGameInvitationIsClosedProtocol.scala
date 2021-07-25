@@ -12,6 +12,7 @@ final case class NextGameInvitationIsClosedProtocol() extends Server2ClientVilla
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object NextGameInvitationIsClosedProtocol {

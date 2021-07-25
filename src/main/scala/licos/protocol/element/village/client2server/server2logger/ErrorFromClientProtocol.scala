@@ -76,6 +76,7 @@ final case class ErrorFromClientProtocol(
     severity: Severity,
     source:   String
   )
+
 }
 
 object ErrorFromClientProtocol {

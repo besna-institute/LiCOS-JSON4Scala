@@ -71,6 +71,7 @@ final case class FlavorTextProtocol(
     village:    VillageInfo,
     flavorText: Seq[ChatFromServerProtocol]
   )
+
 }
 
 object FlavorTextProtocol {

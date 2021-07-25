@@ -88,6 +88,7 @@ final case class OnymousAudienceChatFromClientProtocol(
     myAvatarName:  String,
     myAvatarImage: URL
   )
+
 }
 
 object OnymousAudienceChatFromClientProtocol {

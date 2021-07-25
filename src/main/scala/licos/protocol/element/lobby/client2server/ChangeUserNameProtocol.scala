@@ -16,6 +16,7 @@ final case class ChangeUserNameProtocol(userName: String) extends Client2ServerL
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ChangeUserNameProtocol {

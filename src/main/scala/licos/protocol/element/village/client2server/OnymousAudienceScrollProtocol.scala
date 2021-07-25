@@ -50,6 +50,7 @@ final case class OnymousAudienceScrollProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object OnymousAudienceScrollProtocol {

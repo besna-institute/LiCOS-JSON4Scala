@@ -18,6 +18,7 @@ final case class PlayedProtocol(language: Locale) extends Server2ClientLobbyMess
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PlayedProtocol {

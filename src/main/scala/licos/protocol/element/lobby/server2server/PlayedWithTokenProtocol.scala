@@ -21,6 +21,7 @@ final case class PlayedWithTokenProtocol(to: UUID, json: PlayedProtocol) extends
   override def toJsonOpt: Option[JsValue] = json_.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PlayedWithTokenProtocol {

@@ -8,6 +8,7 @@ import licos.knowledge.Character
 import licos.util.LiCOSOnline
 
 final case class SimpleCharacterProtocol(character: Character, villageId: Long, language: Locale) {
+
   def json(`@id`: String): JsonSimpleCharacter = {
     JsonSimpleCharacter(
       CharacterContext.iri,
@@ -18,4 +19,5 @@ final case class SimpleCharacterProtocol(character: Character, villageId: Long, 
       character.icon
     )
   }
+
 }

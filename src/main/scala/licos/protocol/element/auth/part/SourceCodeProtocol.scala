@@ -7,6 +7,7 @@ final case class SourceCodeProtocol(
     programmingLanguage: Seq[ProgrammingLanguageProtocol],
     url:                 String
 ) {
+
   lazy val json: Option[JsonSourceCode] = {
     Some(
       JsonSourceCode(
@@ -16,6 +17,7 @@ final case class SourceCodeProtocol(
       )
     )
   }
+
 }
 
 object SourceCodeProtocol {

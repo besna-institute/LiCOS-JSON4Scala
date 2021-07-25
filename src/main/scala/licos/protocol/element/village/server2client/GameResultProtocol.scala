@@ -37,6 +37,7 @@ final case class GameResultProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object GameResultProtocol {

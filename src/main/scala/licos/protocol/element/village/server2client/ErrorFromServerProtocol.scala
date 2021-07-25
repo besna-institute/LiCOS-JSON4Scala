@@ -76,6 +76,7 @@ final case class ErrorFromServerProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object ErrorFromServerProtocol {

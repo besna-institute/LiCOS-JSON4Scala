@@ -28,6 +28,7 @@ sealed abstract class Character(val name: NameProtocol) extends Product with Ser
   }
 
   override def toString: String = name.en
+
 }
 
 final case class Adil()
@@ -46,7 +47,9 @@ final case class Adil()
         .vi("Adil")
         .zhCN("Adil")
         .zhTW("Adil")
-    )
+    ) {
+  override def hashCode(): Int = 511001
+}
 
 final case class Borya()
     extends Character(
@@ -64,7 +67,9 @@ final case class Borya()
         .vi("Borya")
         .zhCN("Borya")
         .zhTW("Borya")
-    )
+    ) {
+  override def hashCode(): Int = 511002
+}
 
 final case class Chacha()
     extends Character(
@@ -82,7 +87,9 @@ final case class Chacha()
         .vi("Chacha")
         .zhCN("Chacha")
         .zhTW("Chacha")
-    )
+    ) {
+  override def hashCode(): Int = 511003
+}
 
 final case class Devdatta()
     extends Character(
@@ -100,7 +107,9 @@ final case class Devdatta()
         .vi("Devdatta")
         .zhCN("Devdatta")
         .zhTW("Devdatta")
-    )
+    ) {
+  override def hashCode(): Int = 511004
+}
 
 final case class Ekrem()
     extends Character(
@@ -118,7 +127,9 @@ final case class Ekrem()
         .vi("Ekrem")
         .zhCN("Ekrem")
         .zhTW("Ekrem")
-    )
+    ) {
+  override def hashCode(): Int = 511005
+}
 
 final case class Fernando()
     extends Character(
@@ -136,7 +147,9 @@ final case class Fernando()
         .vi("Fernando")
         .zhCN("Fernando")
         .zhTW("Fernando")
-    )
+    ) {
+  override def hashCode(): Int = 511006
+}
 
 final case class Gavriil()
     extends Character(
@@ -154,7 +167,9 @@ final case class Gavriil()
         .vi("Gavriil")
         .zhCN("Gavriil")
         .zhTW("Gavriil")
-    )
+    ) {
+  override def hashCode(): Int = 511007
+}
 
 final case class Henrik()
     extends Character(
@@ -172,7 +187,9 @@ final case class Henrik()
         .vi("Henrik")
         .zhCN("Henrik")
         .zhTW("Henrik")
-    )
+    ) {
+  override def hashCode(): Int = 511008
+}
 
 final case class Ileanna()
     extends Character(
@@ -190,7 +207,9 @@ final case class Ileanna()
         .vi("Ileanna")
         .zhCN("Ileanna")
         .zhTW("Ileanna")
-    )
+    ) {
+  override def hashCode(): Int = 511009
+}
 
 final case class Jasmin()
     extends Character(
@@ -208,7 +227,9 @@ final case class Jasmin()
         .vi("Jasmin")
         .zhCN("Jasmin")
         .zhTW("Jasmin")
-    )
+    ) {
+  override def hashCode(): Int = 511010
+}
 
 final case class Kaiji()
     extends Character(
@@ -226,7 +247,9 @@ final case class Kaiji()
         .vi("Kaiji")
         .zhCN("开司")
         .zhTW("開司")
-    )
+    ) {
+  override def hashCode(): Int = 511011
+}
 
 final case class Louise()
     extends Character(
@@ -244,7 +267,9 @@ final case class Louise()
         .vi("Louise")
         .zhCN("Louise")
         .zhTW("Louise")
-    )
+    ) {
+  override def hashCode(): Int = 511012
+}
 
 final case class Marthe()
     extends Character(
@@ -262,7 +287,9 @@ final case class Marthe()
         .vi("Marthe")
         .zhCN("Marthe")
         .zhTW("Marthe")
-    )
+    ) {
+  override def hashCode(): Int = 511013
+}
 
 final case class Nanyamka()
     extends Character(
@@ -280,7 +307,9 @@ final case class Nanyamka()
         .vi("Nanyamka")
         .zhCN("Nanyamka")
         .zhTW("Nanyamka")
-    )
+    ) {
+  override def hashCode(): Int = 511014
+}
 
 final case class Oliwia()
     extends Character(
@@ -298,7 +327,9 @@ final case class Oliwia()
         .vi("Oliwia")
         .zhCN("Oliwia")
         .zhTW("Oliwia")
-    )
+    ) {
+  override def hashCode(): Int = 511015
+}
 
 final case class Ryan()
     extends Character(
@@ -316,7 +347,9 @@ final case class Ryan()
         .vi("Ryan")
         .zhCN("Ryan")
         .zhTW("Ryan")
-    )
+    ) {
+  override def hashCode(): Int = 511016
+}
 
 final case class Susan()
     extends Character(
@@ -334,7 +367,9 @@ final case class Susan()
         .vi("Susan")
         .zhCN("Susan")
         .zhTW("Susan")
-    )
+    ) {
+  override def hashCode(): Int = 511017
+}
 
 final case class Thuy()
     extends Character(
@@ -352,7 +387,9 @@ final case class Thuy()
         .vi("Thúy")
         .zhCN("Thuy")
         .zhTW("Thuy")
-    )
+    ) {
+  override def hashCode(): Int = 511018
+}
 
 final case class Uma()
     extends Character(
@@ -370,7 +407,9 @@ final case class Uma()
         .vi("Uma")
         .zhCN("Uma")
         .zhTW("Uma")
-    )
+    ) {
+  override def hashCode(): Int = 511019
+}
 
 final case class Valeria()
     extends Character(
@@ -388,7 +427,9 @@ final case class Valeria()
         .vi("Valeria")
         .zhCN("Valeria")
         .zhTW("Valeria")
-    )
+    ) {
+  override def hashCode(): Int = 511020
+}
 
 final case class Yihan()
     extends Character(
@@ -406,4 +447,6 @@ final case class Yihan()
         .vi("Yihan")
         .zhCN("艺涵")
         .zhTW("藝涵")
-    )
+    ) {
+  override def hashCode(): Int = 511021
+}

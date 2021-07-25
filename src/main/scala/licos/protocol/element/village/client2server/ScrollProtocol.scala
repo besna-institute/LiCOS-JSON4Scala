@@ -36,6 +36,7 @@ final case class ScrollProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object ScrollProtocol {

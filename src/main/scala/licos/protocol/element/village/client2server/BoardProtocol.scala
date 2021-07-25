@@ -34,6 +34,7 @@ final case class BoardProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object BoardProtocol {

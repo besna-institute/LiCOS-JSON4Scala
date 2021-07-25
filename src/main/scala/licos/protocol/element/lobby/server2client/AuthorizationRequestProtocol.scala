@@ -6,6 +6,7 @@ import licos.json.element.lobby.server2client.JsonAuthorizationRequest
 import play.api.libs.json.{JsValue, Json}
 
 final case class AuthorizationRequestProtocol(accessToken: UUID) extends Server2ClientLobbyMessageProtocol {
+
   private lazy val json: Option[JsonAuthorizationRequest] = {
     Some(
       new JsonAuthorizationRequest(
@@ -17,6 +18,7 @@ final case class AuthorizationRequestProtocol(accessToken: UUID) extends Server2
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object AuthorizationRequestProtocol {

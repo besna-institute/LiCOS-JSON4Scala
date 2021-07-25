@@ -18,6 +18,7 @@ final case class AuthorizationRequestAcceptedProtocol(accessToken: UUID) extends
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object AuthorizationRequestAcceptedProtocol {

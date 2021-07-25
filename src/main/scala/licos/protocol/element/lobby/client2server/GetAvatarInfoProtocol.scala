@@ -18,6 +18,7 @@ final case class GetAvatarInfoProtocol(token: UUID) extends Client2ServerLobbyMe
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object GetAvatarInfoProtocol {

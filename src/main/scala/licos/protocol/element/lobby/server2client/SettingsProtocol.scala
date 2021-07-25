@@ -21,6 +21,7 @@ final case class SettingsProtocol(userName: String, userEmail: String, language:
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object SettingsProtocol {

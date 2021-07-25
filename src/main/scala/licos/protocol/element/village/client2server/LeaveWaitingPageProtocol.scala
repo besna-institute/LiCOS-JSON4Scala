@@ -22,6 +22,7 @@ final case class LeaveWaitingPageProtocol(token: UUID, villageId: Long, lobby: L
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object LeaveWaitingPageProtocol {

@@ -42,6 +42,7 @@ final case class BuildVillageProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object BuildVillageProtocol {

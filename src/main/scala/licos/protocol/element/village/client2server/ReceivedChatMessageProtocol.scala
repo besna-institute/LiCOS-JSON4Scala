@@ -20,6 +20,7 @@ final case class ReceivedChatMessageProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ReceivedChatMessageProtocol {

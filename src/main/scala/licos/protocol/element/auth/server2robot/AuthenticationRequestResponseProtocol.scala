@@ -8,6 +8,7 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class AuthenticationRequestResponseProtocol(accessToken: UUID, response: String)
     extends AuthMessageProtocol {
+
   private lazy val json: Option[JsonAuthenticationRequestResponse] = {
     Some(
       new JsonAuthenticationRequestResponse(

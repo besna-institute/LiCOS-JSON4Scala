@@ -18,6 +18,7 @@ final case class RobotPlayerSelectionPageProtocol(avatar: Seq[RobotPlayerInfoPro
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object RobotPlayerSelectionPageProtocol {

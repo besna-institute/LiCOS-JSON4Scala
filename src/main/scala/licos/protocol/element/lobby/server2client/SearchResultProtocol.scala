@@ -19,6 +19,7 @@ final case class SearchResultProtocol(villages: Seq[VillageProtocol], error: Opt
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object SearchResultProtocol {

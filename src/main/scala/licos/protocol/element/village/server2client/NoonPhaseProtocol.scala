@@ -30,6 +30,7 @@ final case class NoonPhaseProtocol(village: VillageInfo, character: Seq[Characte
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object NoonPhaseProtocol {

@@ -13,6 +13,7 @@ final case class RenewAvatarTokenProtocol(token: UUID, lobby: Lobby) extends Cli
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object RenewAvatarTokenProtocol {

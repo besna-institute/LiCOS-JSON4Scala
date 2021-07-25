@@ -89,6 +89,7 @@ final case class StarProtocol(
     myCharacter:     Character,
     myRole:          Role
   )
+
 }
 
 object StarProtocol {

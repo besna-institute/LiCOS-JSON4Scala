@@ -29,6 +29,7 @@ final case class RobotPlayerInfoProtocol(
       )
     )
   }
+
 }
 
 object RobotPlayerInfoProtocol {

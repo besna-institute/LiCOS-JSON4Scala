@@ -14,4 +14,5 @@ final case class VillageInfoWithAvatarList(villageInfo: VillageInfo, avatarList:
   }
 
   def numberOfAlivePlayers: Int = alivePlayerList.size
+
 }

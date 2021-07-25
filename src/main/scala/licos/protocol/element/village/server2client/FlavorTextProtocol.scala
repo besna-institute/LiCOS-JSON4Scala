@@ -23,6 +23,7 @@ final case class FlavorTextProtocol(village: VillageInfo, flavorText: Seq[ChatFr
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object FlavorTextProtocol {

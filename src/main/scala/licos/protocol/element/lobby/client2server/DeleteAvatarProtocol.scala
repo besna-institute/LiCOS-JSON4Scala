@@ -21,6 +21,7 @@ final case class DeleteAvatarProtocol(token: Seq[UUID], lobby: Lobby) extends Cl
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object DeleteAvatarProtocol {

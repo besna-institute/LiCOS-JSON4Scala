@@ -1,4 +1,5 @@
 package licos.protocol.element.lobby.client2server
+
 import licos.json.element.lobby.client2server.JsonEnterAvatarSelectionPage
 import licos.knowledge.{Data2Knowledge, Lobby}
 import play.api.libs.json.{JsValue, Json}
@@ -16,6 +17,7 @@ final case class EnterAvatarSelectionPageProtocol(lobby: Lobby) extends Client2S
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object EnterAvatarSelectionPageProtocol {

@@ -35,6 +35,7 @@ final case class OnymousAudienceChatFromServerProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object OnymousAudienceChatFromServerProtocol {

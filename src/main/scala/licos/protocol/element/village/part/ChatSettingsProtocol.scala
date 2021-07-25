@@ -9,6 +9,7 @@ final case class ChatSettingsProtocol(
     maxNumberOfChatMessages:      Int,
     maxLengthOfUnicodeCodePoints: Int
 ) {
+
   lazy val json: JsonChatSettings =
     JsonChatSettings(
       ChatSettingsContext.iri,
@@ -16,4 +17,5 @@ final case class ChatSettingsProtocol(
       maxNumberOfChatMessages,
       maxLengthOfUnicodeCodePoints
     )
+
 }

@@ -34,6 +34,7 @@ final case class ChatFromClientProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object ChatFromClientProtocol {

@@ -36,6 +36,7 @@ final case class AdvancedSearchProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object AdvancedSearchProtocol {

@@ -33,6 +33,7 @@ final case class FirstMorningPhaseProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object FirstMorningPhaseProtocol {

@@ -20,6 +20,7 @@ final case class PingProtocol(id: UUID, results: Seq[PingResultProtocol]) extend
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PingProtocol {

@@ -22,6 +22,7 @@ final case class IdSearchProtocol(token: UUID, lobby: Lobby, idForSearching: Lon
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object IdSearchProtocol {

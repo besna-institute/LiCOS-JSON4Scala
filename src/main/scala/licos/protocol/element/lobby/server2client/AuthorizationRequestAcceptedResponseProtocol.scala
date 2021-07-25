@@ -7,6 +7,7 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class AuthorizationRequestAcceptedResponseProtocol(accessToken: UUID, response: String)
     extends Server2ClientLobbyMessageProtocol {
+
   private lazy val json: Option[JsonAuthorizationRequestAcceptedResponse] = {
     Some(
       new JsonAuthorizationRequestAcceptedResponse(
@@ -19,6 +20,7 @@ final case class AuthorizationRequestAcceptedResponseProtocol(accessToken: UUID,
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object AuthorizationRequestAcceptedResponseProtocol {

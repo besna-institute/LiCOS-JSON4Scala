@@ -83,6 +83,7 @@ final case class MorningPhaseProtocol(
     role:                 Seq[RoleProtocol],
     votingResultsSummary: Seq[VotingResultSummaryProtocol]
   )
+
 }
 
 object MorningPhaseProtocol {

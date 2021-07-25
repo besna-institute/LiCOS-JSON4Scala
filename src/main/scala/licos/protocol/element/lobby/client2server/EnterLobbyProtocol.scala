@@ -21,6 +21,7 @@ final case class EnterLobbyProtocol(token: UUID, lobby: Lobby, page: Int) extend
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object EnterLobbyProtocol {

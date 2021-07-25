@@ -83,6 +83,7 @@ final case class PostMortemDiscussionProtocol(
     role:                 Seq[RoleProtocol],
     votingResultsSummary: Seq[VotingResultSummaryProtocol]
   )
+
 }
 
 object PostMortemDiscussionProtocol {

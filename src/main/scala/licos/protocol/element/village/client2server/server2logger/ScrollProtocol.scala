@@ -87,6 +87,7 @@ final case class ScrollProtocol(
     myCharacter:  Character,
     myRole:       Role
   )
+
 }
 
 object ScrollProtocol {

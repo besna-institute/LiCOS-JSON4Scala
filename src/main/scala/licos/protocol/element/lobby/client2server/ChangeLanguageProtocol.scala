@@ -18,6 +18,7 @@ final case class ChangeLanguageProtocol(language: Locale) extends Client2ServerL
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ChangeLanguageProtocol {

@@ -44,6 +44,7 @@ final case class MorningPhaseProtocol(
       votingResultsDetail:        Seq[VotingResultDetailProtocol]
     )
   }
+
 }
 
 object MorningPhaseProtocol {

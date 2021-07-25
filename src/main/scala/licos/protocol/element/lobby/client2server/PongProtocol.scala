@@ -19,6 +19,7 @@ final case class PongProtocol(token: UUID, id: UUID) extends Client2ServerLobbyM
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PongProtocol {

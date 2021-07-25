@@ -79,6 +79,7 @@ final case class AnonymousAudienceChatFromServerProtocol(
     isMine:  Boolean,
     text:    String
   )
+
 }
 
 object AnonymousAudienceChatFromServerProtocol {

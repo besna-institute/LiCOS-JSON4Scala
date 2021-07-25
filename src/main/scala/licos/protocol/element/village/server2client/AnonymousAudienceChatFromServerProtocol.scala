@@ -26,6 +26,7 @@ final case class AnonymousAudienceChatFromServerProtocol(village: VillageInfo, i
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object AnonymousAudienceChatFromServerProtocol {

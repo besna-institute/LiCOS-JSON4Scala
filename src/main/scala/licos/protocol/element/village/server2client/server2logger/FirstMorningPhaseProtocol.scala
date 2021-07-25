@@ -76,6 +76,7 @@ final case class FirstMorningPhaseProtocol(
     character: Seq[CharacterProtocol],
     role:      Seq[RoleProtocol]
   )
+
 }
 
 object FirstMorningPhaseProtocol {

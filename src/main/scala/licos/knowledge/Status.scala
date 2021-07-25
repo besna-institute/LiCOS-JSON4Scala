@@ -21,25 +21,31 @@ sealed abstract class Status(val label: String) extends Product with Serializabl
 }
 
 case object Alive extends Status("alive") {
+  override def hashCode():           Int    = 514001
   override def toIntermediateStatus: Status = this
 }
 
 case object Dead extends Status("dead") {
+  override def hashCode():           Int    = 514002
   override def toIntermediateStatus: Status = this
 }
 
 case object DeathByExecution extends Status("death by execution") {
+  override def hashCode():           Int    = 514003
   override def toIntermediateStatus: Status = this
 }
 
 case object DeathByAttack extends Status("death by attack") {
+  override def hashCode():           Int    = 514004
   override def toIntermediateStatus: Status = Dead
 }
 
 case object DeathByFear extends Status("death by fear") {
+  override def hashCode():           Int    = 514005
   override def toIntermediateStatus: Status = Dead
 }
 
 case object UnnaturalDeath extends Status("unnatural death") {
+  override def hashCode():           Int    = 514006
   override def toIntermediateStatus: Status = UnnaturalDeath
 }

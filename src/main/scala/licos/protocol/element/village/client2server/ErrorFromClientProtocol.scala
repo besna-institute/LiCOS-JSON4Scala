@@ -31,6 +31,7 @@ final case class ErrorFromClientProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object ErrorFromClientProtocol {

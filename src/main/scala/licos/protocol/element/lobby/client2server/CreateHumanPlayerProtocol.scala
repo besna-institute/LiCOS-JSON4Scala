@@ -22,6 +22,7 @@ final case class CreateHumanPlayerProtocol(name: String, image: URL, language: L
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object CreateHumanPlayerProtocol {
