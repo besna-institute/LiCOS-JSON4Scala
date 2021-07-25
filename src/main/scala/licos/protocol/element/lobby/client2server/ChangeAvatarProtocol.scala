@@ -15,20 +15,6 @@ final case class ChangeAvatarProtocol(
     lobby:    Lobby
 ) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521004
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ChangeAvatarProtocol =>
-        protocol.token == token &&
-          protocol.name == name &&
-          protocol.image == image &&
-          protocol.language == language &&
-          protocol.lobby == lobby
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonChangeAvatar] = {
     Some(
       new JsonChangeAvatar(
@@ -44,6 +30,7 @@ final case class ChangeAvatarProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ChangeAvatarProtocol {

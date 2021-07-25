@@ -4,19 +4,6 @@ import licos.json.element.lobby.JsonPlayerSetting
 
 final case class PlayerSettingProtocol(number: Int, current: Int, robot: RobotProtocol, human: HumanProtocol) {
 
-  override def hashCode(): Int = 522006
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PlayerSettingProtocol =>
-        protocol.number == number &&
-          protocol.current == current &&
-          protocol.robot == robot &&
-          protocol.human == human
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonPlayerSetting] = {
     for {
       jsonRobot <- robot.json
@@ -30,6 +17,7 @@ final case class PlayerSettingProtocol(number: Int, current: Int, robot: RobotPr
       )
     }
   }
+
 }
 
 object PlayerSettingProtocol {

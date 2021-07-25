@@ -49,28 +49,6 @@ final case class NameProtocol() {
   def zhCN: String = zhCN_
   def zhTW: String = zhTW_
 
-  override def hashCode(): Int = 533014
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: NameProtocol =>
-        protocol.ar == ar &&
-          protocol.de == de &&
-          protocol.en == en &&
-          protocol.es == es &&
-          protocol.it == it &&
-          protocol.fr == fr &&
-          protocol.ja == ja &&
-          protocol.pt == pt &&
-          protocol.ru == ru &&
-          protocol.uk == uk &&
-          protocol.vi == vi &&
-          protocol.zhCN == zhCN &&
-          protocol.zhTW == zhTW
-      case _ => false
-    }
-  }
-
   def json(localeOpt: Option[Locale]): JsonName = {
     def all: JsonName = {
       JsonName(

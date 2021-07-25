@@ -28,18 +28,6 @@ final case class FlavorTextProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 534005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: FlavorTextProtocol =>
-        protocol.village == village &&
-          protocol.flavorText == flavorText &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonFlavorText] = {
     Some(
       new JsonFlavorText(
@@ -83,6 +71,7 @@ final case class FlavorTextProtocol(
     village:    VillageInfo,
     flavorText: Seq[ChatFromServerProtocol]
   )
+
 }
 
 object FlavorTextProtocol {

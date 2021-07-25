@@ -37,21 +37,6 @@ final case class PostMortemDiscussionProtocol(
     votingResultsDetail:        Seq[VotingResultDetailProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 534011
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PostMortemDiscussionProtocol =>
-        protocol.village == village &&
-          protocol.character == character &&
-          protocol.role == role &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange &&
-          protocol.votingResultsSummary == votingResultsSummary &&
-          protocol.votingResultsDetail == votingResultsDetail
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonPhase] = {
     Some(
       new JsonPhase(
@@ -98,6 +83,7 @@ final case class PostMortemDiscussionProtocol(
     role:                 Seq[RoleProtocol],
     votingResultsSummary: Seq[VotingResultSummaryProtocol]
   )
+
 }
 
 object PostMortemDiscussionProtocol {

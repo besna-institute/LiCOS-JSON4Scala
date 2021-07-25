@@ -10,19 +10,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class BuildVillageProtocol(village: VillageInfoFromLobby, token: UUID, villageId: Long, villageName: String)
     extends Client2ServerVillageMessageProtocol {
 
-  override def hashCode(): Int = 532003
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: BuildVillageProtocol =>
-        protocol.village == village &&
-          protocol.token == token &&
-          protocol.villageId == villageId &&
-          protocol.villageName == villageName
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonBuildVillage] = {
     Some(
       new JsonBuildVillage(
@@ -66,6 +53,7 @@ final case class BuildVillageProtocol(village: VillageInfoFromLobby, token: UUID
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object BuildVillageProtocol {

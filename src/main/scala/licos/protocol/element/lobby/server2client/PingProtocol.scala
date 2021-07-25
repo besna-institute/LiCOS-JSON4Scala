@@ -8,17 +8,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class PingProtocol(id: UUID, results: Seq[PingResultProtocol]) extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523007
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PingProtocol =>
-        protocol.id == id &&
-          protocol.results == results
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonPing] = {
     Some(
       new JsonPing(
@@ -31,6 +20,7 @@ final case class PingProtocol(id: UUID, results: Seq[PingResultProtocol]) extend
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PingProtocol {

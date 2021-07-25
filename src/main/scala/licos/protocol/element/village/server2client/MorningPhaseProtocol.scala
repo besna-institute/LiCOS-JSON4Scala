@@ -23,19 +23,6 @@ final case class MorningPhaseProtocol(
     votingResultsSummary: Seq[VotingResultSummaryProtocol]
 ) extends Server2ClientVillageMessageProtocol {
 
-  override def hashCode(): Int = 535007
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: MorningPhaseProtocol =>
-        protocol.village == village &&
-          protocol.character == character &&
-          protocol.role == role &&
-          protocol.votingResultsSummary == votingResultsSummary
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonPhase] = {
     server2logger.MorningPhaseProtocol(village, character, role, Nil, votingResultsSummary, Nil).json
   }
@@ -57,6 +44,7 @@ final case class MorningPhaseProtocol(
       votingResultsDetail:        Seq[VotingResultDetailProtocol]
     )
   }
+
 }
 
 object MorningPhaseProtocol {

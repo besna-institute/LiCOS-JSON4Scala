@@ -15,20 +15,6 @@ final case class CreateRobotPlayerProtocol(
     support:          SupportProtocol
 ) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521011
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: CreateRobotPlayerProtocol =>
-        protocol.name == name &&
-          protocol.image == image &&
-          protocol.language == language &&
-          protocol.isFullyAutomated == isFullyAutomated &&
-          protocol.support == support
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonCreateRobotPlayer] = {
     support.json.map { jsonSupport: JsonSupport =>
       new JsonCreateRobotPlayer(

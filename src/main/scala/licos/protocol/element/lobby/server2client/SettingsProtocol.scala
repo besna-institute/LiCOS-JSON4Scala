@@ -8,18 +8,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class SettingsProtocol(userName: String, userEmail: String, language: Locale)
     extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523011
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SettingsProtocol =>
-        protocol.userName == userName &&
-          protocol.userEmail == userEmail &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonSettings] = {
     Some(
       new JsonSettings(
@@ -33,6 +21,7 @@ final case class SettingsProtocol(userName: String, userEmail: String, language:
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object SettingsProtocol {

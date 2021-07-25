@@ -17,27 +17,6 @@ final case class SupportProtocol(
     `15`: SupportedCompositionProtocol
 ) {
 
-  override def hashCode(): Int = 522012
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SupportProtocol =>
-        protocol.`4` == `4` &&
-          protocol.`5` == `5` &&
-          protocol.`6` == `6` &&
-          protocol.`7` == `7` &&
-          protocol.`8` == `8` &&
-          protocol.`9` == `9` &&
-          protocol.`10` == `10` &&
-          protocol.`11` == `11` &&
-          protocol.`12` == `12` &&
-          protocol.`13` == `13` &&
-          protocol.`14` == `14` &&
-          protocol.`15` == `15`
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonSupport] = {
     for {
       json4  <- `4`.json
@@ -69,6 +48,7 @@ final case class SupportProtocol(
       )
     }
   }
+
 }
 
 object SupportProtocol {

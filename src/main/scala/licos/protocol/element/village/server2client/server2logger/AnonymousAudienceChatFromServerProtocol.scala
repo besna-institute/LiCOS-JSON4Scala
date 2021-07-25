@@ -29,19 +29,6 @@ final case class AnonymousAudienceChatFromServerProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 534001
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: AnonymousAudienceChatFromServerProtocol =>
-        protocol.village == village &&
-          protocol.isMine == isMine &&
-          protocol.text == text &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonAnonymousAudienceChat] = {
     Some(
       new JsonAnonymousAudienceChat(
@@ -92,6 +79,7 @@ final case class AnonymousAudienceChatFromServerProtocol(
     isMine:  Boolean,
     text:    String
   )
+
 }
 
 object AnonymousAudienceChatFromServerProtocol {

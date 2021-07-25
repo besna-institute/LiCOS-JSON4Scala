@@ -9,18 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class IdSearchProtocol(token: UUID, lobby: Lobby, idForSearching: Long)
     extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521017
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: IdSearchProtocol =>
-        protocol.token == token &&
-          protocol.lobby == lobby &&
-          protocol.idForSearching == idForSearching
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonIdSearch] = {
     Some(
       new JsonIdSearch(
@@ -34,6 +22,7 @@ final case class IdSearchProtocol(token: UUID, lobby: Lobby, idForSearching: Lon
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object IdSearchProtocol {

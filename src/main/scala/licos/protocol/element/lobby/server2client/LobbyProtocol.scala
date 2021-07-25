@@ -8,18 +8,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class LobbyProtocol(lobby: Lobby, villages: Seq[VillageProtocol], error: Option[ErrorProtocol])
     extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: LobbyProtocol =>
-        protocol.lobby == lobby &&
-          protocol.villages == villages &&
-          protocol.error == error
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonLobby] = {
     Some(
       new JsonLobby(
@@ -33,6 +21,7 @@ final case class LobbyProtocol(lobby: Lobby, villages: Seq[VillageProtocol], err
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object LobbyProtocol {

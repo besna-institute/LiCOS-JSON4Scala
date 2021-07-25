@@ -10,19 +10,6 @@ import licos.util.LiCOSOnline
 
 final case class RoleCharacterProtocol(character: Character, role: Role, villageId: Long, language: Locale) {
 
-  override def hashCode(): Int = 533003
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: RoleCharacterProtocol =>
-        protocol.character == character &&
-          protocol.role == role &&
-          protocol.villageId == villageId &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   lazy val json: JsonRoleCharacter = {
     val `@id`: String = LiCOSOnline.state(villageId, "/myCharacter")
     JsonRoleCharacter(

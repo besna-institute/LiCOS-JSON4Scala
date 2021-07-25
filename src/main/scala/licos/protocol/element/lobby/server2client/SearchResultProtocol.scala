@@ -7,17 +7,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class SearchResultProtocol(villages: Seq[VillageProtocol], error: Option[ErrorProtocol])
     extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523010
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SearchResultProtocol =>
-        protocol.villages == villages &&
-          protocol.error == error
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonSearchResult] = {
     Some(
       new JsonSearchResult(
@@ -30,6 +19,7 @@ final case class SearchResultProtocol(villages: Seq[VillageProtocol], error: Opt
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object SearchResultProtocol {

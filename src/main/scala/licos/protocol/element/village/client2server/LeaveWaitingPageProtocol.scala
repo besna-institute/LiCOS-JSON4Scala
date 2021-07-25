@@ -9,18 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class LeaveWaitingPageProtocol(token: UUID, villageId: Long, lobby: Lobby)
     extends Client2ServerVillageMessageProtocol {
 
-  override def hashCode(): Int = 532006
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: LeaveWaitingPageProtocol =>
-        protocol.token == token &&
-          protocol.villageId == villageId &&
-          protocol.lobby == lobby
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonLeaveWaitingPage] = {
     Some(
       new JsonLeaveWaitingPage(
@@ -34,6 +22,7 @@ final case class LeaveWaitingPageProtocol(token: UUID, villageId: Long, lobby: L
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object LeaveWaitingPageProtocol {

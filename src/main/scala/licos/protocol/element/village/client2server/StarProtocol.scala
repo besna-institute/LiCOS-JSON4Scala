@@ -17,21 +17,6 @@ final case class StarProtocol(
     myRole:          Role
 ) extends Client2ServerVillageMessageProtocol {
 
-  override def hashCode(): Int = 532015
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: StarProtocol =>
-        protocol.village == village &&
-          protocol.serverTimestamp == serverTimestamp &&
-          protocol.clientTimestamp == clientTimestamp &&
-          protocol.isMarked == isMarked &&
-          protocol.myCharacter == myCharacter &&
-          protocol.myRole == myRole
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonStar] = {
     server2logger.StarProtocol(village, serverTimestamp, clientTimestamp, isMarked, myCharacter, myRole, Nil).json
   }
@@ -51,6 +36,7 @@ final case class StarProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object StarProtocol {

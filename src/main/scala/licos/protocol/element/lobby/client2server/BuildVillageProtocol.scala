@@ -19,24 +19,6 @@ final case class BuildVillageProtocol(
     comment:        Option[String]
 ) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521003
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: BuildVillageProtocol =>
-        protocol.token == token &&
-          protocol.name == name &&
-          protocol.id == id &&
-          protocol.idForSearching == idForSearching &&
-          protocol.hostPlayer == hostPlayer &&
-          protocol.playerSetting == playerSetting &&
-          protocol.roleSetting == roleSetting &&
-          protocol.avatar == avatar &&
-          protocol.comment == comment
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonBuildVillage] = {
     for {
       jsonHostPlayer    <- hostPlayer.json
@@ -60,6 +42,7 @@ final case class BuildVillageProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object BuildVillageProtocol {

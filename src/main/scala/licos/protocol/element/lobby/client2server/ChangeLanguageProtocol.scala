@@ -7,16 +7,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class ChangeLanguageProtocol(language: Locale) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ChangeLanguageProtocol =>
-        protocol.language == language
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonChangeLanguage] = {
     Some(
       new JsonChangeLanguage(
@@ -28,6 +18,7 @@ final case class ChangeLanguageProtocol(language: Locale) extends Client2ServerL
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ChangeLanguageProtocol {

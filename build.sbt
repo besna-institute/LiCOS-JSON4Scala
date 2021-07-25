@@ -97,6 +97,7 @@ lazy val json = (project in file(".")).
     name := jsonLibraryName,
     publishMavenStyle := true,
     Test / publishArtifact := false,
+    ThisBuild / versionScheme := Some("early-semver"),
     pomIncludeRepository := { _ => false },
     publishTo := getPublishTo(isSnapshot.value, name.value),
     licenses := licensesTemplate,

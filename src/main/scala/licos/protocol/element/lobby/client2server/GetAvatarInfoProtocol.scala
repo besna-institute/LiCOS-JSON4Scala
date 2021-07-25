@@ -7,16 +7,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class GetAvatarInfoProtocol(token: UUID) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521015
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: GetAvatarInfoProtocol =>
-        protocol.token == token
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonGetAvatarInfo] = {
     Some(
       new JsonGetAvatarInfo(
@@ -28,6 +18,7 @@ final case class GetAvatarInfoProtocol(token: UUID) extends Client2ServerLobbyMe
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object GetAvatarInfoProtocol {

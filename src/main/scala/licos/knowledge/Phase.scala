@@ -19,10 +19,17 @@ sealed abstract class Phase(val label: String) extends Product with Serializable
 }
 
 case object FlavorText extends Phase("flavor text") {
+
+  override def hashCode(): Int = 512001
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = Option.empty[FiniteDuration]
+
 }
 
 case object Morning extends Phase("morning") {
+
+  override def hashCode(): Int = 512002
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = {
     if (1 < day) {
       if (numberOfAlivePlayers <= 6) {
@@ -36,20 +43,37 @@ case object Morning extends Phase("morning") {
       Some(5.minutes)
     }
   }
+
 }
 
 case object Noon extends Phase("noon") {
+
+  override def hashCode(): Int = 512003
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = Some(60.seconds)
+
 }
 
 case object Night extends Phase("night") {
+
+  override def hashCode(): Int = 512004
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = Some(60.seconds)
+
 }
 
 case object Result extends Phase("result") {
+
+  override def hashCode(): Int = 512005
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = Option.empty[FiniteDuration]
+
 }
 
 case object PostMortemDiscussion extends Phase("post-mortem discussion") {
+
+  override def hashCode(): Int = 512006
+
   override def timeLimit(day: Int, numberOfAlivePlayers: Int): Option[FiniteDuration] = Some((24 * 60 * 60).seconds)
+
 }

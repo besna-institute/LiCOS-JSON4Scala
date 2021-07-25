@@ -7,17 +7,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class SelectVillageProtocol(token: UUID, villageId: Long) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521025
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SelectVillageProtocol =>
-        protocol.token == token &&
-          protocol.villageId == villageId
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonSelectVillage] = {
     Some(
       new JsonSelectVillage(
@@ -30,6 +19,7 @@ final case class SelectVillageProtocol(token: UUID, villageId: Long) extends Cli
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object SelectVillageProtocol {

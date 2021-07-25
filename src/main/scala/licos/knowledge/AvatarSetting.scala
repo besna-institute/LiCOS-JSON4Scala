@@ -5,6 +5,7 @@ sealed abstract class AvatarSetting(val label: String) extends Product with Seri
   override def toString: String = label
 
   def isAnonymous: Boolean
+
 }
 
 case object RandomAvatarSetting extends AvatarSetting("random") {

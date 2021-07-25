@@ -30,23 +30,6 @@ final case class ScrollProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Client2ServerVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 531008
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ScrollProtocol =>
-        protocol.village == village &&
-          protocol.nodeId == nodeId &&
-          protocol.scrollTop == scrollTop &&
-          protocol.scrollHeight == scrollHeight &&
-          protocol.offsetHeight == offsetHeight &&
-          protocol.myCharacter == myCharacter &&
-          protocol.myRole == myRole &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonScroll] = {
     Some(
       new JsonScroll(
@@ -104,6 +87,7 @@ final case class ScrollProtocol(
     myCharacter:  Character,
     myRole:       Role
   )
+
 }
 
 object ScrollProtocol {

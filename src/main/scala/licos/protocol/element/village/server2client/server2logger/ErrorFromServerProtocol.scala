@@ -28,20 +28,6 @@ final case class ErrorFromServerProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Server2ClientVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 534003
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ErrorFromServerProtocol =>
-        protocol.village == village &&
-          protocol.content == content &&
-          protocol.severity == severity &&
-          protocol.source == source &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonError] = {
     Some(
       new JsonError(
@@ -90,6 +76,7 @@ final case class ErrorFromServerProtocol(
     severity: Severity,
     source:   String
   )
+
 }
 
 object ErrorFromServerProtocol {

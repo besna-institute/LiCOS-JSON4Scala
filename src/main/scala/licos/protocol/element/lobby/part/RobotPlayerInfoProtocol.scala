@@ -15,20 +15,6 @@ final case class RobotPlayerInfoProtocol(
     isFullyAutomated: Boolean
 ) {
 
-  override def hashCode(): Int = 522008
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: RobotPlayerInfoProtocol =>
-        protocol.avatar == avatar &&
-          protocol.status == status &&
-          protocol.isAuthorized == isAuthorized &&
-          protocol.isTestPassed == isTestPassed &&
-          protocol.isFullyAutomated == isFullyAutomated
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonRobotPlayerInfo] = {
     Some(
       new JsonRobotPlayerInfo(
@@ -43,6 +29,7 @@ final case class RobotPlayerInfoProtocol(
       )
     )
   }
+
 }
 
 object RobotPlayerInfoProtocol {

@@ -7,16 +7,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class RunRobotPlayerInTheBackgroundProtocol(token: Seq[UUID]) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521024
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: RunRobotPlayerInTheBackgroundProtocol =>
-        protocol.token == token
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonRunRobotPlayerInTheBackground] = {
     Some(
       new JsonRunRobotPlayerInTheBackground(

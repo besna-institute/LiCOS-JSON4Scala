@@ -5,16 +5,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class ChangeUserPasswordProtocol(userPassword: String) extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521008
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ChangeUserPasswordProtocol =>
-        protocol.userPassword == userPassword
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonChangeUserPassword] = {
     Some(
       new JsonChangeUserPassword(
@@ -26,6 +16,7 @@ final case class ChangeUserPasswordProtocol(userPassword: String) extends Client
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ChangeUserPasswordProtocol {

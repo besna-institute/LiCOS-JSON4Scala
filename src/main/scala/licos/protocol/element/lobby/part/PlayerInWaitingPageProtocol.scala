@@ -14,21 +14,6 @@ final case class PlayerInWaitingPageProtocol(
     isMe:        Boolean
 ) {
 
-  override def hashCode(): Int = 522005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PlayerInWaitingPageProtocol =>
-        protocol.token == token &&
-          protocol.name == name &&
-          protocol.avatarImage == avatarImage &&
-          protocol.isAnonymous == isAnonymous &&
-          protocol.isHost == isHost &&
-          protocol.isMe == isMe
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonPlayerInWaitingPage] = {
     Some(
       JsonPlayerInWaitingPage(

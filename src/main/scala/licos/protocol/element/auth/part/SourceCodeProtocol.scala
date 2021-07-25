@@ -8,18 +8,6 @@ final case class SourceCodeProtocol(
     url:                 String
 ) {
 
-  override def hashCode(): Int = 511002
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SourceCodeProtocol =>
-        protocol.timestamp == timestamp &&
-          protocol.programmingLanguage == programmingLanguage &&
-          protocol.url == url
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonSourceCode] = {
     Some(
       JsonSourceCode(
@@ -29,6 +17,7 @@ final case class SourceCodeProtocol(
       )
     )
   }
+
 }
 
 object SourceCodeProtocol {

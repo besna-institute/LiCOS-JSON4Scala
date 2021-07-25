@@ -10,19 +10,6 @@ final case class SupportedCompositionProtocol(
     isSupportedForC: Boolean
 ) {
 
-  override def hashCode(): Int = 522011
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: SupportedCompositionProtocol =>
-        protocol.numberOfPlayers == numberOfPlayers &&
-          protocol.isSupportedForA == isSupportedForA &&
-          protocol.isSupportedForB == isSupportedForB &&
-          protocol.isSupportedForC == isSupportedForC
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonSupportedComposition] = {
     Some(
       JsonSupportedComposition(

@@ -9,19 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class ReceivedSystemMessageProtocol(token: UUID, villageId: Long, phase: Phase, day: Int)
     extends ReceivedMessageProtocol {
 
-  override def hashCode(): Int = 532013
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ReceivedSystemMessageProtocol =>
-        protocol.token == token &&
-          protocol.villageId == villageId &&
-          protocol.phase == phase &&
-          protocol.day == day
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonReceivedSystemMessage] = {
     Some(new JsonReceivedSystemMessage(token.toString, villageId, phase.label, day))
   }
@@ -29,6 +16,7 @@ final case class ReceivedSystemMessageProtocol(token: UUID, villageId: Long, pha
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object ReceivedSystemMessageProtocol {

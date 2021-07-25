@@ -7,18 +7,6 @@ import licos.knowledge.{Data2Knowledge, PingStatus}
 
 final case class PingResultProtocol(token: UUID, ping: String, status: PingStatus) {
 
-  override def hashCode(): Int = 522004
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PingResultProtocol =>
-        protocol.token == token &&
-          protocol.ping == ping &&
-          protocol.status == status
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonPingResult] = {
     Some(
       JsonPingResult(

@@ -11,18 +11,6 @@ final case class WaitingPageProtocol(
     error:   Option[ErrorProtocol]
 ) extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523012
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: WaitingPageProtocol =>
-        protocol.village == village &&
-          protocol.players == players &&
-          protocol.error == error
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonWaitingPage] = {
     village.json.map { jsonVillage: JsonVillage =>
       new JsonWaitingPage(
@@ -36,6 +24,7 @@ final case class WaitingPageProtocol(
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object WaitingPageProtocol {

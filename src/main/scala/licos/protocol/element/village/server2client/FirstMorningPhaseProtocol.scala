@@ -17,18 +17,6 @@ final case class FirstMorningPhaseProtocol(
     role:      Seq[RoleProtocol]
 ) extends Server2ClientVillageMessageProtocol {
 
-  override def hashCode(): Int = 535004
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: FirstMorningPhaseProtocol =>
-        protocol.village == village &&
-          protocol.character == character &&
-          protocol.role == role
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonPhase] = {
     server2logger.FirstMorningPhaseProtocol(village, character, role, Nil).json
   }
@@ -45,6 +33,7 @@ final case class FirstMorningPhaseProtocol(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object FirstMorningPhaseProtocol {

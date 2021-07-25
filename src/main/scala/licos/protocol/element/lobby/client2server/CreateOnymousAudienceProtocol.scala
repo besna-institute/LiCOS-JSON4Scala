@@ -9,18 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class CreateOnymousAudienceProtocol(name: String, image: URL, language: Locale)
     extends Client2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 521010
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: CreateOnymousAudienceProtocol =>
-        protocol.name == name &&
-          protocol.image == image &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonCreateOnymousAudience] = {
     Some(
       new JsonCreateOnymousAudience(
@@ -34,6 +22,7 @@ final case class CreateOnymousAudienceProtocol(name: String, image: URL, languag
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object CreateOnymousAudienceProtocol {

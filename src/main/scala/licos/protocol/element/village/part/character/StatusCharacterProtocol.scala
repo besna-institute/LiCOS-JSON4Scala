@@ -17,21 +17,6 @@ final case class StatusCharacterProtocol(
     language:   Locale
 ) {
 
-  override def hashCode(): Int = 533005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: StatusCharacterProtocol =>
-        protocol.character == character &&
-          protocol.role == role &&
-          protocol.status == status &&
-          protocol.playerType == playerType &&
-          protocol.villageId == villageId &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   lazy val json: JsonStatusCharacter = {
     val `@id`: String = LiCOSOnline.state(villageId, s"character#${character.getId.toString}")
     JsonStatusCharacter(

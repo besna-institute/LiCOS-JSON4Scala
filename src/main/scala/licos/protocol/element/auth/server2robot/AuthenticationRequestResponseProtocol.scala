@@ -9,17 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class AuthenticationRequestResponseProtocol(accessToken: UUID, response: String)
     extends AuthMessageProtocol {
 
-  override def hashCode(): Int = 513001
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: AuthenticationRequestResponseProtocol =>
-        protocol.accessToken == accessToken &&
-          protocol.response == response
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonAuthenticationRequestResponse] = {
     Some(
       new JsonAuthenticationRequestResponse(

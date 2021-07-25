@@ -5,16 +5,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class NextGameInvitationProtocol(villageId: Long) extends Server2ClientVillageMessageProtocol {
 
-  override def hashCode(): Int = 535009
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: NextGameInvitationProtocol =>
-        protocol.villageId == villageId
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonNextGameInvitation] = {
     Some(new JsonNextGameInvitation(villageId))
   }
@@ -22,6 +12,7 @@ final case class NextGameInvitationProtocol(villageId: Long) extends Server2Clie
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object NextGameInvitationProtocol {

@@ -32,22 +32,6 @@ final case class OnymousAudienceBoardProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Client2ServerVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 531005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: OnymousAudienceBoardProtocol =>
-        protocol.village == village &&
-          protocol.character == character &&
-          protocol.role == role &&
-          protocol.prediction == prediction &&
-          protocol.myAvatarName == myAvatarName &&
-          protocol.myAvatarImage == myAvatarImage &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonOnymousAudienceBoard] = {
     Some(
       new JsonOnymousAudienceBoard(
@@ -110,6 +94,7 @@ final case class OnymousAudienceBoardProtocol(
     myAvatarName:  String,
     myAvatarImage: URL
   )
+
 }
 
 object OnymousAudienceBoardProtocol {

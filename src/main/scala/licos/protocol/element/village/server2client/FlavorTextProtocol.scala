@@ -8,17 +8,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class FlavorTextProtocol(village: VillageInfo, flavorText: Seq[ChatFromServerProtocol])
     extends Server2ClientVillageMessageProtocol {
 
-  override def hashCode(): Int = 535005
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: FlavorTextProtocol =>
-        protocol.village == village &&
-          protocol.flavorText == flavorText
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonFlavorText] = {
     server2logger.FlavorTextProtocol(village, flavorText, Nil).json
   }
@@ -34,6 +23,7 @@ final case class FlavorTextProtocol(village: VillageInfo, flavorText: Seq[ChatFr
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
     )
   }
+
 }
 
 object FlavorTextProtocol {

@@ -16,20 +16,6 @@ final case class ResultRoleProtocol(
     language:  Locale
 ) {
 
-  override def hashCode(): Int = 533006
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: ResultRoleProtocol =>
-        protocol.role == role &&
-          protocol.isMine == isMine &&
-          protocol.character == character &&
-          protocol.villageId == villageId &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   lazy val json: JsonResultRole = {
     val `@id`: String = LiCOSOnline.state(villageId, s"role#${role.name.en.toLowerCase(Locale.ENGLISH)}")
     JsonResultRole(

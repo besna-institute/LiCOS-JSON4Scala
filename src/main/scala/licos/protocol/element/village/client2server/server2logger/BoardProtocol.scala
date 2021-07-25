@@ -34,22 +34,6 @@ final case class BoardProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Client2ServerVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 531002
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: BoardProtocol =>
-        protocol.village == village &&
-          protocol.character == character &&
-          protocol.role == role &&
-          protocol.prediction == prediction &&
-          protocol.myCharacter == myCharacter &&
-          protocol.myRole == myRole &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonBoard] = {
     Some(
       new JsonBoard(
@@ -113,6 +97,7 @@ final case class BoardProtocol(
     myCharacter: Character,
     myRole:      Role
   )
+
 }
 
 object BoardProtocol {

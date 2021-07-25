@@ -5,10 +5,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class NextGameInvitationIsClosedProtocol() extends Server2ClientVillageMessageProtocol {
 
-  override def hashCode(): Int = 535008
-
-  override def equals(obj: Any): Boolean = obj.isInstanceOf[NextGameInvitationIsClosedProtocol]
-
   private lazy val json: Option[JsonNextGameInvitationIsClosed] = {
     Some(new JsonNextGameInvitationIsClosed())
   }
@@ -16,6 +12,7 @@ final case class NextGameInvitationIsClosedProtocol() extends Server2ClientVilla
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object NextGameInvitationIsClosedProtocol {

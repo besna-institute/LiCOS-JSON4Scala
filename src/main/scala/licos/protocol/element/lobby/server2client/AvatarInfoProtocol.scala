@@ -9,19 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 final case class AvatarInfoProtocol(token: UUID, name: String, image: URL, language: Locale)
     extends Server2ClientLobbyMessageProtocol {
 
-  override def hashCode(): Int = 523003
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: AvatarInfoProtocol =>
-        protocol.token == token &&
-          protocol.name == name &&
-          protocol.image == image &&
-          protocol.language == language
-      case _ => false
-    }
-  }
-
   private lazy val json: Option[JsonAvatarInfo] = {
     Some(
       new JsonAvatarInfo(

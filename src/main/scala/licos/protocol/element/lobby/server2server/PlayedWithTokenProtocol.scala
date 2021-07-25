@@ -9,17 +9,6 @@ import play.api.libs.json.{JsValue, Json}
 
 final case class PlayedWithTokenProtocol(to: UUID, json: PlayedProtocol) extends Server2ServerLobbyMessageProtocol {
 
-  override def hashCode(): Int = 524001
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: PlayedWithTokenProtocol =>
-        protocol.to == to &&
-          protocol.json == json
-      case _ => false
-    }
-  }
-
   private lazy val json_ : Option[JsonPlayedWithToken] = {
     json.json.map { played: JsonPlayed =>
       JsonPlayedWithToken(
@@ -32,6 +21,7 @@ final case class PlayedWithTokenProtocol(to: UUID, json: PlayedProtocol) extends
   override def toJsonOpt: Option[JsValue] = json_.map { j =>
     Json.toJson(j)
   }
+
 }
 
 object PlayedWithTokenProtocol {

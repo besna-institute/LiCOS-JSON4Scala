@@ -34,23 +34,6 @@ final case class OnymousAudienceScrollProtocol(
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
 ) extends Client2ServerVillageMessageProtocolForLogging {
 
-  override def hashCode(): Int = 531007
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: OnymousAudienceScrollProtocol =>
-        protocol.village == village &&
-          protocol.nodeId == nodeId &&
-          protocol.scrollTop == scrollTop &&
-          protocol.scrollHeight == scrollHeight &&
-          protocol.offsetHeight == offsetHeight &&
-          protocol.myAvatarName == myAvatarName &&
-          protocol.myAvatarImage == myAvatarImage &&
-          protocol.extensionalDisclosureRange == extensionalDisclosureRange
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonOnymousAudienceScroll] = {
     Some(
       new JsonOnymousAudienceScroll(

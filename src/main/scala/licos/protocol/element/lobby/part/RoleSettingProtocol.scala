@@ -13,23 +13,6 @@ final case class RoleSettingProtocol(
     werehamster: Int
 ) {
 
-  override def hashCode(): Int = 522010
-
-  override def equals(obj: Any): Boolean = {
-    obj match {
-      case protocol: RoleSettingProtocol =>
-        protocol.villager == villager &&
-          protocol.werewolf == werewolf &&
-          protocol.seer == seer &&
-          protocol.medium == medium &&
-          protocol.madman == madman &&
-          protocol.hunter == hunter &&
-          protocol.mason == mason &&
-          protocol.werehamster == werehamster
-      case _ => false
-    }
-  }
-
   lazy val json: Option[JsonRoleSetting] = {
     Some(
       JsonRoleSetting(
