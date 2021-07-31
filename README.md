@@ -1,25 +1,25 @@
 # LiCOS-JSON4Scala
 
-[![CircleCI](https://circleci.com/gh/ktr-skmt/LiCOS-JSON4Scala.svg?style=svg)](https://circleci.com/gh/ktr-skmt/LiCOS-JSON4Scala)
-[![Build Status](https://travis-ci.org/ktr-skmt/LiCOS-JSON4Scala.svg?branch=master)](https://travis-ci.org/ktr-skmt/LiCOS-JSON4Scala)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ktr-skmt/LiCOS-JSON4Scala/blob/master/LICENSE)
+[![CircleCI](https://circleci.com/gh/besna-institute/LiCOS-JSON4Scala.svg?style=svg)](https://circleci.com/gh/besna-institute/LiCOS-JSON4Scala)
+[![Build Status](https://travis-ci.org/besna-institute/LiCOS-JSON4Scala.svg?branch=master)](https://travis-ci.org/besna-institute/LiCOS-JSON4Scala)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/besna-institute/LiCOS-JSON4Scala/blob/master/LICENSE)
 
 ## API
 
 ### The latest version
 
-https://ktr-skmt.github.io/LiCOS-JSON4ScalaDoc/0.5.1/api/index.html
+https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/0.5.1/api/index.html
 
 ### Old versions
 
-https://ktr-skmt.github.io/LiCOS-JSON4ScalaDoc/index.html
+https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/index.html
 
 ## Import
 
 ### SBT
 
 ```scala
-resolvers += "LiCOS-JSON4Scala-snapshots-repository" at "https://github.com/ktr-skmt/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"
+resolvers += "LiCOS-JSON4Scala-snapshots-repository" at "https://github.com/besna-institute/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"
 ```
 
 ```scala
@@ -31,7 +31,7 @@ libraryDependences += "online.licos" % "licos-json4scala_2.13" % "(version)"
 ```javascript
 repositories {
     maven {
-        url "https://github.com/ktr-skmt/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"
+        url "https://github.com/besna-institute/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"
     }
 }
 ```
@@ -47,7 +47,7 @@ dependencies {
 ```xml
 <repository>
   <id>LiCOS-JSON4Scala-snapshots-repository</id>
-  <url>https://github.com/ktr-skmt/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots</url>
+  <url>https://github.com/besna-institute/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots</url>
 </repository>
 ```
 
@@ -66,7 +66,7 @@ dependencies {
     <settings defaultResolver="chain"/>
     <resolvers>
         <chain name="chain">
-            <ibiblio name="LiCOS-JSON4Scala-snapshots-repository" m2compatible="true" root="https://github.com/ktr-skmt/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"/>
+            <ibiblio name="LiCOS-JSON4Scala-snapshots-repository" m2compatible="true" root="https://github.com/besna-institute/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"/>
         </chain>
     </resolvers>
 </ivysettings>
