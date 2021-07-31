@@ -37,7 +37,7 @@ object JsonVillageMessageRunner extends App {
 
   private val aJSONExampleOfTheLiCOSProtocol: String = {
     val source: BufferedSource = Source.fromURL(
-      "https://raw.githubusercontent.com/ktr-skmt/werewolfworld/gh-pages/village/example/0.3/server2client/firstMorning.jsonld"
+      "https://raw.githubusercontent.com/besna-institute/werewolfworld/gh-pages/village/example/0.3/server2client/firstMorning.jsonld"
     )
     val json: String = source.getLines().mkString("\n")
     source.close()

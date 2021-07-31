@@ -5,27 +5,27 @@
     <artifactId>licos-json4scala_2.12</artifactId>
     <packaging>jar</packaging>
     <description>LiCOS-JSON4Scala</description>
-    <url>https://github.com/ktr-skmt/LiCOS-JSON4Scala</url>
+    <url>https://github.com/besna-institute/LiCOS-JSON4Scala</url>
     <version>0.1.0</version>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
-            <url>https://raw.githubusercontent.com/ktr-skmt/LiCOS-JSON4Scala/master/LICENSE</url>
+            <url>https://raw.githubusercontent.com/besna-institute/LiCOS-JSON4Scala/master/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
     <name>LiCOS-JSON4Scala</name>
     <organization>
         <name>online.licos</name>
-        <url>https://github.com/ktr-skmt/LiCOS-JSON4Scala</url>
+        <url>https://github.com/besna-institute/LiCOS-JSON4Scala</url>
     </organization>
     <scm>
-        <url>git@github.com:ktr-skmt/LiCOS-JSON4Scala.git</url>
-        <connection>scm:git@github.com:ktr-skmt/LiCOS-JSON4Scala.git</connection>
+        <url>git@github.com:besna-institute/LiCOS-JSON4Scala.git</url>
+        <connection>scm:git@github.com:besna-institute/LiCOS-JSON4Scala.git</connection>
     </scm>
     <developers>
         <developer>
-            <id>ktr-skmt</id>
+            <id>besna-institute</id>
             <name>sakamoto-kotaro-pn@ynu.jp</name>
             <url>https://linkedin.com/in/kotaro-sakamoto-19168b4a</url>
         </developer>
