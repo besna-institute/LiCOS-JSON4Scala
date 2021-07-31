@@ -109,7 +109,7 @@ lazy val json = (project in file(".")).
         "com.typesafe.play" %% "play-json" % "2.9.2",
         "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
         "org.slf4j" % "slf4j-api" % "1.7.32" % Compile,
-        "ch.qos.logback" % "logback-classic" % "1.2.4",
+        "ch.qos.logback" % "logback-classic" % "1.2.5",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
         "org.typelevel" %% "cats-core" % "2.6.1"
       )
