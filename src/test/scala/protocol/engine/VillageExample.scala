@@ -3,7 +3,7 @@ package protocol.engine
 import java.net.URL
 
 abstract class VillageExample(filePath: String) {
-  private val baseUrl: String = "https://raw.githubusercontent.com/ktr-skmt/werewolfworld/gh-pages/village/example/0.3/"
+  private val baseUrl: String = "https://raw.githubusercontent.com/besna-institute/werewolfworld/gh-pages/village/example/0.3/"
 
   val path: URL = new URL(baseUrl.concat(filePath))
 

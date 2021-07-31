@@ -64,18 +64,18 @@ def getPublishTo(isSnapshot: Boolean, n: String): Option[Resolver] = {
   )
 }
 val licensesTemplate = Seq(
-  "Apache License Version 2.0" -> url("https://raw.githubusercontent.com/ktr-skmt/LiCOS-JSON4Scala/master/LICENSE"))
-val homepageTemplate = Some(url("https://github.com/ktr-skmt/LiCOS-JSON4Scala"))
+  "Apache License Version 2.0" -> url("https://raw.githubusercontent.com/besna-institute/LiCOS-JSON4Scala/master/LICENSE"))
+val homepageTemplate = Some(url("https://github.com/besna-institute/LiCOS-JSON4Scala"))
 val pomExtraTemplate = {
   <scm>
-    <url>git@github.com:ktr-skmt/LiCOS-JSON4Scala.git</url>
-    <connection>scm:git@github.com:ktr-skmt/LiCOS-JSON4Scala.git</connection>
+    <url>git@github.com:besna-institute/LiCOS-JSON4Scala.git</url>
+    <connection>scm:git@github.com:besna-institute/LiCOS-JSON4Scala.git</connection>
   </scm>
     <developers>
       <developer>
-        <id>ktr-skmt</id>
+        <id>besna-institute</id>
         <name>sakamoto.github@besna.institute</name>
-        <url>https://linkedin.com/in/kotaro-sakamoto-19168b4a</url>
+        <url>https://www.besna.institute</url>
       </developer>
     </developers>
 }

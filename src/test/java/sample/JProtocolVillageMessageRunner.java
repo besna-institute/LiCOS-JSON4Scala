@@ -40,7 +40,7 @@ public class JProtocolVillageMessageRunner {
         VillageProcessingEngine processingEngine = processingEngineFactory.create();
 
         try {
-            URL url = new URL("https://raw.githubusercontent.com/ktr-skmt/werewolfworld/gh-pages/village/example/0.3/server2client/firstMorning.jsonld");
+            URL url = new URL("https://raw.githubusercontent.com/besna-institute/werewolfworld/gh-pages/village/example/0.3/server2client/firstMorning.jsonld");
             URLConnection connection = url.openConnection();
 
             String msg;
