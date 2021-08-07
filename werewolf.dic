@@ -124,3 +124,9 @@ Ypartial
 Dlog
 Xdoclint
 semver
+Dependences
+awestruct
+showtitle
+frontmatter
+BESNA
+ifdef
