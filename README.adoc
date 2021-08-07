@@ -21,24 +21,26 @@ ifdef::license[]
 image:{license_image}[LICENSE, link={license_url}]
 endif::[]
 
-## API
+== API ==
 
-### The latest version
+=== The latest version ===
 
 https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/0.5.1/api/index.html
 
-### Old versions
+=== Old versions ===
 
 https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/index.html
 
-## Import
+== Import ==
 
-### SBT
+=== SBT ===
 
-```scala
+[source,scala]
+----
 resolvers += "LiCOS-JSON4Scala-snapshots-repository" at "https://github.com/besna-institute/LiCOS-JSON4Scala/raw/main/maven-repo/snapshots"
-```
+----
 
-```scala
+[source,scala]
+----
 libraryDependences += "online.licos" % "licos-json4scala_2.13" % "(version)"
-```
+----
