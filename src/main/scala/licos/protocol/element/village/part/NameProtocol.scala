@@ -285,14 +285,14 @@ final case class NameProtocol() {
     }
   }
 
-  private val ARABIC:     Locale  = new Locale("ar")
-  private val SPANISH:    Locale  = new Locale("es")
-  private val PORTUGUESE: Locale  = new Locale("pt")
-  private val RUSSIAN:    Locale  = new Locale("ru")
-  private val UKRAINIAN:  Locale  = new Locale("uk")
-  private val VIETNAMESE: Locale  = new Locale("vi")
-  private val CHINESE_   : Locale = new Locale("zh-CN")
-  private val TAIWANESE:  Locale  = new Locale("zh-TW")
+  private val ARABIC:     Locale = new Locale("ar")
+  private val SPANISH:    Locale = new Locale("es")
+  private val PORTUGUESE: Locale = new Locale("pt")
+  private val RUSSIAN:    Locale = new Locale("ru")
+  private val UKRAINIAN:  Locale = new Locale("uk")
+  private val VIETNAMESE: Locale = new Locale("vi")
+  private val CHINESE_  : Locale = new Locale("zh-CN")
+  private val TAIWANESE:  Locale = new Locale("zh-TW")
 
   def withLanguage(locale: Locale): String = {
     import Locale._

@@ -43,7 +43,8 @@ import scala.util.{Failure, Success, Try}
 
 /** This JSON parser lets classes extend parse methods for village.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
 trait VillageParser extends LiCOSParser {
@@ -52,8 +53,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Phase JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Phase JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Phase JSON.
     */
   def parsePhase(jsValue: JsValue): Either[JsValue, JsonPhase] = {
     Try(jsValue.validate[JsonPhase]) match {
@@ -72,8 +75,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Flavor-text JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Flavor-text JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Flavor-text JSON.
     */
   def parseFlavorText(jsValue: JsValue): Either[JsValue, JsonFlavorText] = {
     Try(jsValue.validate[JsonFlavorText]) match {
@@ -92,8 +97,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Game-result JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Game-result JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Game-result JSON.
     */
   def parseGameResult(jsValue: JsValue): Either[JsValue, JsonGameResult] = {
     Try(jsValue.validate[JsonGameResult]) match {
@@ -112,8 +119,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Error JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Error JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Error JSON.
     */
   def parseError(jsValue: JsValue): Either[JsValue, JsonError] = {
     Try(jsValue.validate[JsonError]) match {
@@ -132,8 +141,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Board JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Board JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Board JSON.
     */
   protected def parseBoard(jsValue: JsValue): Either[JsValue, JsonBoard] = {
     Try(jsValue.validate[JsonBoard]) match {
@@ -152,8 +163,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Onymous Audience Board JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Board JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Board JSON.
     */
   protected def parseOnymousAudienceBoard(jsValue: JsValue): Either[JsValue, JsonOnymousAudienceBoard] = {
     Try(jsValue.validate[JsonOnymousAudienceBoard]) match {
@@ -172,8 +185,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Star JSON.
     *
-    * @param jsValue a play.api.libs.jsob.JsValue to parse
-    * @return either Star JSON
+    * @param jsValue
+    *   a play.api.libs.jsob.JsValue to parse
+    * @return
+    *   either Star JSON
     */
   protected def parseStar(jsValue: JsValue): Either[JsValue, JsonStar] = {
     Try(jsValue.validate[JsonStar]) match {
@@ -192,8 +207,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Chat-from-client JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Chat-from-client JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Chat-from-client JSON.
     */
   protected def parseChatFromClient(jsValue: JsValue): Either[JsValue, JsonChatFromClient] = {
     Try(jsValue.validate[JsonChatFromClient]) match {
@@ -212,8 +229,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Chat-from-server JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Chat-from-server JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Chat-from-server JSON.
     */
   protected def parseChatFromServer(jsValue: JsValue): Either[JsValue, JsonChatFromServer] = {
     Try(jsValue.validate[JsonChatFromServer]) match {
@@ -232,8 +251,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Onymous-audience-chat JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return an Onymous-audience-chat JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   an Onymous-audience-chat JSON.
     */
   protected def parseOnymousAudienceChat(jsValue: JsValue): Either[JsValue, JsonOnymousAudienceChat] = {
     Try(jsValue.validate[JsonOnymousAudienceChat]) match {
@@ -252,8 +273,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Anonymous-audience-chat JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return an Anonymous-audience-chat JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   an Anonymous-audience-chat JSON.
     */
   protected def parseAnonymousAudienceChat(jsValue: JsValue): Either[JsValue, JsonAnonymousAudienceChat] = {
     Try(jsValue.validate[JsonAnonymousAudienceChat]) match {
@@ -272,8 +295,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Vote JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Vote JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Vote JSON.
     */
   protected def parseVote(jsValue: JsValue): Either[JsValue, JsonVote] = {
     Try(jsValue.validate[JsonVote]) match {
@@ -292,8 +317,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Scroll JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Scroll JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Scroll JSON.
     */
   protected def parseScroll(jsValue: JsValue): Either[JsValue, JsonScroll] = {
     Try(jsValue.validate[JsonScroll]) match {
@@ -312,8 +339,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Onymous-audience-scroll JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Scroll JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Scroll JSON.
     */
   protected def parseOnymousAudienceScroll(jsValue: JsValue): Either[JsValue, JsonOnymousAudienceScroll] = {
     Try(jsValue.validate[JsonOnymousAudienceScroll]) match {
@@ -332,8 +361,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Received-chat-message JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Received-chat-message JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Received-chat-message JSON.
     */
   def parseReceivedChatMessage(jsValue: JsValue): Either[JsValue, JsonReceivedChatMessage] = {
     Try(jsValue.validate[JsonReceivedChatMessage]) match {
@@ -352,8 +383,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Received-system-message JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Received-system-message JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Received-system-message JSON.
     */
   def parseReceivedSystemMessage(jsValue: JsValue): Either[JsValue, JsonReceivedSystemMessage] = {
     Try(jsValue.validate[JsonReceivedSystemMessage]) match {
@@ -372,8 +405,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Received-flavor-text JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Received-flavor-text JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Received-flavor-text JSON.
     */
   def parseReceivedFlavorTextMessage(jsValue: JsValue): Either[JsValue, JsonReceivedFlavorTextMessage] = {
     Try(jsValue.validate[JsonReceivedFlavorTextMessage]) match {
@@ -392,8 +427,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Next-game-invitation-is-closed JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Next-game-invitation-is-closed JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Next-game-invitation-is-closed JSON.
     */
   def parseNextGameInvitationIsClosed(jsValue: JsValue): Either[JsValue, JsonNextGameInvitationIsClosed] = {
     Try(jsValue.validate[JsonNextGameInvitationIsClosed]) match {
@@ -412,8 +449,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Next-game-invitation JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Next-game-invitation JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Next-game-invitation JSON.
     */
   def parseNextGameInvitation(jsValue: JsValue): Either[JsValue, JsonNextGameInvitation] = {
     Try(jsValue.validate[JsonNextGameInvitation]) match {
@@ -432,8 +471,10 @@ trait VillageParser extends LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Story JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Story JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Story JSON.
     */
   def parseStory(jsValue: JsValue): Either[JsValue, JsonStory] = {
     Try(jsValue.validate[JsonStory]) match {

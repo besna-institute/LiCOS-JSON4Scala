@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for changing a user name.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait ChangeUserNameAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param changeUserName a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param changeUserName
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, changeUserName: JsonChangeUserName): Either[JsValue, JsValue]
 }

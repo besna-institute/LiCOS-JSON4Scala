@@ -65,7 +65,8 @@ final class LobbyProcessingEngineFactory extends ProcessingEngineFactory {
 
   /** Creates a lobby processing engine.
     *
-    * @return a processing engine.
+    * @return
+    *   a processing engine.
     */
   override def create: LobbyProcessingEngine = {
     new LobbyProcessingEngine(

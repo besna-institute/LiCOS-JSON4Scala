@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for entering a lobby.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait EnterLobbyAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param enterLobby a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param enterLobby
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, enterLobby: JsonEnterLobby): Either[JsValue, JsValue]
 }
