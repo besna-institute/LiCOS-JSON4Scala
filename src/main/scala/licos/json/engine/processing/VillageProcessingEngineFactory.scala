@@ -54,7 +54,8 @@ final class VillageProcessingEngineFactory extends ProcessingEngineFactory {
 
   /** Creates a village processing engine.
     *
-    * @return a processing engine.
+    * @return
+    *   a processing engine.
     */
   override def create: VillageProcessingEngine = {
     new VillageProcessingEngine(

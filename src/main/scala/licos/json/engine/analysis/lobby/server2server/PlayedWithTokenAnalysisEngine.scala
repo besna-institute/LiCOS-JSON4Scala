@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for played-with-token.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait PlayedWithTokenAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param playedWithToken a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param playedWithToken
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, playedWithToken: JsonPlayedWithToken): Either[JsValue, JsValue]
 

@@ -10,10 +10,10 @@ import play.api.libs.functional.syntax._
 import scala.util.matching.Regex
 
 object RoleValidation {
-  private val label:        String        = "role"
-  private val roleNames:    String        = """(?:Hunter|Madman|Mason|Master|Medium|Seer|Villager|Werehamster|Werewolf)"""
-  def roleNamesInLowerCase: String        = roleNames.toLowerCase(Locale.ENGLISH)
-  val `@context`:           Reads[String] = pattern(WerewolfWorld.context(label).r)
+  private val label:        String = "role"
+  private val roleNames:    String = """(?:Hunter|Madman|Mason|Master|Medium|Seer|Villager|Werehamster|Werewolf)"""
+  def roleNamesInLowerCase: String = roleNames.toLowerCase(Locale.ENGLISH)
+  val `@context`: Reads[String] = pattern(WerewolfWorld.context(label).r)
 
   val `@idRegex`: Regex = LiCOSOnline
     .stateRegex(

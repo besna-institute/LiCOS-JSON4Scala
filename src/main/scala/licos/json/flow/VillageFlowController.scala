@@ -7,14 +7,17 @@ import play.api.libs.json.JsValue
 
 /** This class is to control the flow of parsing play.api.libs.json.JsValue for village.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 final class VillageFlowController extends FlowController with VillageParser {
 
   /** Controls the flow of parsing play.api.libs.json.JsValue for village.
     *
-    * @param jsValue a play.api.libs.json.JsValue for village to parse.
-    * @return a parsing result.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue for village to parse.
+    * @return
+    *   a parsing result.
     */
   @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
   override def flow(jsValue: JsValue): Either[JsValue, Element] = {

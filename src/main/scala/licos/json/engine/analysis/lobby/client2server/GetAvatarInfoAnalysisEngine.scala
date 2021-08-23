@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for getting an avatar information.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait GetAvatarInfoAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param getAvatarInfo a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param getAvatarInfo
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, getAvatarInfo: JsonGetAvatarInfo): Either[JsValue, JsValue]
 }

@@ -8,7 +8,8 @@ import scala.reflect.ClassTag
 
 /** This package is used for flow controllers.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 package object utils {
 
@@ -16,8 +17,11 @@ package object utils {
 
     /** getOrElse after checking a type correctness of A.
       *
-      * @param default the default expression.
-      * @return Returns the Either if the Either is the Right and its type is correct, otherwise return the result of evaluating default.
+      * @param default
+      *   the default expression.
+      * @return
+      *   Returns the Either if the Either is the Right and its type is correct, otherwise return the result of
+      *   evaluating default.
       */
     @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
     def >>>[B <: Either[JsValue, Element]](default: B): Either[JsValue, Element] = op match {
@@ -30,8 +34,10 @@ package object utils {
 
     /** getOrElse.
       *
-      * @param default the default expression.
-      * @return Returns the Either if the Either is the Right, otherwise return the result of evaluating default.
+      * @param default
+      *   the default expression.
+      * @return
+      *   Returns the Either if the Either is the Right, otherwise return the result of evaluating default.
       */
     @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
     def >->[B <: Either[JsValue, Element]](default: B): Either[JsValue, Element] =

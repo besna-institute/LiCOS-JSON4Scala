@@ -6,7 +6,8 @@ import play.api.libs.json.JsValue
 
 /** This lets classes extend process to return a play.api.libs.json.JsValue response from a JSON message.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait ProcessingEngine {
 
@@ -14,9 +15,12 @@ trait ProcessingEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param msg a JSON message.
-    * @return a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
+    * @param box
+    *   a box.
+    * @param msg
+    *   a JSON message.
+    * @return
+    *   a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
     */
   def process(box: BOX, msg: String): Either[JsValue, JsValue]
 }

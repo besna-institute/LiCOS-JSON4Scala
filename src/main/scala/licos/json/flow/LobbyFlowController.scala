@@ -7,14 +7,17 @@ import play.api.libs.json.JsValue
 
 /** This class is to control the flow of parsing play.api.libs.json.JsValue for lobby.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 final class LobbyFlowController() extends FlowController with LobbyParser {
 
   /** Controls the flow of parsing play.api.libs.json.JsValue for lobby.
     *
-    * @param jsValue a play.api.libs.json.JsValue for lobby to parse.
-    * @return a parsing result.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue for lobby to parse.
+    * @return
+    *   a parsing result.
     */
   @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
   override def flow(jsValue: JsValue): Either[JsValue, Element] = {

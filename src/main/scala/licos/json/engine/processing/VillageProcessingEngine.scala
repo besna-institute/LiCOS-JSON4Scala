@@ -30,30 +30,54 @@ import play.api.libs.json.{JsValue, Json}
 
 /** This class implements the processing engine that aggregates and runs analysis engines for village.
   *
-  * @param readyEngine the analysis engine for Ready JSON.
-  * @param receivedChatMessageEngine the analysis engine for Received-player-message JSON.
-  * @param receivedSystemMessageEngine the analysis engine for Received-system-message JSON.
-  * @param receivedFlavorTextMessageEngine the analysis engine for Flavor-text-message JSON.
-  * @param chatFromClientEngine the analysis engine for Chat-from-client JSON.
-  * @param chatFromServerEngine the analysis engine for Chat-from-server JSON.
-  * @param onymousAudienceChatFromClientEngine the analysis engine for Onymous-audience-chat-from-client JSON.
-  * @param onymousAudienceChatFromServerEngine the analysis engine for Onymous-audience-chat-from-server JSON.
-  * @param anonymousAudienceChatFromClientEngine the analysis engine for Anonymous-audience-chat-from-client JSON.
-  * @param anonymousAudienceChatFromServerEngine the analysis engine for Anonymous-audience-chat-from-server JSON.
-  * @param boardEngine the analysis engine for Board JSON.
-  * @param onymousAudienceBoardEngine the analysis engine for Onymous-audience-board JSON.
-  * @param voteEngine the analysis engine for Vote JSON.
-  * @param scrollEngine the analysis engine for Scroll JSON.
-  * @param onymousAudienceScrollEngine the analysis engine for Onymous-audience-scroll JSON.
-  * @param starEngine the analysis engine for Star JSON.
-  * @param phaseEngine the analysis engine for Phase JSON.
-  * @param flavorTextEngine the analysis engine for Flavor-text JSON.
-  * @param gameResultEngine the analysis engine for Game-result JSON.
-  * @param buildVillageEngine the analysis engine for Build-village JSON.
-  * @param leaveWaitingPageEngine the analysis engine for Leave-waiting-page JSON.
-  * @param errorFromClientEngine the analysis engine for Error-from-client JSON.
-  * @param errorFromServerEngine the analysis engine for Error-from-server JSON.
-  * @author Kotaro Sakamoto
+  * @param readyEngine
+  *   the analysis engine for Ready JSON.
+  * @param receivedChatMessageEngine
+  *   the analysis engine for Received-player-message JSON.
+  * @param receivedSystemMessageEngine
+  *   the analysis engine for Received-system-message JSON.
+  * @param receivedFlavorTextMessageEngine
+  *   the analysis engine for Flavor-text-message JSON.
+  * @param chatFromClientEngine
+  *   the analysis engine for Chat-from-client JSON.
+  * @param chatFromServerEngine
+  *   the analysis engine for Chat-from-server JSON.
+  * @param onymousAudienceChatFromClientEngine
+  *   the analysis engine for Onymous-audience-chat-from-client JSON.
+  * @param onymousAudienceChatFromServerEngine
+  *   the analysis engine for Onymous-audience-chat-from-server JSON.
+  * @param anonymousAudienceChatFromClientEngine
+  *   the analysis engine for Anonymous-audience-chat-from-client JSON.
+  * @param anonymousAudienceChatFromServerEngine
+  *   the analysis engine for Anonymous-audience-chat-from-server JSON.
+  * @param boardEngine
+  *   the analysis engine for Board JSON.
+  * @param onymousAudienceBoardEngine
+  *   the analysis engine for Onymous-audience-board JSON.
+  * @param voteEngine
+  *   the analysis engine for Vote JSON.
+  * @param scrollEngine
+  *   the analysis engine for Scroll JSON.
+  * @param onymousAudienceScrollEngine
+  *   the analysis engine for Onymous-audience-scroll JSON.
+  * @param starEngine
+  *   the analysis engine for Star JSON.
+  * @param phaseEngine
+  *   the analysis engine for Phase JSON.
+  * @param flavorTextEngine
+  *   the analysis engine for Flavor-text JSON.
+  * @param gameResultEngine
+  *   the analysis engine for Game-result JSON.
+  * @param buildVillageEngine
+  *   the analysis engine for Build-village JSON.
+  * @param leaveWaitingPageEngine
+  *   the analysis engine for Leave-waiting-page JSON.
+  * @param errorFromClientEngine
+  *   the analysis engine for Error-from-client JSON.
+  * @param errorFromServerEngine
+  *   the analysis engine for Error-from-server JSON.
+  * @author
+  *   Kotaro Sakamoto
   */
 final class VillageProcessingEngine(
     readyEngine:                           Option[ReadyAnalysisEngine],
@@ -89,9 +113,12 @@ final class VillageProcessingEngine(
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param msg a JSON message.
-    * @return a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
+    * @param box
+    *   a box.
+    * @param msg
+    *   a JSON message.
+    * @return
+    *   a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
     */
   override def process(box: BOX, msg: String): Either[JsValue, JsValue] = {
 
