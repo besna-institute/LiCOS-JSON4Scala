@@ -14,7 +14,8 @@ import scala.util.{Failure, Success, Try}
 
 /** This JSON parser lets classes extend common parse methods.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 @SuppressWarnings(Array[String]("org.wartremover.warts.Nothing"))
 trait LiCOSParser {
@@ -85,8 +86,10 @@ trait LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Ready JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Ready JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Ready JSON.
     */
   protected def parseReady(jsValue: JsValue): Either[JsValue, JsonReady] = {
     Try(jsValue.validate[JsonReady]) match {
@@ -105,8 +108,10 @@ trait LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Build-village JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Build-village JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Build-village JSON.
     */
   protected def parseBuildVillage(jsValue: JsValue): Either[JsValue, JsonBuildVillage] = {
     Try(jsValue.validate[JsonBuildVillage]) match {
@@ -125,8 +130,10 @@ trait LiCOSParser {
 
   /** Tries to parse play.api.libs.json.JsValue as Leave-waiting-page JSON.
     *
-    * @param jsValue a play.api.libs.json.JsValue to parse.
-    * @return either Leave-waiting-page JSON.
+    * @param jsValue
+    *   a play.api.libs.json.JsValue to parse.
+    * @return
+    *   either Leave-waiting-page JSON.
     */
   protected def parseLeaveWaitingPage(jsValue: JsValue): Either[JsValue, JsonLeaveWaitingPage] = {
     Try(jsValue.validate[JsonLeaveWaitingPage]) match {

@@ -26,7 +26,8 @@ lazy val commonSettings = Seq(
 ) ++ {
   scalacOptions ++= Seq(
     "-deprecation",
-    "-encoding", "UTF-8", // yes, this is 2 args
+    "-encoding",
+    "UTF-8", // yes, this is 2 args
     "-feature",
     "-language:implicitConversions",
     "-unchecked",
@@ -35,17 +36,19 @@ lazy val commonSettings = Seq(
   )
 } ++ {
   javacOptions ++= Seq(
-    "-source", javaVersion,
-    "-target", javaVersion,
+    "-source",
+    javaVersion,
+    "-target",
+    javaVersion,
     "-Xlint:unchecked",
     "-Xdoclint:accessibility,reference,syntax"
   )
 }
 
 val fileProtocol: String = "file://"
-val mavenRepo: String = "maven-repo"
+val mavenRepo:    String = "maven-repo"
 val snapshotsStr: String = "snapshots"
-val releasesStr: String = "releases"
+val releasesStr:  String = "releases"
 
 def getPublishTo(isSnapshot: Boolean, n: String): Option[Resolver] = {
   val version: String = {
@@ -64,7 +67,10 @@ def getPublishTo(isSnapshot: Boolean, n: String): Option[Resolver] = {
   )
 }
 val licensesTemplate = Seq(
-  "Apache License Version 2.0" -> url("https://raw.githubusercontent.com/besna-institute/LiCOS-JSON4Scala/master/LICENSE"))
+  "Apache License Version 2.0" -> url(
+    "https://raw.githubusercontent.com/besna-institute/LiCOS-JSON4Scala/master/LICENSE"
+  )
+)
 val homepageTemplate = Some(url("https://github.com/besna-institute/LiCOS-JSON4Scala"))
 val pomExtraTemplate = {
   <scm>
@@ -80,18 +86,20 @@ val pomExtraTemplate = {
     </developers>
 }
 
-lazy val json = (project in file(".")).
-  settings(commonSettings: _*).
-  settings(wartremoverSettings: _*).
-  settings(scalafmtSettings: _*).
-  settings(
+lazy val json = (project in file("."))
+  .settings(commonSettings: _*)
+  .settings(wartremoverSettings: _*)
+  .settings(scalafmtSettings: _*)
+  .settings(
     Compile / doc / scalacOptions ++= Seq(
       "-groups",
       "-implicits",
-      "-doc-root-content", (Compile / sourceDirectory).value + "/rootdoc.txt"
+      "-doc-root-content",
+      (Compile / sourceDirectory).value + "/rootdoc.txt"
     ),
     autoAPIMappings := true
-  ).settings(
+  )
+  .settings(
     isSnapshot := true,
     version := "0.5.1",
     name := jsonLibraryName,
@@ -103,7 +111,8 @@ lazy val json = (project in file(".")).
     licenses := licensesTemplate,
     homepage := homepageTemplate,
     pomExtra := pomExtraTemplate
-  ).settings(
+  )
+  .settings(
     libraryDependencies ++= {
       Seq(
         "com.typesafe.play" %% "play-json" % "2.9.2",
@@ -114,7 +123,8 @@ lazy val json = (project in file(".")).
         "org.typelevel" %% "cats-core" % "2.6.1"
       )
     }
-  ).settings(
+  )
+  .settings(
     dependencyOverrides ++= {
       Seq(
         "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.10.2",

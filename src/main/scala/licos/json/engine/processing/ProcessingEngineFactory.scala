@@ -6,7 +6,8 @@ trait ProcessingEngineFactory {
 
   /** Create a processing engine.
     *
-    * @return a processing engine.
+    * @return
+    *   a processing engine.
     */
   def create: ProcessingEngine
 }

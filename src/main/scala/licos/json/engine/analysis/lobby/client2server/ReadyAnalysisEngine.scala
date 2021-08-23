@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for readying up.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait ReadyAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param ready a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param ready
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, ready: JsonReady): Either[JsValue, JsValue]
 }

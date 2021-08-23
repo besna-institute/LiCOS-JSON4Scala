@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for a chat from server.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait ChatAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param chatFromServer a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param chatFromServer
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, chatFromServer: JsonChatFromServer): Either[JsValue, JsValue]
 

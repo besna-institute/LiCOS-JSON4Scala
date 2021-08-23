@@ -54,46 +54,86 @@ import play.api.libs.json.{JsValue, Json}
 
 /** This class implements the processing engine that aggregates and runs analysis engines for lobby.
   *
-  * @param pongEngine the analysis engine for Pong JSON.
-  * @param pingEngine the analysis engine for Ping JSON.
-  * @param waitingPageEngine the analysis engine for Waiting-page JSON.
-  * @param lobbyEngine the analysis engine for Lobby JSON.
-  * @param enterLobbyEngine the analysis engine for Enter-lobby JSON.
-  * @param getAvatarInfoEngine the analysis engine for Get-avatar-info JSON.
-  * @param avatarInfoEngine the analysis engine for Avatar-info JSON.
-  * @param selectVillageEngine the analysis engine for Select-village JSON.
-  * @param leaveWaitingPageEngine the analysis engine for Leave-waiting-page JSON.
-  * @param kickOutPlayerEngine the analysis engine for Kick-out-player JSON.
-  * @param buildVillageEngine the analysis engine for Build-village JSON.
-  * @param advancedSearchEngine the analysis engine for Advanced-search JSON.
-  * @param idSearchEngine the analysis engine for Id-search JSON.
-  * @param playEngine the analysis engine for play JSON.
-  * @param playedEngine the analysis engine for Played JSON.
-  * @param playedWithTokenEngine the analysis engine for Played-with-token JSON.
-  * @param readyEngine the analysis engine for Ready JSON.
-  * @param searchResultEngine the analysis engine for Search-result JSON.
-  * @param changeLanguageEngine the analysis engine for Change-language JSON.
-  * @param changeUserEmailEngine the analysis engine for Change-user-email JSON.
-  * @param changeUserNameEngine the analysis engine for Change-user-name JSON.
-  * @param changeUserPasswordEngine the analysis engine for Change-user-password JSON.
-  * @param getSettingsEngine the analysis engine for Get-settings JSON.
-  * @param settingsEngine the analysis engine for Settings JSON.
-  * @param authorizationRequestEngine the analysis engine for Authorization-request JSON
-  * @param authorizationRequestAcceptedResponseEngine the analysis engine for Authorization-request-accepted-response JSON
-  * @param authorizationRequestAcceptedEngine the analysis engine for Authorization-request-accepted JSON
-  * @param renewAvatarTokenEngine the analysis engine for Renew-avatar-token JSON
-  * @param createHumanPlayerEngine the analysis engine for Create-human-player JSON
-  * @param createRobotPlayerEngine the analysis engine for Create-robot-player JSON
-  * @param createOnymousAudienceEngine the analysis engine for Create-onymous-audience JSON
-  * @param deleteAvatarEngine the analysis engine for Delete-avatar JSON
-  * @param runRobotPlayerInTheBackgroundEngine the analysis engine for Run-robot-player-in-the-background JSON
-  * @param stopRobotPlayerEngine the analysis engine for Stop-robot-player JSON
-  * @param humanPlayerSelectionPageEngine the analysis engine for Human-player-selection-page JSON
-  * @param onymousAudienceSelectionPageEngine the analysis engine for Onymous-audience-selection-page JSON
-  * @param robotPlayerSelectionPageEngine the analysis engine for Robot-player-selection-page JSON
-  * @param changeAvatarEngine the analysis engine for Change-avatar JSON
-  * @param enterAvatarSelectionPageEngine the analysis engine for Enter-avatar-selection-page JSON
-  * @author Kotaro Sakamoto
+  * @param pongEngine
+  *   the analysis engine for Pong JSON.
+  * @param pingEngine
+  *   the analysis engine for Ping JSON.
+  * @param waitingPageEngine
+  *   the analysis engine for Waiting-page JSON.
+  * @param lobbyEngine
+  *   the analysis engine for Lobby JSON.
+  * @param enterLobbyEngine
+  *   the analysis engine for Enter-lobby JSON.
+  * @param getAvatarInfoEngine
+  *   the analysis engine for Get-avatar-info JSON.
+  * @param avatarInfoEngine
+  *   the analysis engine for Avatar-info JSON.
+  * @param selectVillageEngine
+  *   the analysis engine for Select-village JSON.
+  * @param leaveWaitingPageEngine
+  *   the analysis engine for Leave-waiting-page JSON.
+  * @param kickOutPlayerEngine
+  *   the analysis engine for Kick-out-player JSON.
+  * @param buildVillageEngine
+  *   the analysis engine for Build-village JSON.
+  * @param advancedSearchEngine
+  *   the analysis engine for Advanced-search JSON.
+  * @param idSearchEngine
+  *   the analysis engine for Id-search JSON.
+  * @param playEngine
+  *   the analysis engine for play JSON.
+  * @param playedEngine
+  *   the analysis engine for Played JSON.
+  * @param playedWithTokenEngine
+  *   the analysis engine for Played-with-token JSON.
+  * @param readyEngine
+  *   the analysis engine for Ready JSON.
+  * @param searchResultEngine
+  *   the analysis engine for Search-result JSON.
+  * @param changeLanguageEngine
+  *   the analysis engine for Change-language JSON.
+  * @param changeUserEmailEngine
+  *   the analysis engine for Change-user-email JSON.
+  * @param changeUserNameEngine
+  *   the analysis engine for Change-user-name JSON.
+  * @param changeUserPasswordEngine
+  *   the analysis engine for Change-user-password JSON.
+  * @param getSettingsEngine
+  *   the analysis engine for Get-settings JSON.
+  * @param settingsEngine
+  *   the analysis engine for Settings JSON.
+  * @param authorizationRequestEngine
+  *   the analysis engine for Authorization-request JSON
+  * @param authorizationRequestAcceptedResponseEngine
+  *   the analysis engine for Authorization-request-accepted-response JSON
+  * @param authorizationRequestAcceptedEngine
+  *   the analysis engine for Authorization-request-accepted JSON
+  * @param renewAvatarTokenEngine
+  *   the analysis engine for Renew-avatar-token JSON
+  * @param createHumanPlayerEngine
+  *   the analysis engine for Create-human-player JSON
+  * @param createRobotPlayerEngine
+  *   the analysis engine for Create-robot-player JSON
+  * @param createOnymousAudienceEngine
+  *   the analysis engine for Create-onymous-audience JSON
+  * @param deleteAvatarEngine
+  *   the analysis engine for Delete-avatar JSON
+  * @param runRobotPlayerInTheBackgroundEngine
+  *   the analysis engine for Run-robot-player-in-the-background JSON
+  * @param stopRobotPlayerEngine
+  *   the analysis engine for Stop-robot-player JSON
+  * @param humanPlayerSelectionPageEngine
+  *   the analysis engine for Human-player-selection-page JSON
+  * @param onymousAudienceSelectionPageEngine
+  *   the analysis engine for Onymous-audience-selection-page JSON
+  * @param robotPlayerSelectionPageEngine
+  *   the analysis engine for Robot-player-selection-page JSON
+  * @param changeAvatarEngine
+  *   the analysis engine for Change-avatar JSON
+  * @param enterAvatarSelectionPageEngine
+  *   the analysis engine for Enter-avatar-selection-page JSON
+  * @author
+  *   Kotaro Sakamoto
   */
 final class LobbyProcessingEngine(
     pongEngine:                                 Option[PongAnalysisEngine],
@@ -143,9 +183,12 @@ final class LobbyProcessingEngine(
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param msg a JSON message.
-    * @return a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
+    * @param box
+    *   a box.
+    * @param msg
+    *   a JSON message.
+    * @return
+    *   a play.api.libs.json.JsValue Either. Right(json: JsValue) if succeeded, Left(error: JsValue) if failed.
     */
   override def process(box: BOX, msg: String): Either[JsValue, JsValue] = {
 

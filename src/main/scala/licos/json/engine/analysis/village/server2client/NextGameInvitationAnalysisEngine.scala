@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for a next-game invitation.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait NextGameInvitationAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param nextGameInvitation a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param nextGameInvitation
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, nextGameInvitation: JsonNextGameInvitation): Either[JsValue, JsValue]
 

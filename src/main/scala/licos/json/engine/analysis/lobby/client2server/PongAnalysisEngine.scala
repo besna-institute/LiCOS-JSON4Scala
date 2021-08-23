@@ -7,15 +7,19 @@ import play.api.libs.json.JsValue
 
 /** The analysis engine for a pong.
   *
-  * @author Kotaro Sakamoto
+  * @author
+  *   Kotaro Sakamoto
   */
 trait PongAnalysisEngine extends AnalysisEngine {
 
   /** Returns a play.api.libs.json.JsValue response from a JSON message.
     *
-    * @param box a box.
-    * @param pong a JSON message.
-    * @return either play.api.libs.json.JsValue.
+    * @param box
+    *   a box.
+    * @param pong
+    *   a JSON message.
+    * @return
+    *   either play.api.libs.json.JsValue.
     */
   def process(box: BOX, pong: JsonPong): Either[JsValue, JsValue]
 }
