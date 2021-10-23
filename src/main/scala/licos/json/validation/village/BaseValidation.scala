@@ -27,6 +27,6 @@ object BaseValidation {
   val clientTimestamp:   Reads[String] = timestamp
   val directionality:    Reads[String] = pattern("""(?:client to server|server to client)""".r)
   val intensionalDisclosureRange: Reads[String] = pattern(
-    """(?:public|private|werewolf|seer|hunter|master|grave|onymousAudience|anonymousAudience)""".r
+    """public|private|werewolf|seer|hunter|master|grave|onymousAudience|anonymousAudience""".r
   )
 }

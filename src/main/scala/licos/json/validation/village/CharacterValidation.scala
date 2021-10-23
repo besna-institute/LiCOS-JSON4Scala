@@ -22,6 +22,6 @@ object CharacterValidation {
   val gender: Reads[String] = pattern("""(?:fe)?male""".r)
   val image:  Reads[String] = pattern(WerewolfWorld.characterIcon("""(?:[a-z]|anonymous)""").r)
   val id:     Reads[Int]    = min(1) keepAnd max(15)
-  val status: Reads[String] = pattern("""(?:alive|dead|death by (?:execution|attack|fear)|unnatural death)""".r)
-  val result: Reads[String] = pattern("""(?:win|lose)""".r)
+  val status: Reads[String] = pattern("""alive|dead|death by (?:execution|attack|fear)|unnatural death""".r)
+  val result: Reads[String] = pattern("""win|lose""".r)
 }

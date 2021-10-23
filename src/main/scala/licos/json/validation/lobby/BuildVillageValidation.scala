@@ -6,6 +6,6 @@ import play.api.libs.functional.syntax.*
 
 object BuildVillageValidation {
   val id:      Reads[Long]   = min(-1L) keepAnd max(Long.MaxValue)
-  val avatar:  Reads[String] = pattern("""(?:fixed|random)""".r)
+  val avatar:  Reads[String] = pattern("""fixed|random""".r)
   val comment: Reads[String] = maxLength[String](100)
 }
