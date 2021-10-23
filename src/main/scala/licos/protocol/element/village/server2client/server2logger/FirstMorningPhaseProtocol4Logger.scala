@@ -3,12 +3,12 @@ package licos.protocol.element.village.server2client.server2logger
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
-import licos.json.element.village.{JsonBoardResult, JsonVotingResultDetail, JsonVotingResultSummary}
 import licos.json.element.village.character.{JsonCharacter, JsonStatusCharacter}
+import licos.json.element.village.JsonBoardResult
 import licos.json.element.village.iri.{Contexts, SystemMessage}
 import licos.json.element.village.role.JsonRole
 import licos.json.element.village.server2client.JsonPhase
-import licos.knowledge.{Character, Data2Knowledge, PostMortemDiscussion, PublicChannel, Role, ServerToClient}
+import licos.knowledge.{Data2Knowledge, Morning, PrivateChannel, Role, ServerToClient}
 import licos.protocol.element.village.part.{
   BaseProtocol,
   BoardResultProtocol,
@@ -18,24 +18,18 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.part.character.{
-  CharacterProtocol,
-  SimpleCharacterProtocol,
-  StatusCharacterProtocol
-}
+import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.role.RoleProtocol
-import licos.protocol.element.village.server2client.{PostMortemDiscussionProtocol => SimplePostMortemDiscussionProtocol}
+import licos.protocol.element.village.server2client.FirstMorningPhaseProtocol as SimpleFirstMorningPhaseProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class PostMortemDiscussionProtocol(
+final case class FirstMorningPhaseProtocol4Logger(
     village:                    VillageInfo,
     character:                  Seq[CharacterProtocol],
     role:                       Seq[RoleProtocol],
-    extensionalDisclosureRange: Seq[StatusCharacterProtocol],
-    votingResultsSummary:       Seq[VotingResultSummaryProtocol],
-    votingResultsDetail:        Seq[VotingResultDetailProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+    extensionalDisclosureRange: Seq[StatusCharacterProtocol]
+) extends Server2ClientVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonPhase] = {
     Some(
@@ -62,10 +56,10 @@ final case class PostMortemDiscussionProtocol(
           Some(TimestampGenerator.now),
           Option.empty[OffsetDateTime],
           ServerToClient,
-          PublicChannel,
+          PrivateChannel,
           extensionalDisclosureRange,
-          Some(votingResultsSummary),
-          Some(votingResultsDetail)
+          Option.empty[Seq[VotingResultSummaryProtocol]],
+          Option.empty[Seq[VotingResultDetailProtocol]]
         ).json,
         character.map(_.json),
         role.map(_.json)
@@ -77,24 +71,24 @@ final case class PostMortemDiscussionProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimplePostMortemDiscussionProtocol = SimplePostMortemDiscussionProtocol(
-    village:              VillageInfo,
-    character:            Seq[CharacterProtocol],
-    role:                 Seq[RoleProtocol],
-    votingResultsSummary: Seq[VotingResultSummaryProtocol]
+  def simpleProtocol: SimpleFirstMorningPhaseProtocol = SimpleFirstMorningPhaseProtocol(
+    village:   VillageInfo,
+    character: Seq[CharacterProtocol],
+    role:      Seq[RoleProtocol]
   )
 
 }
 
-object PostMortemDiscussionProtocol {
+object FirstMorningPhaseProtocol4Logger {
 
-  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[PostMortemDiscussionProtocol] = {
-    import cats.implicits._
-    if (json.base.phase === PostMortemDiscussion.label && json.base.day === 0) {
+  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[FirstMorningPhaseProtocol4Logger] = {
+    import cats.implicits.*
+    if (json.base.phase === Morning.label && json.base.day === 1) {
+
       VillageInfoFactory
         .createOpt(villageInfoFromLobby, json.base)
         .map { village: VillageInfo =>
-          PostMortemDiscussionProtocol(
+          FirstMorningPhaseProtocol4Logger(
             village,
             json.character.flatMap { jsonCharacter: JsonCharacter =>
               for {
@@ -162,62 +156,12 @@ object PostMortemDiscussionProtocol {
                   village.language
                 )
               }
-            },
-            json.base.votingResultsSummary.toList.flatMap { summaries: Seq[JsonVotingResultSummary] =>
-              summaries.flatMap { jsonVotingResultSummary: JsonVotingResultSummary =>
-                Data2Knowledge
-                  .characterOpt(
-                    jsonVotingResultSummary.characterToPutToDeath.name.en,
-                    jsonVotingResultSummary.characterToPutToDeath.id
-                  )
-                  .toList
-                  .map { character: Character =>
-                    VotingResultSummaryProtocol(
-                      character,
-                      jsonVotingResultSummary.numberOfVotes,
-                      jsonVotingResultSummary.rankOfVotes,
-                      village.id,
-                      village.language
-                    )
-                  }
-              }
-            },
-            json.base.votingResultsDetails.toList.flatMap { details: Seq[JsonVotingResultDetail] =>
-              details.flatMap { jsonVotingResultDetail: JsonVotingResultDetail =>
-                for {
-                  sourceCharacter <- Data2Knowledge
-                    .characterOpt(
-                      jsonVotingResultDetail.sourceCharacter.name.en,
-                      jsonVotingResultDetail.sourceCharacter.id
-                    )
-                    .toList
-                  targetCharacter <- Data2Knowledge
-                    .characterOpt(
-                      jsonVotingResultDetail.targetCharacter.name.en,
-                      jsonVotingResultDetail.targetCharacter.id
-                    )
-                    .toList
-                } yield {
-                  VotingResultDetailProtocol(
-                    SimpleCharacterProtocol(
-                      sourceCharacter,
-                      village.id,
-                      village.language
-                    ),
-                    SimpleCharacterProtocol(
-                      targetCharacter,
-                      village.id,
-                      village.language
-                    ),
-                    village.id
-                  )
-                }
-              }
             }
           )
         }
     } else {
-      Option.empty[PostMortemDiscussionProtocol]
+      Option.empty[FirstMorningPhaseProtocol4Logger]
     }
   }
+
 }

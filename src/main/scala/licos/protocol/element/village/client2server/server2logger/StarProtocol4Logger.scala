@@ -4,42 +4,38 @@ import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.character.JsonStatusCharacter
-import licos.json.element.village.client2server.JsonBoard
-import licos.json.element.village.iri.{BoardMessage, Contexts}
-import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PolarityMark, PrivateChannel, Role}
-import licos.protocol.element.village.client2server.{BoardProtocol => SimpleBoardProtocol}
-import licos.protocol.element.village.part.character.{
-  RoleCharacterProtocol,
-  SimpleCharacterProtocol,
-  StatusCharacterProtocol
-}
-import licos.protocol.element.village.part.role.SimpleRoleProtocol
+import licos.json.element.village.client2server.JsonStar
+import licos.json.element.village.iri.{Contexts, StarMessage}
+import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PrivateChannel, Role}
+import licos.protocol.element.village.client2server.StarProtocol as SimpleStarProtocol
+import licos.protocol.element.village.part.character.{RoleCharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.{
   BaseProtocol,
   ChatSettingsProtocol,
+  StarInfoProtocol,
   VillageProtocol,
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.util.{LiCOSOnline, TimestampGenerator}
+import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class BoardProtocol(
+final case class StarProtocol4Logger(
     village:                    VillageInfo,
-    character:                  Character,
-    role:                       Role,
-    prediction:                 PolarityMark,
+    serverTimestamp:            OffsetDateTime,
+    clientTimestamp:            OffsetDateTime,
+    isMarked:                   Boolean,
     myCharacter:                Character,
     myRole:                     Role,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Client2ServerVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonBoard] = {
+  lazy val json: Option[JsonStar] = {
     Some(
-      new JsonBoard(
+      new JsonStar(
         BaseProtocol(
-          Contexts.get(BoardMessage),
-          BoardMessage,
+          Contexts.get(StarMessage),
+          StarMessage,
           VillageProtocol(
             village.id,
             village.name,
@@ -70,17 +66,13 @@ final case class BoardProtocol(
           village.id,
           village.language
         ).json,
-        SimpleCharacterProtocol(
-          character,
+        StarInfoProtocol(
           village.id,
-          village.language
-        ).json(LiCOSOnline.stateVillage(village.id)),
-        SimpleRoleProtocol(
-          role,
-          village.id,
-          village.language
-        ).json(LiCOSOnline.stateVillage(village.id)),
-        prediction.label
+          village.token,
+          serverTimestamp,
+          clientTimestamp,
+          isMarked
+        ).json
       )
     )
   }
@@ -89,39 +81,32 @@ final case class BoardProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleBoardProtocol = SimpleBoardProtocol(
-    village:     VillageInfo,
-    character:   Character,
-    role:        Role,
-    prediction:  PolarityMark,
-    myCharacter: Character,
-    myRole:      Role
+  def simpleProtocol: SimpleStarProtocol = SimpleStarProtocol(
+    village:         VillageInfo,
+    serverTimestamp: OffsetDateTime,
+    clientTimestamp: OffsetDateTime,
+    isMarked:        Boolean,
+    myCharacter:     Character,
+    myRole:          Role
   )
 
 }
 
-object BoardProtocol {
+object StarProtocol4Logger {
 
-  def read(json: JsonBoard, villageInfoFromLobby: VillageInfoFromLobby): Option[BoardProtocol] = {
+  def read(json: JsonStar, villageInfoFromLobby: VillageInfoFromLobby): Option[StarProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .flatMap { village: VillageInfo =>
         for {
-          prediction <- Data2Knowledge.polarityMarkOpt(json.prediction)
-          character  <- Data2Knowledge.characterOpt(json.character.name.en, json.character.id)
-          role <- Data2Knowledge
-            .roleOpt(
-              json.role.name.en,
-              village.composition.parse(json.role.name.en).map(_.numberOfPlayers).getOrElse(0)
-            )
           myCharacter <- Data2Knowledge.characterOpt(json.myCharacter.name.en, json.myCharacter.id)
           myRole      <- village.composition.parse(json.myCharacter.role.name.en)
         } yield {
-          BoardProtocol(
+          StarProtocol4Logger(
             village,
-            character,
-            role,
-            prediction,
+            OffsetDateTime.parse(json.star.serverTimestamp),
+            OffsetDateTime.parse(json.star.clientTimestamp),
+            json.star.isMarked,
             myCharacter,
             myRole,
             json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>
@@ -145,4 +130,5 @@ object BoardProtocol {
         }
       }
   }
+
 }

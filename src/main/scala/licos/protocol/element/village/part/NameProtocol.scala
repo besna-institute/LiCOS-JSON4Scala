@@ -69,7 +69,7 @@ final case class NameProtocol() {
     }
     localeOpt match {
       case Some(locale: Locale) =>
-        import Locale._
+        import Locale.*
         locale match {
           case ARABIC =>
             JsonName(
@@ -295,7 +295,7 @@ final case class NameProtocol() {
   private val TAIWANESE:  Locale = new Locale("zh-TW")
 
   def withLanguage(locale: Locale): String = {
-    import Locale._
+    import Locale.*
     locale match {
       case ARABIC     => ar
       case GERMAN     => de

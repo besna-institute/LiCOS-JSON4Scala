@@ -17,13 +17,11 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.client2server.{
-  OnymousAudienceScrollProtocol => SimpleOnymousAudienceScrollProtocol
-}
+import licos.protocol.element.village.client2server.OnymousAudienceScrollProtocol as SimpleOnymousAudienceScrollProtocol
 import licos.util.{LiCOSOnline, TimestampGenerator}
 import play.api.libs.json.{JsValue, Json}
 
-final case class OnymousAudienceScrollProtocol(
+final case class OnymousAudienceScrollProtocol4Logger(
     village:                    VillageInfo,
     nodeId:                     String,
     scrollTop:                  Int,
@@ -32,7 +30,7 @@ final case class OnymousAudienceScrollProtocol(
     myAvatarName:               String,
     myAvatarImage:              URL,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Client2ServerVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonOnymousAudienceScroll] = {
     Some(
@@ -93,16 +91,16 @@ final case class OnymousAudienceScrollProtocol(
 
 }
 
-object OnymousAudienceScrollProtocol {
+object OnymousAudienceScrollProtocol4Logger {
 
   def read(
       json:                 JsonOnymousAudienceScroll,
       villageInfoFromLobby: VillageInfoFromLobby
-  ): Option[OnymousAudienceScrollProtocol] = {
+  ): Option[OnymousAudienceScrollProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .map { village: VillageInfo =>
-        OnymousAudienceScrollProtocol(
+        OnymousAudienceScrollProtocol4Logger(
           village,
           json.nodeId,
           json.scrollTop,

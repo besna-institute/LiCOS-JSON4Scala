@@ -1,6 +1,6 @@
 package licos.json.element.village.server2client
 
-import java.util.{List => JList}
+import java.util.List as JList
 
 import licos.json.element.Element
 import licos.json.element.village.character.JsonCharacter
@@ -9,7 +9,7 @@ import licos.json.element.village.{JsonBase, JsonElement}
 import play.api.libs.functional.syntax.{unlift, _}
 import play.api.libs.json.{Format, JsPath, Json, OFormat}
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class JsonPhase private (base: JsonBase, sub: JsonSubPhase) extends JsonElement with Element {
 

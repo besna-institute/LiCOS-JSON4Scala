@@ -1,7 +1,6 @@
 package licos.protocol.element.village.server2client
 
 import java.net.URL
-
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.character.{JsonResultCharacter, JsonSimpleCharacter}
 import licos.json.element.village.role.JsonResultRole
@@ -13,6 +12,7 @@ import licos.protocol.element.village.part.character.{
   StatusCharacterProtocol
 }
 import licos.protocol.element.village.part.role.ResultRoleProtocol
+import licos.protocol.element.village.server2client.server2logger.GameResultProtocol4Logger
 import play.api.libs.json.{JsValue, Json}
 
 final case class GameResultProtocol(
@@ -22,15 +22,15 @@ final case class GameResultProtocol(
 ) extends Server2ClientVillageMessageProtocol {
 
   private lazy val json: Option[JsonGameResult] = {
-    server2logger.GameResultProtocol(village, character, role, Nil).json
+    GameResultProtocol4Logger(village, character, role, Nil).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
 
-  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): server2logger.GameResultProtocol = {
-    server2logger.GameResultProtocol(
+  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): GameResultProtocol4Logger = {
+    GameResultProtocol4Logger(
       village:                    VillageInfo,
       character:                  Seq[ResultCharacterProtocol],
       role:                       Seq[ResultRoleProtocol],

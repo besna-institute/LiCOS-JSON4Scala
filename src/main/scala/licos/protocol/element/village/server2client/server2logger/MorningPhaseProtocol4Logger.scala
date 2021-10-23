@@ -3,12 +3,12 @@ package licos.protocol.element.village.server2client.server2logger
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
-import licos.json.element.village.JsonBoardResult
 import licos.json.element.village.character.{JsonCharacter, JsonStatusCharacter}
+import licos.json.element.village.{JsonBoardResult, JsonVotingResultDetail, JsonVotingResultSummary}
 import licos.json.element.village.iri.{Contexts, SystemMessage}
 import licos.json.element.village.role.JsonRole
 import licos.json.element.village.server2client.JsonPhase
-import licos.knowledge.{Data2Knowledge, PrivateChannel, Role, ServerToClient}
+import licos.knowledge.{Character, Data2Knowledge, PrivateChannel, Role, ServerToClient}
 import licos.protocol.element.village.part.{
   BaseProtocol,
   BoardResultProtocol,
@@ -18,18 +18,24 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
+import licos.protocol.element.village.part.character.{
+  CharacterProtocol,
+  SimpleCharacterProtocol,
+  StatusCharacterProtocol
+}
 import licos.protocol.element.village.part.role.RoleProtocol
-import licos.protocol.element.village.server2client.{NoonPhaseProtocol => SimpleNoonPhaseProtocol}
+import licos.protocol.element.village.server2client.MorningPhaseProtocol as SimpleMorningPhaseProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class NoonPhaseProtocol(
+final case class MorningPhaseProtocol4Logger(
     village:                    VillageInfo,
     character:                  Seq[CharacterProtocol],
     role:                       Seq[RoleProtocol],
-    extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+    extensionalDisclosureRange: Seq[StatusCharacterProtocol],
+    votingResultsSummary:       Seq[VotingResultSummaryProtocol],
+    votingResultsDetail:        Seq[VotingResultDetailProtocol]
+) extends Server2ClientVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonPhase] = {
     Some(
@@ -58,8 +64,8 @@ final case class NoonPhaseProtocol(
           ServerToClient,
           PrivateChannel,
           extensionalDisclosureRange,
-          Option.empty[Seq[VotingResultSummaryProtocol]],
-          Option.empty[Seq[VotingResultDetailProtocol]]
+          Option(votingResultsSummary),
+          Option(votingResultsDetail)
         ).json,
         character.map(_.json),
         role.map(_.json)
@@ -71,21 +77,22 @@ final case class NoonPhaseProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleNoonPhaseProtocol = SimpleNoonPhaseProtocol(
-    village:   VillageInfo,
-    character: Seq[CharacterProtocol],
-    role:      Seq[RoleProtocol]
+  def simpleProtocol: SimpleMorningPhaseProtocol = SimpleMorningPhaseProtocol(
+    village:              VillageInfo,
+    character:            Seq[CharacterProtocol],
+    role:                 Seq[RoleProtocol],
+    votingResultsSummary: Seq[VotingResultSummaryProtocol]
   )
 
 }
 
-object NoonPhaseProtocol {
+object MorningPhaseProtocol4Logger {
 
-  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[NoonPhaseProtocol] = {
+  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[MorningPhaseProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .map { village: VillageInfo =>
-        NoonPhaseProtocol(
+        MorningPhaseProtocol4Logger(
           village,
           json.character.flatMap { jsonCharacter: JsonCharacter =>
             for {
@@ -151,6 +158,57 @@ object NoonPhaseProtocol {
                 village.id,
                 village.language
               )
+            }
+          },
+          json.base.votingResultsSummary.toList.flatMap { summaries: Seq[JsonVotingResultSummary] =>
+            summaries.flatMap { jsonVotingResultSummary: JsonVotingResultSummary =>
+              Data2Knowledge
+                .characterOpt(
+                  jsonVotingResultSummary.characterToPutToDeath.name.en,
+                  jsonVotingResultSummary.characterToPutToDeath.id
+                )
+                .toList
+                .map { character: Character =>
+                  VotingResultSummaryProtocol(
+                    character,
+                    jsonVotingResultSummary.numberOfVotes,
+                    jsonVotingResultSummary.rankOfVotes,
+                    village.id,
+                    village.language
+                  )
+                }
+            }
+          },
+          json.base.votingResultsDetails.toList.flatMap { details: Seq[JsonVotingResultDetail] =>
+            details.flatMap { jsonVotingResultDetail: JsonVotingResultDetail =>
+              for {
+                sourceCharacter <- Data2Knowledge
+                  .characterOpt(
+                    jsonVotingResultDetail.sourceCharacter.name.en,
+                    jsonVotingResultDetail.sourceCharacter.id
+                  )
+                  .toList
+                targetCharacter <- Data2Knowledge
+                  .characterOpt(
+                    jsonVotingResultDetail.targetCharacter.name.en,
+                    jsonVotingResultDetail.targetCharacter.id
+                  )
+                  .toList
+              } yield {
+                VotingResultDetailProtocol(
+                  SimpleCharacterProtocol(
+                    sourceCharacter,
+                    village.id,
+                    village.language
+                  ),
+                  SimpleCharacterProtocol(
+                    targetCharacter,
+                    village.id,
+                    village.language
+                  ),
+                  village.id
+                )
+              }
             }
           }
         )

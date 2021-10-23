@@ -41,7 +41,7 @@ final case class JsonChatFromServer private (base: JsonBase, sub: JsonSubChatFro
   }
 
   def fromHostPlayerToAvatar(guid: String): JsonChatFromServer = {
-    import cats.implicits._
+    import cats.implicits.*
     def isCharacterMine: Boolean = guid === base.token
     JsonChatFromServer(
       base.otherAvatar(guid): JsonBase,
@@ -115,8 +115,8 @@ final case class JsonSubChatFromServer(
 
 object JsonSubChatFromServer {
 
-  import play.api.libs.functional.syntax._
-  import play.api.libs.json._
+  import play.api.libs.functional.syntax.*
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonSubChatFromServer] = (

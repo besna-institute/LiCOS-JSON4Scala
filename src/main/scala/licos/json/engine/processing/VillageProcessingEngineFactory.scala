@@ -1,9 +1,9 @@
 package licos.json.engine.processing
 
-import licos.json.engine.analysis.lobby.client2server._
+import licos.json.engine.analysis.lobby.client2server.*
 import licos.json.engine.analysis.village
-import licos.json.engine.analysis.village.client2server._
-import licos.json.engine.analysis.village.server2client._
+import licos.json.engine.analysis.village.client2server.*
+import licos.json.engine.analysis.village.server2client.*
 
 /** A village processing engine factory.
   */

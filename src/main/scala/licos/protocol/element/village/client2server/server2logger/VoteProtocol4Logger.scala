@@ -1,43 +1,42 @@
 package licos.protocol.element.village.client2server.server2logger
 
-import java.net.URL
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.character.JsonStatusCharacter
-import licos.json.element.village.client2server.JsonOnymousAudienceBoard
-import licos.json.element.village.iri.{BoardMessage, Contexts}
-import licos.knowledge.{Character, ClientToServer, Data2Knowledge, OnymousAudienceChannel, PolarityMark, Role}
-import licos.protocol.element.village.part.character.{SimpleCharacterProtocol, StatusCharacterProtocol}
-import licos.protocol.element.village.part.role.SimpleRoleProtocol
+import licos.json.element.village.client2server.JsonVote
+import licos.json.element.village.iri.{Contexts, VoteMessage}
+import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PrivateChannel, Role}
+import licos.protocol.element.village.client2server.VoteProtocol as SimpleVoteProtocol
+import licos.protocol.element.village.part.character.{
+  RoleCharacterProtocol,
+  SimpleCharacterProtocol,
+  StatusCharacterProtocol
+}
 import licos.protocol.element.village.part.{
-  AvatarProtocol,
   BaseProtocol,
   ChatSettingsProtocol,
   VillageProtocol,
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.client2server.{OnymousAudienceBoardProtocol => SimpleOnymousAudienceBoardProtocol}
 import licos.util.{LiCOSOnline, TimestampGenerator}
 import play.api.libs.json.{JsValue, Json}
 
-final case class OnymousAudienceBoardProtocol(
+final case class VoteProtocol4Logger(
     village:                    VillageInfo,
     character:                  Character,
-    role:                       Role,
-    prediction:                 PolarityMark,
-    myAvatarName:               String,
-    myAvatarImage:              URL,
+    myCharacter:                Character,
+    myRole:                     Role,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Client2ServerVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonOnymousAudienceBoard] = {
+  lazy val json: Option[JsonVote] = {
     Some(
-      new JsonOnymousAudienceBoard(
+      new JsonVote(
         BaseProtocol(
-          Contexts.get(BoardMessage),
-          BoardMessage,
+          Contexts.get(VoteMessage),
+          VoteMessage,
           VillageProtocol(
             village.id,
             village.name,
@@ -57,27 +56,22 @@ final case class OnymousAudienceBoardProtocol(
           Option.empty[OffsetDateTime],
           Some(TimestampGenerator.now),
           ClientToServer,
-          OnymousAudienceChannel,
+          PrivateChannel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
           Option.empty[Seq[VotingResultDetailProtocol]]
         ).json,
-        AvatarProtocol(
-          village.token,
-          myAvatarName,
-          myAvatarImage
-        ).json(LiCOSOnline.stateVillage(village.id)),
+        RoleCharacterProtocol(
+          myCharacter,
+          myRole,
+          village.id,
+          village.language
+        ).json,
         SimpleCharacterProtocol(
           character,
           village.id,
           village.language
-        ).json(LiCOSOnline.stateVillage(village.id)),
-        SimpleRoleProtocol(
-          role,
-          village.id,
-          village.language
-        ).json(LiCOSOnline.stateVillage(village.id)),
-        prediction.label
+        ).json(LiCOSOnline.stateVillage(village.id))
       )
     )
   }
@@ -86,42 +80,30 @@ final case class OnymousAudienceBoardProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleOnymousAudienceBoardProtocol = SimpleOnymousAudienceBoardProtocol(
-    village:       VillageInfo,
-    character:     Character,
-    role:          Role,
-    prediction:    PolarityMark,
-    myAvatarName:  String,
-    myAvatarImage: URL
+  def simpleProtocol: SimpleVoteProtocol = SimpleVoteProtocol(
+    village:     VillageInfo,
+    character:   Character,
+    myCharacter: Character,
+    myRole:      Role
   )
 
 }
 
-object OnymousAudienceBoardProtocol {
-
-  def read(
-      json:                 JsonOnymousAudienceBoard,
-      villageInfoFromLobby: VillageInfoFromLobby
-  ): Option[OnymousAudienceBoardProtocol] = {
+object VoteProtocol4Logger {
+  def read(json: JsonVote, villageInfoFromLobby: VillageInfoFromLobby): Option[VoteProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .flatMap { village: VillageInfo =>
         for {
-          prediction <- Data2Knowledge.polarityMarkOpt(json.prediction)
-          character  <- Data2Knowledge.characterOpt(json.character.name.en, json.character.id)
-          role <- Data2Knowledge
-            .roleOpt(
-              json.role.name.en,
-              village.composition.parse(json.role.name.en).map(_.numberOfPlayers).getOrElse(0)
-            )
+          character   <- Data2Knowledge.characterOpt(json.character.name.en, json.character.id)
+          myCharacter <- Data2Knowledge.characterOpt(json.myCharacter.name.en, json.myCharacter.id)
+          myRole      <- village.composition.parse(json.myCharacter.role.name.en)
         } yield {
-          OnymousAudienceBoardProtocol(
+          VoteProtocol4Logger(
             village,
             character,
-            role,
-            prediction,
-            json.avatar.name,
-            new URL(json.avatar.image),
+            myCharacter,
+            myRole,
             json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>
               for {
                 character  <- Data2Knowledge.characterOpt(jsonStatusCharacter.name.en, jsonStatusCharacter.id).toList
@@ -138,6 +120,7 @@ object OnymousAudienceBoardProtocol {
                   village.language
                 )
               }
+
             }
           )
         }

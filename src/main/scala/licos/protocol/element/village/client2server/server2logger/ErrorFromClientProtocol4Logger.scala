@@ -1,12 +1,12 @@
-package licos.protocol.element.village.server2client.server2logger
+package licos.protocol.element.village.client2server.server2logger
 
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.JsonError
 import licos.json.element.village.character.JsonStatusCharacter
-import licos.json.element.village.iri.{Contexts, ErrorMessage}
-import licos.knowledge.{Data2Knowledge, PrivateChannel, ServerToClient, Severity}
+import licos.json.element.village.iri.{ChatMessage, Contexts}
+import licos.knowledge.{ClientToServer, Data2Knowledge, PrivateChannel, Severity}
 import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import licos.protocol.element.village.part.{
   BaseProtocol,
@@ -16,24 +16,24 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.server2client.{ErrorFromServerProtocol => SimpleErrorFromServerProtocol}
+import licos.protocol.element.village.client2server.ErrorFromClientProtocol as SimpleErrorFromClientProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class ErrorFromServerProtocol(
+final case class ErrorFromClientProtocol4Logger(
     village:                    VillageInfo,
     content:                    NameProtocol,
     severity:                   Severity,
     source:                     String,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonError] = {
     Some(
       new JsonError(
         BaseProtocol(
-          Contexts.get(ErrorMessage),
-          ErrorMessage,
+          Contexts.get(ChatMessage),
+          ChatMessage,
           VillageProtocol(
             village.id,
             village.name,
@@ -50,9 +50,9 @@ final case class ErrorFromServerProtocol(
           village.day,
           village.phaseTimeLimit,
           village.phaseStartTime,
-          Some(TimestampGenerator.now),
           Option.empty[OffsetDateTime],
-          ServerToClient,
+          Some(TimestampGenerator.now),
+          ClientToServer,
           PrivateChannel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
@@ -61,7 +61,7 @@ final case class ErrorFromServerProtocol(
         content.json(Some(village.language)),
         severity.label,
         source,
-        isFromServer = true
+        isFromServer = false
       )
     )
   }
@@ -70,7 +70,7 @@ final case class ErrorFromServerProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleErrorFromServerProtocol = SimpleErrorFromServerProtocol(
+  def simpleProtocol: SimpleErrorFromClientProtocol = SimpleErrorFromClientProtocol(
     village:  VillageInfo,
     content:  NameProtocol,
     severity: Severity,
@@ -79,15 +79,16 @@ final case class ErrorFromServerProtocol(
 
 }
 
-object ErrorFromServerProtocol {
+object ErrorFromClientProtocol4Logger {
 
-  def read(json: JsonError, villageInfoFromLobby: VillageInfoFromLobby): Option[ErrorFromServerProtocol] = {
-    if (json.isFromServer) {
-      VillageInfoFactory
-        .createOpt(villageInfoFromLobby, json.base)
-        .flatMap { village: VillageInfo =>
-          Data2Knowledge.severityOpt(json.severity).map { severity: Severity =>
-            ErrorFromServerProtocol(
+  def read(json: JsonError, villageInfoFromLobby: VillageInfoFromLobby): Option[ErrorFromClientProtocol4Logger] = {
+    VillageInfoFactory
+      .createOpt(villageInfoFromLobby, json.base)
+      .flatMap { village: VillageInfo =>
+        Data2Knowledge
+          .severityOpt(json.severity)
+          .map { severity: Severity =>
+            ErrorFromClientProtocol4Logger(
               village,
               Data2Knowledge.name(json.content),
               severity,
@@ -111,10 +112,7 @@ object ErrorFromServerProtocol {
               }
             )
           }
-        }
-    } else {
-      Option.empty[ErrorFromServerProtocol]
-    }
+      }
   }
 
 }

@@ -1,13 +1,18 @@
-package licos.protocol.element.village.server2client.server2logger
+package licos.protocol.element.village.client2server.server2logger
 
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
-import licos.json.element.village.JsonAnonymousAudienceChat
 import licos.json.element.village.character.JsonStatusCharacter
+import licos.json.element.village.client2server.JsonChatFromClient
 import licos.json.element.village.iri.{ChatMessage, Contexts}
-import licos.knowledge.{AnonymousAudienceChannel, Data2Knowledge, ServerToClient}
-import licos.protocol.element.village.part.character.StatusCharacterProtocol
+import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PlayerChatChannel, Role}
+import licos.protocol.element.village.client2server.ChatFromClientProtocol as SimpleChatFromClientProtocol
+import licos.protocol.element.village.part.character.{
+  RoleCharacterProtocol,
+  SimpleCharacterProtocol,
+  StatusCharacterProtocol
+}
 import licos.protocol.element.village.part.{
   BaseProtocol,
   ChatSettingsProtocol,
@@ -16,22 +21,22 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.server2client.{
-  AnonymousAudienceChatFromServerProtocol => SimpleAnonymousAudienceChatFromServerProtocol
-}
-import licos.util.TimestampGenerator
+import licos.util.{LiCOSOnline, TimestampGenerator}
 import play.api.libs.json.{JsValue, Json}
 
-final case class AnonymousAudienceChatFromServerProtocol(
+final case class ChatFromClientProtocol4Logger(
     village:                    VillageInfo,
-    isMine:                     Boolean,
+    channel:                    PlayerChatChannel,
     text:                       String,
+    isOver:                     Boolean,
+    myCharacter:                Character,
+    myRole:                     Role,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonAnonymousAudienceChat] = {
+  lazy val json: Option[JsonChatFromClient] = {
     Some(
-      new JsonAnonymousAudienceChat(
+      new JsonChatFromClient(
         BaseProtocol(
           Contexts.get(ChatMessage),
           ChatMessage,
@@ -51,21 +56,32 @@ final case class AnonymousAudienceChatFromServerProtocol(
           village.day,
           village.phaseTimeLimit,
           village.phaseStartTime,
-          Some(TimestampGenerator.now),
           Option.empty[OffsetDateTime],
-          ServerToClient,
-          AnonymousAudienceChannel,
+          Some(TimestampGenerator.now),
+          ClientToServer,
+          channel.channel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
           Option.empty[Seq[VotingResultDetailProtocol]]
         ).json,
-        isMine,
+        RoleCharacterProtocol(
+          myCharacter,
+          myRole,
+          village.id,
+          village.language
+        ).json,
+        SimpleCharacterProtocol(
+          myCharacter,
+          village.id,
+          village.language
+        ).json(LiCOSOnline.stateVillage.concat(s"#${village.id.toString}")),
+        isMine = true,
         ChatTextProtocol(
           text,
           village.language
         ).json,
         village.maxLengthOfUnicodeCodePoints,
-        isFromServer = true
+        isOver
       )
     )
   }
@@ -74,28 +90,38 @@ final case class AnonymousAudienceChatFromServerProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleAnonymousAudienceChatFromServerProtocol = SimpleAnonymousAudienceChatFromServerProtocol(
-    village: VillageInfo,
-    isMine:  Boolean,
-    text:    String
+  def simpleProtocol: SimpleChatFromClientProtocol = SimpleChatFromClientProtocol(
+    village:     VillageInfo,
+    channel:     PlayerChatChannel,
+    text:        String,
+    isOver:      Boolean,
+    myCharacter: Character,
+    myRole:      Role
   )
 
 }
 
-object AnonymousAudienceChatFromServerProtocol {
+object ChatFromClientProtocol4Logger {
 
   def read(
-      json:                 JsonAnonymousAudienceChat,
+      json:                 JsonChatFromClient,
       villageInfoFromLobby: VillageInfoFromLobby
-  ): Option[AnonymousAudienceChatFromServerProtocol] = {
-    if (json.isFromServer) {
-      VillageInfoFactory
-        .createOpt(villageInfoFromLobby, json.base)
-        .map { village: VillageInfo =>
-          AnonymousAudienceChatFromServerProtocol(
+  ): Option[ChatFromClientProtocol4Logger] = {
+    VillageInfoFactory
+      .createOpt(villageInfoFromLobby, json.base)
+      .flatMap { village: VillageInfo =>
+        for {
+          channel     <- Data2Knowledge.playerChatChannelOpt(json.base.intensionalDisclosureRange)
+          myCharacter <- Data2Knowledge.characterOpt(json.myCharacter.name.en, json.myCharacter.id)
+          myRole      <- village.composition.parse(json.myCharacter.role.name.en)
+        } yield {
+          ChatFromClientProtocol4Logger(
             village,
-            json.isMine,
+            channel,
             json.text.`@value`,
+            json.isOver,
+            myCharacter,
+            myRole,
             json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>
               for {
                 character  <- Data2Knowledge.characterOpt(jsonStatusCharacter.name.en, jsonStatusCharacter.id).toList
@@ -115,9 +141,7 @@ object AnonymousAudienceChatFromServerProtocol {
             }
           )
         }
-    } else {
-      Option.empty[AnonymousAudienceChatFromServerProtocol]
-    }
+      }
   }
 
 }

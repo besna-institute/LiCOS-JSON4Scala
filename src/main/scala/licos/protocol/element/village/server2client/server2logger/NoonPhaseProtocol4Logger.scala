@@ -1,41 +1,39 @@
 package licos.protocol.element.village.server2client.server2logger
 
-import java.net.URL
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
-import licos.json.element.village.character.{JsonResultCharacter, JsonSimpleCharacter, JsonStatusCharacter}
+import licos.json.element.village.JsonBoardResult
+import licos.json.element.village.character.{JsonCharacter, JsonStatusCharacter}
 import licos.json.element.village.iri.{Contexts, SystemMessage}
-import licos.json.element.village.role.JsonResultRole
-import licos.json.element.village.server2client.JsonGameResult
-import licos.knowledge.{Character, Data2Knowledge, PublicChannel, Role, ServerToClient}
+import licos.json.element.village.role.JsonRole
+import licos.json.element.village.server2client.JsonPhase
+import licos.knowledge.{Data2Knowledge, PrivateChannel, Role, ServerToClient}
 import licos.protocol.element.village.part.{
   BaseProtocol,
+  BoardResultProtocol,
   ChatSettingsProtocol,
+  UpdateProtocol,
   VillageProtocol,
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.part.character.{
-  ResultCharacterProtocol,
-  SimpleCharacterProtocol,
-  StatusCharacterProtocol
-}
-import licos.protocol.element.village.part.role.ResultRoleProtocol
-import licos.protocol.element.village.server2client.{GameResultProtocol => SimpleGameResultProtocol}
+import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
+import licos.protocol.element.village.part.role.RoleProtocol
+import licos.protocol.element.village.server2client.NoonPhaseProtocol as SimpleNoonPhaseProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class GameResultProtocol(
+final case class NoonPhaseProtocol4Logger(
     village:                    VillageInfo,
-    character:                  Seq[ResultCharacterProtocol],
-    role:                       Seq[ResultRoleProtocol],
+    character:                  Seq[CharacterProtocol],
+    role:                       Seq[RoleProtocol],
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Server2ClientVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonGameResult] = {
+  lazy val json: Option[JsonPhase] = {
     Some(
-      new JsonGameResult(
+      new JsonPhase(
         BaseProtocol(
           Contexts.get(SystemMessage),
           SystemMessage,
@@ -58,7 +56,7 @@ final case class GameResultProtocol(
           Some(TimestampGenerator.now),
           Option.empty[OffsetDateTime],
           ServerToClient,
-          PublicChannel,
+          PrivateChannel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
           Option.empty[Seq[VotingResultDetailProtocol]]
@@ -73,62 +71,69 @@ final case class GameResultProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleGameResultProtocol = SimpleGameResultProtocol(
+  def simpleProtocol: SimpleNoonPhaseProtocol = SimpleNoonPhaseProtocol(
     village:   VillageInfo,
-    character: Seq[ResultCharacterProtocol],
-    role:      Seq[ResultRoleProtocol]
+    character: Seq[CharacterProtocol],
+    role:      Seq[RoleProtocol]
   )
 
 }
 
-object GameResultProtocol {
+object NoonPhaseProtocol4Logger {
 
-  def read(json: JsonGameResult, villageInfoFromLobby: VillageInfoFromLobby): Option[GameResultProtocol] = {
+  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[NoonPhaseProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .map { village: VillageInfo =>
-        GameResultProtocol(
+        NoonPhaseProtocol4Logger(
           village,
-          json.character.flatMap { jsonResultCharacter: JsonResultCharacter =>
+          json.character.flatMap { jsonCharacter: JsonCharacter =>
             for {
-              character <- Data2Knowledge.characterOpt(jsonResultCharacter.name.en, jsonResultCharacter.id).toList
-              role      <- village.composition.parse(jsonResultCharacter.role.name.en).toList
-              status    <- Data2Knowledge.statusOpt(jsonResultCharacter.status).toList
-              result    <- Data2Knowledge.outcomeOpt(jsonResultCharacter.result).toList
+              character <- Data2Knowledge.characterOpt(jsonCharacter.name.en, jsonCharacter.id).toList
+              phase     <- Data2Knowledge.phaseOpt(jsonCharacter.update.phase).toList
+              status    <- Data2Knowledge.statusOpt(jsonCharacter.status).toList
             } yield {
-              ResultCharacterProtocol(
+              CharacterProtocol(
                 character,
-                jsonResultCharacter.isMine,
-                role,
-                status,
-                result,
-                village.token,
-                jsonResultCharacter.avatar.name,
-                new URL(jsonResultCharacter.avatar.image),
                 village.id,
-                village.language
+                village.language,
+                jsonCharacter.isMine,
+                status,
+                UpdateProtocol(
+                  phase,
+                  jsonCharacter.update.day
+                ),
+                jsonCharacter.isAChoice
               )
             }
           },
-          json.role.flatMap { jsonResultRole: JsonResultRole =>
-            Data2Knowledge.roleOpt(jsonResultRole.name.en, jsonResultRole.numberOfPlayers).toList.map { role: Role =>
-              ResultRoleProtocol(
+          json.role.flatMap { jsonRole: JsonRole =>
+            Data2Knowledge.roleOpt(jsonRole.name.en, jsonRole.numberOfPlayers).toList.map { role: Role =>
+              RoleProtocol(
                 role,
-                jsonResultRole.isMine,
-                jsonResultRole.character.flatMap { jsonSimpleCharacter: JsonSimpleCharacter =>
-                  Data2Knowledge.characterOpt(jsonSimpleCharacter.name.en, jsonSimpleCharacter.id).toList.map {
-                    character: Character =>
-                      SimpleCharacterProtocol(
-                        character,
-                        village.id,
-                        village.language
-                      )
+                jsonRole.isMine,
+                jsonRole.numberOfPlayers,
+                jsonRole.board.flatMap { jsonBoardResult: JsonBoardResult =>
+                  for {
+                    character <- Data2Knowledge
+                      .characterOpt(jsonBoardResult.character.name.en, jsonBoardResult.character.id)
+                      .toList
+                    polarity <- Data2Knowledge.polarityMarkOpt(jsonBoardResult.polarity).toList
+                    phase    <- Data2Knowledge.phaseOpt(jsonBoardResult.phase).toList
+                  } yield {
+                    BoardResultProtocol(
+                      character,
+                      polarity,
+                      phase,
+                      jsonBoardResult.day,
+                      village.id,
+                      village.language
+                    )
                   }
                 },
                 village.id,
                 village.language
               )
-
             }
           },
           json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>

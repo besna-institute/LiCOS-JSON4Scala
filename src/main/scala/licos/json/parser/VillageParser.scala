@@ -1,7 +1,7 @@
 package licos.json.parser
 
 import licos.json.element.village.invite.{JsonNextGameInvitation, JsonNextGameInvitationIsClosed}
-import licos.json.element.village._
+import licos.json.element.village.*
 import licos.json.element.village.client2server.{
   JsonBoard,
   JsonChatFromClient,

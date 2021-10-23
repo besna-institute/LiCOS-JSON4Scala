@@ -7,7 +7,7 @@ import licos.json.element.village.JsonBase
 import licos.knowledge.{Data2Knowledge, Phase}
 import licos.protocol.element.village.part.{ChatSettingsProtocol, VillageProtocol}
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 
 object VillageInfoFactory {
 
@@ -51,7 +51,7 @@ object VillageInfoFactory {
   }
 
   def createOpt(villageInfoFromLobby: VillageInfoFromLobby, jsonBase: JsonBase): Option[VillageInfo] = {
-    import cats.implicits._
+    import cats.implicits.*
     Data2Knowledge.phaseOpt(jsonBase.phase).map { phase: Phase =>
       create(
         villageInfoFromLobby,

@@ -1,4 +1,4 @@
-package licos.protocol.element.village.server2client.server2logger
+package licos.protocol.element.village.client2server.server2logger
 
 import java.net.URL
 import java.time.OffsetDateTime
@@ -7,7 +7,7 @@ import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.JsonOnymousAudienceChat
 import licos.json.element.village.character.JsonStatusCharacter
 import licos.json.element.village.iri.{ChatMessage, Contexts}
-import licos.knowledge.{Data2Knowledge, OnymousAudienceChannel, ServerToClient}
+import licos.knowledge.{ClientToServer, Data2Knowledge, OnymousAudienceChannel}
 import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import licos.protocol.element.village.part.{
   AvatarProtocol,
@@ -18,20 +18,17 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.protocol.element.village.server2client.{
-  OnymousAudienceChatFromServerProtocol => SimpleOnymousAudienceChatFromServerProtocol
-}
+import licos.protocol.element.village.client2server.OnymousAudienceChatFromClientProtocol as SimpleOnymousAudienceChatFromClientProtocol
 import licos.util.{LiCOSOnline, TimestampGenerator}
 import play.api.libs.json.{JsValue, Json}
 
-final case class OnymousAudienceChatFromServerProtocol(
+final case class OnymousAudienceChatFromClientProtocol4Logger(
     village:                    VillageInfo,
-    isMine:                     Boolean,
     text:                       String,
     myAvatarName:               String,
     myAvatarImage:              URL,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonOnymousAudienceChat] = {
     Some(
@@ -55,9 +52,9 @@ final case class OnymousAudienceChatFromServerProtocol(
           village.day,
           village.phaseTimeLimit,
           village.phaseStartTime,
-          Some(TimestampGenerator.now),
           Option.empty[OffsetDateTime],
-          ServerToClient,
+          Some(TimestampGenerator.now),
+          ClientToServer,
           OnymousAudienceChannel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
@@ -68,13 +65,13 @@ final case class OnymousAudienceChatFromServerProtocol(
           myAvatarName,
           myAvatarImage
         ).json(LiCOSOnline.stateVillage(village.id)),
-        isMine,
+        isMine = true,
         ChatTextProtocol(
           text,
           village.language
         ).json,
         village.maxLengthOfUnicodeCodePoints,
-        isFromServer = true
+        isFromServer = false
       )
     )
   }
@@ -83,9 +80,8 @@ final case class OnymousAudienceChatFromServerProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleOnymousAudienceChatFromServerProtocol = SimpleOnymousAudienceChatFromServerProtocol(
+  def simpleProtocol: SimpleOnymousAudienceChatFromClientProtocol = SimpleOnymousAudienceChatFromClientProtocol(
     village:       VillageInfo,
-    isMine:        Boolean,
     text:          String,
     myAvatarName:  String,
     myAvatarImage: URL
@@ -93,19 +89,17 @@ final case class OnymousAudienceChatFromServerProtocol(
 
 }
 
-object OnymousAudienceChatFromServerProtocol {
-
+object OnymousAudienceChatFromClientProtocol4Logger {
   def read(
       json:                 JsonOnymousAudienceChat,
       villageInfoFromLobby: VillageInfoFromLobby
-  ): Option[OnymousAudienceChatFromServerProtocol] = {
-    if (json.isFromServer) {
+  ): Option[OnymousAudienceChatFromClientProtocol4Logger] = {
+    if (!json.isFromServer) {
       VillageInfoFactory
         .createOpt(villageInfoFromLobby, json.base)
         .map { village: VillageInfo =>
-          OnymousAudienceChatFromServerProtocol(
+          OnymousAudienceChatFromClientProtocol4Logger(
             village,
-            json.isMine,
             json.text.`@value`,
             json.avatar.name,
             new URL(json.avatar.image),
@@ -129,7 +123,7 @@ object OnymousAudienceChatFromServerProtocol {
           )
         }
     } else {
-      Option.empty[OnymousAudienceChatFromServerProtocol]
+      Option.empty[OnymousAudienceChatFromClientProtocol4Logger]
     }
   }
 

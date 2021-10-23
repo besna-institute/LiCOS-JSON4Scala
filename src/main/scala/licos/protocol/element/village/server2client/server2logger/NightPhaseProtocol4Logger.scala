@@ -20,16 +20,16 @@ import licos.protocol.element.village.part.{
 }
 import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.role.RoleProtocol
-import licos.protocol.element.village.server2client.{NightPhaseProtocol => SimpleNightPhaseProtocol}
+import licos.protocol.element.village.server2client.NightPhaseProtocol as SimpleNightPhaseProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class NightPhaseProtocol(
+final case class NightPhaseProtocol4Logger(
     village:                    VillageInfo,
     character:                  Seq[CharacterProtocol],
     role:                       Seq[RoleProtocol],
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Server2ClientVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonPhase] = {
     Some(
@@ -79,14 +79,14 @@ final case class NightPhaseProtocol(
 
 }
 
-object NightPhaseProtocol {
+object NightPhaseProtocol4Logger {
 
-  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[NightPhaseProtocol] = {
+  def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[NightPhaseProtocol4Logger] = {
 
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .map { village: VillageInfo =>
-        NightPhaseProtocol(
+        NightPhaseProtocol4Logger(
           village,
           json.character.flatMap { jsonCharacter: JsonCharacter =>
             for {

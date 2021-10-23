@@ -4,15 +4,11 @@ import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.character.JsonStatusCharacter
-import licos.json.element.village.client2server.JsonVote
-import licos.json.element.village.iri.{Contexts, VoteMessage}
+import licos.json.element.village.client2server.JsonScroll
+import licos.json.element.village.iri.{Contexts, ScrollMessage}
 import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PrivateChannel, Role}
-import licos.protocol.element.village.client2server.{VoteProtocol => SimpleVoteProtocol}
-import licos.protocol.element.village.part.character.{
-  RoleCharacterProtocol,
-  SimpleCharacterProtocol,
-  StatusCharacterProtocol
-}
+import licos.protocol.element.village.client2server.ScrollProtocol as SimpleScrollProtocol
+import licos.protocol.element.village.part.character.{RoleCharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.{
   BaseProtocol,
   ChatSettingsProtocol,
@@ -20,23 +16,26 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
-import licos.util.{LiCOSOnline, TimestampGenerator}
+import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class VoteProtocol(
+final case class ScrollProtocol4Logger(
     village:                    VillageInfo,
-    character:                  Character,
+    nodeId:                     String,
+    scrollTop:                  Int,
+    scrollHeight:               Int,
+    offsetHeight:               Int,
     myCharacter:                Character,
     myRole:                     Role,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Client2ServerVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonVote] = {
+  lazy val json: Option[JsonScroll] = {
     Some(
-      new JsonVote(
+      new JsonScroll(
         BaseProtocol(
-          Contexts.get(VoteMessage),
-          VoteMessage,
+          Contexts.get(ScrollMessage),
+          ScrollMessage,
           VillageProtocol(
             village.id,
             village.name,
@@ -67,11 +66,10 @@ final case class VoteProtocol(
           village.id,
           village.language
         ).json,
-        SimpleCharacterProtocol(
-          character,
-          village.id,
-          village.language
-        ).json(LiCOSOnline.stateVillage(village.id))
+        nodeId,
+        scrollTop,
+        scrollHeight,
+        offsetHeight
       )
     )
   }
@@ -80,28 +78,34 @@ final case class VoteProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleVoteProtocol = SimpleVoteProtocol(
-    village:     VillageInfo,
-    character:   Character,
-    myCharacter: Character,
-    myRole:      Role
+  def simpleProtocol: SimpleScrollProtocol = SimpleScrollProtocol(
+    village:      VillageInfo,
+    nodeId:       String,
+    scrollTop:    Int,
+    scrollHeight: Int,
+    offsetHeight: Int,
+    myCharacter:  Character,
+    myRole:       Role
   )
 
 }
 
-object VoteProtocol {
-  def read(json: JsonVote, villageInfoFromLobby: VillageInfoFromLobby): Option[VoteProtocol] = {
+object ScrollProtocol4Logger {
+
+  def read(json: JsonScroll, villageInfoFromLobby: VillageInfoFromLobby): Option[ScrollProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .flatMap { village: VillageInfo =>
         for {
-          character   <- Data2Knowledge.characterOpt(json.character.name.en, json.character.id)
           myCharacter <- Data2Knowledge.characterOpt(json.myCharacter.name.en, json.myCharacter.id)
           myRole      <- village.composition.parse(json.myCharacter.role.name.en)
         } yield {
-          VoteProtocol(
+          ScrollProtocol4Logger(
             village,
-            character,
+            json.nodeId,
+            json.scrollTop,
+            json.scrollHeight,
+            json.offsetHeight,
             myCharacter,
             myRole,
             json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>
@@ -120,7 +124,6 @@ object VoteProtocol {
                   village.language
                 )
               }
-
             }
           )
         }

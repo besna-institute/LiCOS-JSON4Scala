@@ -2,7 +2,7 @@ package licos.json.validation.lobby
 
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, maxLength, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 object BuildVillageValidation {
   val id:      Reads[Long]   = min(-1L) keepAnd max(Long.MaxValue)

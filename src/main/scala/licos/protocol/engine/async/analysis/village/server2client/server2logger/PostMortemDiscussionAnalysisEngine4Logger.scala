@@ -1,7 +1,7 @@
 package licos.protocol.engine.async.analysis.village.server2client.server2logger
 
 import licos.protocol.element.village.VillageMessageProtocol
-import licos.protocol.element.village.server2client.server2logger.PostMortemDiscussionProtocol
+import licos.protocol.element.village.server2client.server2logger.PostMortemDiscussionProtocol4Logger
 import licos.protocol.engine.analysis.village.VillageMessageAnalysisEngine
 import licos.protocol.engine.processing.village.VillageBOX
 
@@ -11,7 +11,7 @@ trait PostMortemDiscussionAnalysisEngine4Logger extends VillageMessageAnalysisEn
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(
       box:                  VillageBOX,
-      postMortemDiscussion: PostMortemDiscussionProtocol
+      postMortemDiscussion: PostMortemDiscussionProtocol4Logger
   )(implicit ec:            ExecutionContext): Future[Option[VillageMessageProtocol]]
 }
 

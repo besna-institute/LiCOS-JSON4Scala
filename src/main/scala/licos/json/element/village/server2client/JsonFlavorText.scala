@@ -1,13 +1,13 @@
 package licos.json.element.village.server2client
 
-import java.util.{List => JList}
+import java.util.List as JList
 
 import licos.json.element.Element
 import licos.json.element.village.{JsonBase, JsonElement}
 import play.api.libs.functional.syntax.{unlift, _}
 import play.api.libs.json.{Format, JsPath}
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class JsonFlavorText private (base: JsonBase, sub: JsonSubFlavorText) extends JsonElement with Element {
 
@@ -55,7 +55,7 @@ final case class JsonSubFlavorText(flavorText: Seq[JsonChatFromServer]) {
 
 object JsonSubFlavorText {
 
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   implicit val jsonReads: Reads[JsonSubFlavorText] =
     (JsPath \ "flavorText").read[Seq[JsonChatFromServer]].map(JsonSubFlavorText.apply)

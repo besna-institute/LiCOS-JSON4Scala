@@ -3,8 +3,8 @@ package licos.json.validation.lobby
 object PlayerSettingValidation {
 
   import play.api.libs.json.Reads
-  import play.api.libs.json.Reads._
-  import play.api.libs.functional.syntax._
+  import play.api.libs.json.Reads.*
+  import play.api.libs.functional.syntax.*
 
   val current: Reads[Int] = min(-1) keepAnd max(Int.MaxValue)
 

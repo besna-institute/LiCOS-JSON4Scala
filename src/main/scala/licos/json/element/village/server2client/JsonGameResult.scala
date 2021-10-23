@@ -1,6 +1,6 @@
 package licos.json.element.village.server2client
 
-import java.util.{List => JList}
+import java.util.List as JList
 
 import licos.json.element.Element
 import licos.json.element.village.character.JsonResultCharacter
@@ -9,7 +9,7 @@ import licos.json.element.village.{JsonBase, JsonElement}
 import play.api.libs.functional.syntax.{unlift, _}
 import play.api.libs.json.{Format, JsPath}
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class JsonGameResult private (base: JsonBase, sub: JsonSubGameResult) extends JsonElement with Element {
 
@@ -64,8 +64,8 @@ final case class JsonSubGameResult(character: Seq[JsonResultCharacter], role: Se
 
 object JsonSubGameResult {
 
-  import play.api.libs.functional.syntax._
-  import play.api.libs.json._
+  import play.api.libs.functional.syntax.*
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonSubGameResult] = (

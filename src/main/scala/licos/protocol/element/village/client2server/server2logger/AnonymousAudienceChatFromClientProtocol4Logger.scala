@@ -3,39 +3,35 @@ package licos.protocol.element.village.client2server.server2logger
 import java.time.OffsetDateTime
 
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
+import licos.json.element.village.JsonAnonymousAudienceChat
 import licos.json.element.village.character.JsonStatusCharacter
-import licos.json.element.village.client2server.JsonScroll
-import licos.json.element.village.iri.{Contexts, ScrollMessage}
-import licos.knowledge.{Character, ClientToServer, Data2Knowledge, PrivateChannel, Role}
-import licos.protocol.element.village.client2server.{ScrollProtocol => SimpleScrollProtocol}
-import licos.protocol.element.village.part.character.{RoleCharacterProtocol, StatusCharacterProtocol}
+import licos.json.element.village.iri.{ChatMessage, Contexts}
+import licos.knowledge.{AnonymousAudienceChannel, ClientToServer, Data2Knowledge}
+import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import licos.protocol.element.village.part.{
   BaseProtocol,
   ChatSettingsProtocol,
+  ChatTextProtocol,
   VillageProtocol,
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
+import licos.protocol.element.village.client2server.AnonymousAudienceChatFromClientProtocol as SimpleAnonymousAudienceChatFromClientProtocol
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class ScrollProtocol(
+final case class AnonymousAudienceChatFromClientProtocol4Logger(
     village:                    VillageInfo,
-    nodeId:                     String,
-    scrollTop:                  Int,
-    scrollHeight:               Int,
-    offsetHeight:               Int,
-    myCharacter:                Character,
-    myRole:                     Role,
+    text:                       String,
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Client2ServerVillageMessageProtocolForLogging {
+) extends Client2ServerVillageMessageProtocol4Logger {
 
-  lazy val json: Option[JsonScroll] = {
+  lazy val json: Option[JsonAnonymousAudienceChat] = {
     Some(
-      new JsonScroll(
+      new JsonAnonymousAudienceChat(
         BaseProtocol(
-          Contexts.get(ScrollMessage),
-          ScrollMessage,
+          Contexts.get(ChatMessage),
+          ChatMessage,
           VillageProtocol(
             village.id,
             village.name,
@@ -55,21 +51,15 @@ final case class ScrollProtocol(
           Option.empty[OffsetDateTime],
           Some(TimestampGenerator.now),
           ClientToServer,
-          PrivateChannel,
+          AnonymousAudienceChannel,
           extensionalDisclosureRange,
           Option.empty[Seq[VotingResultSummaryProtocol]],
           Option.empty[Seq[VotingResultDetailProtocol]]
         ).json,
-        RoleCharacterProtocol(
-          myCharacter,
-          myRole,
-          village.id,
-          village.language
-        ).json,
-        nodeId,
-        scrollTop,
-        scrollHeight,
-        offsetHeight
+        isMine = true,
+        ChatTextProtocol(text, village.language).json,
+        village.maxLengthOfUnicodeCodePoints,
+        isFromServer = false
       )
     )
   }
@@ -78,36 +68,26 @@ final case class ScrollProtocol(
     Json.toJson(j)
   }
 
-  def simpleProtocol: SimpleScrollProtocol = SimpleScrollProtocol(
-    village:      VillageInfo,
-    nodeId:       String,
-    scrollTop:    Int,
-    scrollHeight: Int,
-    offsetHeight: Int,
-    myCharacter:  Character,
-    myRole:       Role
+  def simpleProtocol: SimpleAnonymousAudienceChatFromClientProtocol = SimpleAnonymousAudienceChatFromClientProtocol(
+    village: VillageInfo,
+    text:    String
   )
 
 }
 
-object ScrollProtocol {
+object AnonymousAudienceChatFromClientProtocol4Logger {
 
-  def read(json: JsonScroll, villageInfoFromLobby: VillageInfoFromLobby): Option[ScrollProtocol] = {
-    VillageInfoFactory
-      .createOpt(villageInfoFromLobby, json.base)
-      .flatMap { village: VillageInfo =>
-        for {
-          myCharacter <- Data2Knowledge.characterOpt(json.myCharacter.name.en, json.myCharacter.id)
-          myRole      <- village.composition.parse(json.myCharacter.role.name.en)
-        } yield {
-          ScrollProtocol(
+  def read(
+      json:                 JsonAnonymousAudienceChat,
+      villageInfoFromLobby: VillageInfoFromLobby
+  ): Option[AnonymousAudienceChatFromClientProtocol4Logger] = {
+    if (!json.isFromServer) {
+      VillageInfoFactory
+        .createOpt(villageInfoFromLobby, json.base)
+        .map { village: VillageInfo =>
+          AnonymousAudienceChatFromClientProtocol4Logger(
             village,
-            json.nodeId,
-            json.scrollTop,
-            json.scrollHeight,
-            json.offsetHeight,
-            myCharacter,
-            myRole,
+            json.text.`@value`,
             json.base.extensionalDisclosureRange.flatMap { jsonStatusCharacter: JsonStatusCharacter =>
               for {
                 character  <- Data2Knowledge.characterOpt(jsonStatusCharacter.name.en, jsonStatusCharacter.id).toList
@@ -127,7 +107,9 @@ object ScrollProtocol {
             }
           )
         }
-      }
+    } else {
+      Option.empty[AnonymousAudienceChatFromClientProtocol4Logger]
+    }
   }
 
 }

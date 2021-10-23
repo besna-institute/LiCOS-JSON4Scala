@@ -1,7 +1,7 @@
 package licos.knowledge
 
 import scala.concurrent.duration.FiniteDuration
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 
 sealed abstract class Phase(val label: String) extends Product with Serializable {
   override def toString: String = label
@@ -9,7 +9,7 @@ sealed abstract class Phase(val label: String) extends Product with Serializable
   override def equals(o: Any): Boolean = {
     o match {
       case p: Phase =>
-        import cats.implicits._
+        import cats.implicits.*
         p.label === label
       case _ => false
     }

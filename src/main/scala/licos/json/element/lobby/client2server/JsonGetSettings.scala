@@ -17,7 +17,7 @@ object JsonGetSettings {
   val `type`: String = "getSettings"
 
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   implicit val jsonReads: Reads[JsonGetSettings] = {
     (JsPath \ "type").read[String](pattern(`type`.r)).map(JsonGetSettings.apply)

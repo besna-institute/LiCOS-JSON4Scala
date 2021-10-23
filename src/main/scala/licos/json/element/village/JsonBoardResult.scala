@@ -14,8 +14,8 @@ final case class JsonBoardResult(
 
 object JsonBoardResult {
 
-  import play.api.libs.json._
-  import play.api.libs.functional.syntax._
+  import play.api.libs.json.*
+  import play.api.libs.functional.syntax.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonBoardResult] = (

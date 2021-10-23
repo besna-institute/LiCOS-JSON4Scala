@@ -19,7 +19,7 @@ sealed abstract class Role(val species: Species, val team: Team, val numberOfPla
   override def equals(o: Any): Boolean = {
     o match {
       case role: Role =>
-        import cats.implicits._
+        import cats.implicits.*
         this.name.en === role.name.en
       case _ => false
     }

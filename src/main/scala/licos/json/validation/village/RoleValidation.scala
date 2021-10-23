@@ -5,7 +5,7 @@ import java.util.Locale
 import licos.util.{LiCOSOnline, WerewolfWorld}
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 import scala.util.matching.Regex
 

@@ -3,7 +3,7 @@ package licos.json.validation.village
 import licos.util.LiCOSOnline
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 object TimeValidation {
   val `@id`: Reads[String] = pattern(

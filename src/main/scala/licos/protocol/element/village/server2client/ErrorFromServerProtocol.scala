@@ -1,7 +1,6 @@
 package licos.protocol.element.village.server2client
 
 import java.time.OffsetDateTime
-
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.JsonError
 import licos.json.element.village.iri.{Contexts, ErrorMessage}
@@ -15,6 +14,7 @@ import licos.protocol.element.village.part.{
   VotingResultDetailProtocol,
   VotingResultSummaryProtocol
 }
+import licos.protocol.element.village.server2client.server2logger.ErrorFromServerProtocol4Logger
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
@@ -67,8 +67,8 @@ final case class ErrorFromServerProtocol(
     Json.toJson(j)
   }
 
-  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): server2logger.ErrorFromServerProtocol = {
-    server2logger.ErrorFromServerProtocol(
+  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): ErrorFromServerProtocol4Logger = {
+    ErrorFromServerProtocol4Logger(
       village:                    VillageInfo,
       content:                    NameProtocol,
       severity:                   Severity,

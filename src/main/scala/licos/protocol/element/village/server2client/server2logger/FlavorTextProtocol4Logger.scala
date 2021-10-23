@@ -17,16 +17,16 @@ import licos.protocol.element.village.part.{
 }
 import licos.protocol.element.village.server2client.{
   ChatFromServerProtocol,
-  FlavorTextProtocol => SimpleFlavorTextProtocol
+  FlavorTextProtocol as SimpleFlavorTextProtocol
 }
 import licos.util.TimestampGenerator
 import play.api.libs.json.{JsValue, Json}
 
-final case class FlavorTextProtocol(
+final case class FlavorTextProtocol4Logger(
     village:                    VillageInfo,
     flavorText:                 Seq[ChatFromServerProtocol],
     extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-) extends Server2ClientVillageMessageProtocolForLogging {
+) extends Server2ClientVillageMessageProtocol4Logger {
 
   lazy val json: Option[JsonFlavorText] = {
     Some(
@@ -74,13 +74,13 @@ final case class FlavorTextProtocol(
 
 }
 
-object FlavorTextProtocol {
+object FlavorTextProtocol4Logger {
 
-  def read(json: JsonFlavorText, villageInfoFromLobby: VillageInfoFromLobby): Option[FlavorTextProtocol] = {
+  def read(json: JsonFlavorText, villageInfoFromLobby: VillageInfoFromLobby): Option[FlavorTextProtocol4Logger] = {
     VillageInfoFactory
       .createOpt(villageInfoFromLobby, json.base)
       .map { village: VillageInfo =>
-        FlavorTextProtocol(
+        FlavorTextProtocol4Logger(
           village,
           json.flavorText.flatMap { jsonChatFromServer: JsonChatFromServer =>
             ChatFromServerProtocol

@@ -2,7 +2,6 @@ package licos.protocol.element.village.server2client
 
 import java.time.OffsetDateTime
 import java.util.UUID
-
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.iri.{ChatMessage, Contexts}
 import licos.json.element.village.server2client.JsonChatFromServer
@@ -16,6 +15,7 @@ import licos.protocol.element.village.part.{
   VotingResultSummaryProtocol
 }
 import licos.protocol.element.village.part.character.{SimpleCharacterProtocol, StatusCharacterProtocol}
+import licos.protocol.element.village.server2client.server2logger.ChatFromServerProtocol4Logger
 import licos.util.{LiCOSOnline, TimestampGenerator}
 import play.api.libs.json.{JsValue, Json}
 
@@ -82,7 +82,7 @@ final case class ChatFromServerProtocol(
   }
 
   def fromHostPlayerToAvatar(token: UUID): ChatFromServerProtocol = {
-    import cats.implicits._
+    import cats.implicits.*
     def isCharacterMine: Boolean = token === village.token
     ChatFromServerProtocol(
       village.changeToken(token): VillageInfo,
@@ -97,8 +97,8 @@ final case class ChatFromServerProtocol(
     )
   }
 
-  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): server2logger.ChatFromServerProtocol = {
-    server2logger.ChatFromServerProtocol(
+  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): ChatFromServerProtocol4Logger = {
+    ChatFromServerProtocol4Logger(
       village:                    VillageInfo,
       channel:                    PlayerChatChannel,
       character:                  SimpleCharacterProtocol,
