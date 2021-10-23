@@ -10,7 +10,7 @@ import licos.knowledge.{Composition, HumanArchitecture, HumanPlayerLobby, Random
 import licos.protocol.element.village.VillageMessageProtocol
 import licos.protocol.engine.async.processing.{SpecificProcessingEngineFactory, VillagePE4Logger}
 import licos.protocol.engine.async.processing.village.server2logger.{
-  VillageProcessingEngine,
+  VillageProcessingEngine4Logger,
   VillageProcessingEngineFactory4Logger
 }
 import org.scalatest.funsuite.AnyFunSuite
@@ -48,7 +48,7 @@ final class VillageProcessingEngineSuite extends AnyFunSuite with Matchers with 
     .set(new ChatFromServerAE())
     .set(new MorningPhaseAE())
 
-  private val processingEngine: VillageProcessingEngine = processingEngineFactory.create
+  private val processingEngine: VillageProcessingEngine4Logger = processingEngineFactory.create
 
   test("protocol.async.villageProcessingEngineSuite") {
     forEvery(fractions) { jsonExample: VillageExample =>

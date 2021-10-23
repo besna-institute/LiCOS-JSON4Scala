@@ -1,48 +1,55 @@
 package licos.protocol.engine.async.processing.village.server2logger
 
-import licos.protocol.engine.async.analysis.village.client2server.server2logger._
-import licos.protocol.engine.async.analysis.village.server2client.server2logger._
+import licos.protocol.engine.async.analysis.village.client2server.server2logger.*
+import licos.protocol.engine.async.analysis.village.server2client.server2logger.*
 import licos.protocol.engine.async.processing.ProcessingEngineFactory
 
 @SuppressWarnings(Array[String]("org.wartremover.warts.Overloading", "org.wartremover.warts.Var"))
 final class VillageProcessingEngineFactory4Logger extends ProcessingEngineFactory {
 
-  private var anonymousAudienceChatFromClientAnalysisEngine: Option[AnonymousAudienceChatFromClientAnalysisEngine] =
-    Option.empty[AnonymousAudienceChatFromClientAnalysisEngine]
-  private var boardAnalysisEngine: Option[BoardAnalysisEngine] = Option.empty[BoardAnalysisEngine]
-  private var chatFromClientAnalysisEngine: Option[ChatFromClientAnalysisEngine] =
-    Option.empty[ChatFromClientAnalysisEngine]
-  private var errorFromClientAnalysisEngine: Option[ErrorFromClientAnalysisEngine] =
-    Option.empty[ErrorFromClientAnalysisEngine]
-  private var onymousAudienceBoardAnalysisEngine: Option[OnymousAudienceBoardAnalysisEngine] =
-    Option.empty[OnymousAudienceBoardAnalysisEngine]
-  private var onymousAudienceChatFromClientAnalysisEngine: Option[OnymousAudienceChatFromClientAnalysisEngine] =
-    Option.empty[OnymousAudienceChatFromClientAnalysisEngine]
-  private var onymousAudienceScrollAnalysisEngine: Option[OnymousAudienceScrollAnalysisEngine] =
-    Option.empty[OnymousAudienceScrollAnalysisEngine]
-  private var scrollAnalysisEngine: Option[ScrollAnalysisEngine] = Option.empty[ScrollAnalysisEngine]
-  private var starAnalysisEngine:   Option[StarAnalysisEngine]   = Option.empty[StarAnalysisEngine]
-  private var voteAnalysisEngine:   Option[VoteAnalysisEngine]   = Option.empty[VoteAnalysisEngine]
-  private var anonymousAudienceChatFromServerAnalysisEngine: Option[AnonymousAudienceChatFromServerAnalysisEngine] =
-    Option.empty[AnonymousAudienceChatFromServerAnalysisEngine]
-  private var chatFromServerAnalysisEngine: Option[ChatFromServerAnalysisEngine] =
-    Option.empty[ChatFromServerAnalysisEngine]
-  private var errorFromServerAnalysisEngine: Option[ErrorFromServerAnalysisEngine] =
-    Option.empty[ErrorFromServerAnalysisEngine]
-  private var firstMorningPhaseAnalysisEngine: Option[FirstMorningPhaseAnalysisEngine] =
-    Option.empty[FirstMorningPhaseAnalysisEngine]
-  private var flavorTextAnalysisEngine:   Option[FlavorTextAnalysisEngine]   = Option.empty[FlavorTextAnalysisEngine]
-  private var gameResultAnalysisEngine:   Option[GameResultAnalysisEngine]   = Option.empty[GameResultAnalysisEngine]
-  private var morningPhaseAnalysisEngine: Option[MorningPhaseAnalysisEngine] = Option.empty[MorningPhaseAnalysisEngine]
-  private var nightPhaseAnalysisEngine:   Option[NightPhaseAnalysisEngine]   = Option.empty[NightPhaseAnalysisEngine]
-  private var noonPhaseAnalysisEngine:    Option[NoonPhaseAnalysisEngine]    = Option.empty[NoonPhaseAnalysisEngine]
-  private var onymousAudienceChatFromServerAnalysisEngine: Option[OnymousAudienceChatFromServerAnalysisEngine] =
-    Option.empty[OnymousAudienceChatFromServerAnalysisEngine]
-  private var postMortemDiscussionAnalysisEngine: Option[PostMortemDiscussionAnalysisEngine] =
-    Option.empty[PostMortemDiscussionAnalysisEngine]
+  private var anonymousAudienceChatFromClientAnalysisEngine
+      : Option[AnonymousAudienceChatFromClientAnalysisEngine4Logger] =
+    Option.empty[AnonymousAudienceChatFromClientAnalysisEngine4Logger]
+  private var boardAnalysisEngine: Option[BoardAnalysisEngine4Logger] = Option.empty[BoardAnalysisEngine4Logger]
+  private var chatFromClientAnalysisEngine: Option[ChatFromClientAnalysisEngine4Logger] =
+    Option.empty[ChatFromClientAnalysisEngine4Logger]
+  private var errorFromClientAnalysisEngine: Option[ErrorFromClientAnalysisEngine4Logger] =
+    Option.empty[ErrorFromClientAnalysisEngine4Logger]
+  private var onymousAudienceBoardAnalysisEngine: Option[OnymousAudienceBoardAnalysisEngine4Logger] =
+    Option.empty[OnymousAudienceBoardAnalysisEngine4Logger]
+  private var onymousAudienceChatFromClientAnalysisEngine: Option[OnymousAudienceChatFromClientAnalysisEngine4Logger] =
+    Option.empty[OnymousAudienceChatFromClientAnalysisEngine4Logger]
+  private var onymousAudienceScrollAnalysisEngine: Option[OnymousAudienceScrollAnalysisEngine4Logger] =
+    Option.empty[OnymousAudienceScrollAnalysisEngine4Logger]
+  private var scrollAnalysisEngine: Option[ScrollAnalysisEngine4Logger] = Option.empty[ScrollAnalysisEngine4Logger]
+  private var starAnalysisEngine:   Option[StarAnalysisEngine4Logger]   = Option.empty[StarAnalysisEngine4Logger]
+  private var voteAnalysisEngine:   Option[VoteAnalysisEngine4Logger]   = Option.empty[VoteAnalysisEngine4Logger]
+  private var anonymousAudienceChatFromServerAnalysisEngine
+      : Option[AnonymousAudienceChatFromServerAnalysisEngine4Logger] =
+    Option.empty[AnonymousAudienceChatFromServerAnalysisEngine4Logger]
+  private var chatFromServerAnalysisEngine: Option[ChatFromServerAnalysisEngine4Logger] =
+    Option.empty[ChatFromServerAnalysisEngine4Logger]
+  private var errorFromServerAnalysisEngine: Option[ErrorFromServerAnalysisEngine4Logger] =
+    Option.empty[ErrorFromServerAnalysisEngine4Logger]
+  private var firstMorningPhaseAnalysisEngine: Option[FirstMorningPhaseAnalysisEngine4Logger] =
+    Option.empty[FirstMorningPhaseAnalysisEngine4Logger]
+  private var flavorTextAnalysisEngine: Option[FlavorTextAnalysisEngine4Logger] =
+    Option.empty[FlavorTextAnalysisEngine4Logger]
+  private var gameResultAnalysisEngine: Option[GameResultAnalysisEngine4Logger] =
+    Option.empty[GameResultAnalysisEngine4Logger]
+  private var morningPhaseAnalysisEngine: Option[MorningPhaseAnalysisEngine4Logger] =
+    Option.empty[MorningPhaseAnalysisEngine4Logger]
+  private var nightPhaseAnalysisEngine: Option[NightPhaseAnalysisEngine4Logger] =
+    Option.empty[NightPhaseAnalysisEngine4Logger]
+  private var noonPhaseAnalysisEngine: Option[NoonPhaseAnalysisEngine4Logger] =
+    Option.empty[NoonPhaseAnalysisEngine4Logger]
+  private var onymousAudienceChatFromServerAnalysisEngine: Option[OnymousAudienceChatFromServerAnalysisEngine4Logger] =
+    Option.empty[OnymousAudienceChatFromServerAnalysisEngine4Logger]
+  private var postMortemDiscussionAnalysisEngine: Option[PostMortemDiscussionAnalysisEngine4Logger] =
+    Option.empty[PostMortemDiscussionAnalysisEngine4Logger]
 
-  override def create: VillageProcessingEngine = {
-    new VillageProcessingEngine(
+  override def create: VillageProcessingEngine4Logger = {
+    new VillageProcessingEngine4Logger(
       anonymousAudienceChatFromClientAnalysisEngine,
       boardAnalysisEngine,
       chatFromClientAnalysisEngine,
@@ -68,119 +75,125 @@ final class VillageProcessingEngineFactory4Logger extends ProcessingEngineFactor
   }
 
   def set(
-      anonymousAudienceChatFromClientAnalysisEngine: AnonymousAudienceChatFromClientAnalysisEngine
+      anonymousAudienceChatFromClientAnalysisEngine: AnonymousAudienceChatFromClientAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.anonymousAudienceChatFromClientAnalysisEngine = Option(anonymousAudienceChatFromClientAnalysisEngine)
     this
   }
 
-  def set(boardAnalysisEngine: BoardAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(boardAnalysisEngine: BoardAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.boardAnalysisEngine = Option(boardAnalysisEngine)
     this
   }
 
-  def set(chatFromClientAnalysisEngine: ChatFromClientAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(chatFromClientAnalysisEngine: ChatFromClientAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.chatFromClientAnalysisEngine = Option(chatFromClientAnalysisEngine)
     this
   }
 
-  def set(errorFromClientAnalysisEngine: ErrorFromClientAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(
+      errorFromClientAnalysisEngine: ErrorFromClientAnalysisEngine4Logger
+  ): VillageProcessingEngineFactory4Logger = {
     this.errorFromClientAnalysisEngine = Option(errorFromClientAnalysisEngine)
     this
   }
 
   def set(
-      onymousAudienceBoardAnalysisEngine: OnymousAudienceBoardAnalysisEngine
+      onymousAudienceBoardAnalysisEngine: OnymousAudienceBoardAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.onymousAudienceBoardAnalysisEngine = Option(onymousAudienceBoardAnalysisEngine)
     this
   }
 
   def set(
-      onymousAudienceChatFromClientAnalysisEngine: OnymousAudienceChatFromClientAnalysisEngine
+      onymousAudienceChatFromClientAnalysisEngine: OnymousAudienceChatFromClientAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.onymousAudienceChatFromClientAnalysisEngine = Option(onymousAudienceChatFromClientAnalysisEngine)
     this
   }
 
   def set(
-      onymousAudienceScrollAnalysisEngine: OnymousAudienceScrollAnalysisEngine
+      onymousAudienceScrollAnalysisEngine: OnymousAudienceScrollAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.onymousAudienceScrollAnalysisEngine = Option(onymousAudienceScrollAnalysisEngine)
     this
   }
 
-  def set(scrollAnalysisEngine: ScrollAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(scrollAnalysisEngine: ScrollAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.scrollAnalysisEngine = Option(scrollAnalysisEngine)
     this
   }
 
-  def set(starAnalysisEngine: StarAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(starAnalysisEngine: StarAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.starAnalysisEngine = Option(starAnalysisEngine)
     this
   }
 
-  def set(voteAnalysisEngine: VoteAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(voteAnalysisEngine: VoteAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.voteAnalysisEngine = Option(voteAnalysisEngine)
     this
   }
 
   def set(
-      anonymousAudienceChatFromServerAnalysisEngine: AnonymousAudienceChatFromServerAnalysisEngine
+      anonymousAudienceChatFromServerAnalysisEngine: AnonymousAudienceChatFromServerAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.anonymousAudienceChatFromServerAnalysisEngine = Option(anonymousAudienceChatFromServerAnalysisEngine)
     this
   }
 
-  def set(chatFromServerAnalysisEngine: ChatFromServerAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(chatFromServerAnalysisEngine: ChatFromServerAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.chatFromServerAnalysisEngine = Option(chatFromServerAnalysisEngine)
     this
   }
 
-  def set(errorFromServerAnalysisEngine: ErrorFromServerAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(
+      errorFromServerAnalysisEngine: ErrorFromServerAnalysisEngine4Logger
+  ): VillageProcessingEngineFactory4Logger = {
     this.errorFromServerAnalysisEngine = Option(errorFromServerAnalysisEngine)
     this
   }
 
-  def set(firstMorningPhaseAnalysisEngine: FirstMorningPhaseAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(
+      firstMorningPhaseAnalysisEngine: FirstMorningPhaseAnalysisEngine4Logger
+  ): VillageProcessingEngineFactory4Logger = {
     this.firstMorningPhaseAnalysisEngine = Option(firstMorningPhaseAnalysisEngine)
     this
   }
 
-  def set(flavorTextAnalysisEngine: FlavorTextAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(flavorTextAnalysisEngine: FlavorTextAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.flavorTextAnalysisEngine = Option(flavorTextAnalysisEngine)
     this
   }
 
-  def set(gameResultAnalysisEngine: GameResultAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(gameResultAnalysisEngine: GameResultAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.gameResultAnalysisEngine = Option(gameResultAnalysisEngine)
     this
   }
 
-  def set(morningPhaseAnalysisEngine: MorningPhaseAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(morningPhaseAnalysisEngine: MorningPhaseAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.morningPhaseAnalysisEngine = Option(morningPhaseAnalysisEngine)
     this
   }
 
-  def set(nightPhaseAnalysisEngine: NightPhaseAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(nightPhaseAnalysisEngine: NightPhaseAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.nightPhaseAnalysisEngine = Option(nightPhaseAnalysisEngine)
     this
   }
 
-  def set(noonPhaseAnalysisEngine: NoonPhaseAnalysisEngine): VillageProcessingEngineFactory4Logger = {
+  def set(noonPhaseAnalysisEngine: NoonPhaseAnalysisEngine4Logger): VillageProcessingEngineFactory4Logger = {
     this.noonPhaseAnalysisEngine = Option(noonPhaseAnalysisEngine)
     this
   }
 
   def set(
-      onymousAudienceChatFromServerAnalysisEngine: OnymousAudienceChatFromServerAnalysisEngine
+      onymousAudienceChatFromServerAnalysisEngine: OnymousAudienceChatFromServerAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.onymousAudienceChatFromServerAnalysisEngine = Option(onymousAudienceChatFromServerAnalysisEngine)
     this
   }
 
   def set(
-      postMortemDiscussionAnalysisEngine: PostMortemDiscussionAnalysisEngine
+      postMortemDiscussionAnalysisEngine: PostMortemDiscussionAnalysisEngine4Logger
   ): VillageProcessingEngineFactory4Logger = {
     this.postMortemDiscussionAnalysisEngine = Option(postMortemDiscussionAnalysisEngine)
     this
