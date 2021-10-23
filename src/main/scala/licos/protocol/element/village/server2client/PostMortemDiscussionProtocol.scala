@@ -14,6 +14,7 @@ import licos.protocol.element.village.part.{
 }
 import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.role.RoleProtocol
+import licos.protocol.element.village.server2client.server2logger.PostMortemDiscussionProtocol4Logger
 import play.api.libs.json.{JsValue, Json}
 
 final case class PostMortemDiscussionProtocol(
@@ -24,7 +25,7 @@ final case class PostMortemDiscussionProtocol(
 ) extends Server2ClientVillageMessageProtocol {
 
   private lazy val json: Option[JsonPhase] = {
-    server2logger.PostMortemDiscussionProtocol(village, character, role, Nil, votingResultsSummary, Nil).json
+    PostMortemDiscussionProtocol4Logger(village, character, role, Nil, votingResultsSummary, Nil).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
@@ -34,8 +35,8 @@ final case class PostMortemDiscussionProtocol(
   def forLogger(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol],
       votingResultsDetail:        Seq[VotingResultDetailProtocol]
-  ): server2logger.PostMortemDiscussionProtocol = {
-    server2logger.PostMortemDiscussionProtocol(
+  ): PostMortemDiscussionProtocol4Logger = {
+    PostMortemDiscussionProtocol4Logger(
       village:                    VillageInfo,
       character:                  Seq[CharacterProtocol],
       role:                       Seq[RoleProtocol],
@@ -49,7 +50,7 @@ final case class PostMortemDiscussionProtocol(
 
 object PostMortemDiscussionProtocol {
   def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[PostMortemDiscussionProtocol] = {
-    import cats.implicits._
+    import cats.implicits.*
     if (json.base.phase === PostMortemDiscussion.label && json.base.day === 0) {
       VillageInfoFactory
         .createOpt(villageInfoFromLobby, json.base)

@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class EnterLobbyAE extends EnterLobbyAnalysisEngine {
   override def process(box: LobbyBOX, enterLobbyProtocol: EnterLobbyProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(EnterLobby.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(EnterLobby.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

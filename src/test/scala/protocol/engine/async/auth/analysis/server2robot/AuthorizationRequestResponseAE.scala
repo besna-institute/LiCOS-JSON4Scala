@@ -14,9 +14,9 @@ final class AuthorizationRequestResponseAE extends AuthorizationRequestResponseA
   override def process(
       box:                                  AuthBOX,
       authorizationRequestResponseProtocol: AuthorizationRequestResponseProtocol
-  )(implicit ec:                            ExecutionContext): Future[AuthMessageProtocol] = {
+  )(implicit ec:                            ExecutionContext): Future[Option[AuthMessageProtocol]] = {
     box match {
-      case _: AuthBox => Future.successful(AuthMessageTestProtocol(AuthorizationRequestResponse.`type`))
+      case _: AuthBox => Future.successful(Some(AuthMessageTestProtocol(AuthorizationRequestResponse.`type`)))
       case _ => Future.failed(new AuthBOXNotFoundException())
     }
   }

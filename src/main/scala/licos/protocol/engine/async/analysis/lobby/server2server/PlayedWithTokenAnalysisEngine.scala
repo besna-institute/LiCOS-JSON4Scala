@@ -11,7 +11,7 @@ trait PlayedWithTokenAnalysisEngine extends LobbyMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, playedWithTokenProtocol: PlayedWithTokenProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object PlayedWithTokenAnalysisEngine {

@@ -23,9 +23,9 @@ object JsonCreateRobotPlayer {
 
   val `type`: String = "createRobotPlayer"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonCreateRobotPlayer] = (
@@ -58,8 +58,8 @@ final case class JsonSupport(
 
 object JsonSupport {
 
-  import play.api.libs.functional.syntax._
-  import play.api.libs.json._
+  import play.api.libs.functional.syntax.*
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonSupport] = (
@@ -85,8 +85,8 @@ final case class JsonSupportedComposition(A: Boolean, B: Boolean, C: Boolean)
 
 object JsonSupportedComposition {
 
-  import play.api.libs.functional.syntax._
-  import play.api.libs.json._
+  import play.api.libs.functional.syntax.*
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonSupportedComposition] = (

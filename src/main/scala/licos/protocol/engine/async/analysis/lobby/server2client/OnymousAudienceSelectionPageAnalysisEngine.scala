@@ -11,7 +11,7 @@ trait OnymousAudienceSelectionPageAnalysisEngine extends LobbyMessageAnalysisEng
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, onymousAudienceSelectionPageProtocol: OnymousAudienceSelectionPageProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object OnymousAudienceSelectionPageAnalysisEngine {

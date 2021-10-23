@@ -1,7 +1,7 @@
 package licos.json.flow
 
 import licos.json.element.Element
-import licos.json.flow.utils._
+import licos.json.flow.utils.*
 import licos.json.parser.AuthParser
 import play.api.libs.json.JsValue
 

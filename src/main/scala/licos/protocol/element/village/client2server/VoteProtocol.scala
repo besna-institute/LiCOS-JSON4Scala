@@ -3,6 +3,7 @@ package licos.protocol.element.village.client2server
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.client2server.JsonVote
 import licos.knowledge.{Character, Data2Knowledge, Role}
+import licos.protocol.element.village.client2server.server2logger.VoteProtocol4Logger
 import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import play.api.libs.json.{JsValue, Json}
 
@@ -10,15 +11,15 @@ final case class VoteProtocol(village: VillageInfo, character: Character, myChar
     extends Client2ServerVillageMessageProtocol {
 
   private lazy val json: Option[JsonVote] = {
-    server2logger.VoteProtocol(village, character, myCharacter, myRole, Nil).json
+    VoteProtocol4Logger(village, character, myCharacter, myRole, Nil).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
 
-  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): server2logger.VoteProtocol = {
-    server2logger.VoteProtocol(
+  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): VoteProtocol4Logger = {
+    VoteProtocol4Logger(
       village:                    VillageInfo,
       character:                  Character,
       myCharacter:                Character,

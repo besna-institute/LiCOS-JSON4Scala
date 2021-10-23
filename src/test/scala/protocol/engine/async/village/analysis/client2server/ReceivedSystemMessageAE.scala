@@ -14,9 +14,9 @@ final class ReceivedSystemMessageAE extends ReceivedSystemMessageAnalysisEngine 
   override def process(
       box:                   VillageBOX,
       receivedSystemMessage: ReceivedSystemMessageProtocol
-  )(implicit ec:             ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:             ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(ReceivedSystemMessage.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(ReceivedSystemMessage.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

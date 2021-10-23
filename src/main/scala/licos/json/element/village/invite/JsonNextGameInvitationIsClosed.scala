@@ -16,7 +16,7 @@ object JsonNextGameInvitationIsClosed {
 
   val `type`: String = "nextGameInvitationIsClosed"
 
-  import play.api.libs.json._
+  import play.api.libs.json.*
   import play.api.libs.json.Reads.pattern
 
   implicit val jsonReads: Reads[JsonNextGameInvitationIsClosed] = {

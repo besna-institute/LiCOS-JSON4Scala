@@ -9,21 +9,22 @@ import licos.knowledge.{Data2Knowledge, Night, Role}
 import licos.protocol.element.village.part.{BoardResultProtocol, UpdateProtocol}
 import licos.protocol.element.village.part.character.{CharacterProtocol, StatusCharacterProtocol}
 import licos.protocol.element.village.part.role.RoleProtocol
+import licos.protocol.element.village.server2client.server2logger.NightPhaseProtocol4Logger
 import play.api.libs.json.{JsValue, Json}
 
 final case class NightPhaseProtocol(village: VillageInfo, character: Seq[CharacterProtocol], role: Seq[RoleProtocol])
     extends Server2ClientVillageMessageProtocol {
 
   private lazy val json: Option[JsonPhase] = {
-    server2logger.NightPhaseProtocol(village, character, role, Nil).json
+    NightPhaseProtocol4Logger(village, character, role, Nil).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
     Json.toJson(j)
   }
 
-  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): server2logger.NightPhaseProtocol = {
-    server2logger.NightPhaseProtocol(
+  def forLogger(extensionalDisclosureRange: Seq[StatusCharacterProtocol]): NightPhaseProtocol4Logger = {
+    NightPhaseProtocol4Logger(
       village:                    VillageInfo,
       character:                  Seq[CharacterProtocol],
       role:                       Seq[RoleProtocol],
@@ -36,7 +37,7 @@ final case class NightPhaseProtocol(village: VillageInfo, character: Seq[Charact
 object NightPhaseProtocol {
 
   def read(json: JsonPhase, villageInfoFromLobby: VillageInfoFromLobby): Option[NightPhaseProtocol] = {
-    import cats.implicits._
+    import cats.implicits.*
     if (json.base.phase === Night.label) {
       VillageInfoFactory
         .createOpt(villageInfoFromLobby, json.base)

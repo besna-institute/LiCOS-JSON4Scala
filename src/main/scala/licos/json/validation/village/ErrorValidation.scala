@@ -5,7 +5,7 @@ import play.api.libs.json.Reads.pattern
 
 object ErrorValidation {
 
-  val severity: Reads[String] = pattern("""(?:error|warning)""".r)
+  val severity: Reads[String] = pattern("""error|warning""".r)
   val source:   Reads[String] = pattern(""".{0,16384}""".r)
 
 }

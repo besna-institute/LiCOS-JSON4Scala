@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ChangeLanguageAE extends ChangeLanguageAnalysisEngine {
   override def process(box: LobbyBOX, changeLanguageProtocol: ChangeLanguageProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(ChangeLanguage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(ChangeLanguage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

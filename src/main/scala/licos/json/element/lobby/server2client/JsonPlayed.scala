@@ -14,9 +14,9 @@ object JsonPlayed {
 
   val `type`: String = "played"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonPlayed] = (

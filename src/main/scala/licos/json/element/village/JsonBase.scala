@@ -1,11 +1,11 @@
 package licos.json.element.village
 
-import java.util.{List => JList}
+import java.util.List as JList
 
 import licos.json.element.village.character.JsonStatusCharacter
 import licos.json.validation.village.{AvatarValidation, BaseValidation, TimeValidation}
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class JsonBase(
     `@context`:                 Seq[String],
@@ -63,7 +63,7 @@ final case class JsonBase(
   }
 
   def otherAvatar(otherAvatarToken: String): JsonBase = {
-    import cats.implicits._
+    import cats.implicits.*
     if (token === otherAvatarToken) {
       this
     } else {
@@ -110,8 +110,8 @@ final case class JsonBase(
 
 object JsonBase {
 
-  import play.api.libs.json._
-  import play.api.libs.functional.syntax._
+  import play.api.libs.json.*
+  import play.api.libs.functional.syntax.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonBase] = (

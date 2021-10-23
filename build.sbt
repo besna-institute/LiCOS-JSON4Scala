@@ -16,7 +16,7 @@ lazy val wartremoverSettings = Seq(
 
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,
-  version := "2.7.5"
+  version := "3.0.7"
 )
 
 lazy val commonSettings = Seq(
@@ -32,6 +32,7 @@ lazy val commonSettings = Seq(
     "-language:implicitConversions",
     "-unchecked",
     "-Xlint",
+    "-Xsource:3",
     s"-target:jvm-1.$javaVersion"
   )
 } ++ {
@@ -101,7 +102,7 @@ lazy val json = (project in file("."))
   )
   .settings(
     isSnapshot := true,
-    version := "0.5.1",
+    version := "0.6.0",
     name := jsonLibraryName,
     publishMavenStyle := true,
     Test / publishArtifact := false,

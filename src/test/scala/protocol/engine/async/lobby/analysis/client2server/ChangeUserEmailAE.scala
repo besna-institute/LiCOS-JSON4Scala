@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ChangeUserEmailAE extends ChangeUserEmailAnalysisEngine {
   override def process(box: LobbyBOX, changeUserEmailProtocol: ChangeUserEmailProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(ChangeUserEmail.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(ChangeUserEmail.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

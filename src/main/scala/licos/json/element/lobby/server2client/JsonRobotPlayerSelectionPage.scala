@@ -20,7 +20,7 @@ object JsonRobotPlayerSelectionPage {
 
   val `type`: String = "robotPlayerSelectionPage"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
   import play.api.libs.json.JsPath
 
@@ -64,7 +64,7 @@ final case class JsonRobotPlayerInfo private (
 
 object JsonRobotPlayerInfo {
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.JsPath
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))

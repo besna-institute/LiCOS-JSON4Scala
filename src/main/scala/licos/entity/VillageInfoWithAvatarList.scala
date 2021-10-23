@@ -6,7 +6,7 @@ final case class VillageInfoWithAvatarList(villageInfo: VillageInfo, avatarList:
     extends Serializable {
 
   def alivePlayerList: Seq[PlayerInVillage] = {
-    import cats.implicits._
+    import cats.implicits.*
     avatarList
       .filter(_.isInstanceOf[PlayerInVillage])
       .map(_.asInstanceOf[PlayerInVillage])

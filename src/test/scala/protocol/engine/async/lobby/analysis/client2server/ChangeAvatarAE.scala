@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ChangeAvatarAE extends ChangeAvatarAnalysisEngine {
   override def process(box: LobbyBOX, changeAvatarProtocol: ChangeAvatarProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(ChangeAvatar.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(ChangeAvatar.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

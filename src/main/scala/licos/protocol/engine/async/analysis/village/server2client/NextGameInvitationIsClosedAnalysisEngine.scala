@@ -12,7 +12,7 @@ trait NextGameInvitationIsClosedAnalysisEngine extends VillageMessageAnalysisEng
   def process(
       box:                        VillageBOX,
       nextGameInvitationIsClosed: NextGameInvitationIsClosedProtocol
-  )(implicit ec:                  ExecutionContext): Future[VillageMessageProtocol]
+  )(implicit ec:                  ExecutionContext): Future[Option[VillageMessageProtocol]]
 }
 
 object NextGameInvitationIsClosedAnalysisEngine {

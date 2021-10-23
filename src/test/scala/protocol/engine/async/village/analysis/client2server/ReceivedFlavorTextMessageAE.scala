@@ -14,9 +14,9 @@ final class ReceivedFlavorTextMessageAE extends ReceivedFlavorTextMessageAnalysi
   override def process(
       box:                       VillageBOX,
       receivedFlavorTextMessage: ReceivedFlavorTextMessageProtocol
-  )(implicit ec:                 ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:                 ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(ReceivedFlavorTextMessage.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(ReceivedFlavorTextMessage.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

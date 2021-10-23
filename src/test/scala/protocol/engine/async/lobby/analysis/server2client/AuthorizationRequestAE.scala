@@ -14,9 +14,9 @@ final class AuthorizationRequestAE extends AuthorizationRequestAnalysisEngine {
   override def process(
       box:                          LobbyBOX,
       authorizationRequestProtocol: AuthorizationRequestProtocol
-  )(implicit ec:                    ExecutionContext): Future[LobbyMessageProtocol] = {
+  )(implicit ec:                    ExecutionContext): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(AuthorizationRequest.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(AuthorizationRequest.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

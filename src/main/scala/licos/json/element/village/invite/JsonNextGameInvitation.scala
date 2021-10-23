@@ -16,9 +16,9 @@ final case class JsonNextGameInvitation(`type`: String, villageId: Long) extends
 object JsonNextGameInvitation {
   val `type`: String = "nextGameInvitation"
 
-  import play.api.libs.json._
+  import play.api.libs.json.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonNextGameInvitation] = (

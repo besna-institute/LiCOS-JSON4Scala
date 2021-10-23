@@ -2,7 +2,7 @@ package licos.knowledge
 
 sealed abstract class Architecture(val label: String) extends Product with Serializable {
   def isHuman: Boolean = {
-    import cats.implicits._
+    import cats.implicits.*
     this.label === HumanArchitecture.label
   }
   def isRobot: Boolean = !isHuman

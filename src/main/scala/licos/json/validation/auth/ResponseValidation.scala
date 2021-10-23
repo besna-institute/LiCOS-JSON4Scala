@@ -8,15 +8,15 @@ object ResponseValidation {
   object server2robot {
     val authenticationRequestResponse: Reads[String] =
       pattern(
-        """(?:authenticated|error:(?:alreadyRegistered|blocked|need(?:User(?:Email|Password)|AccessToken|RobotVersion|SourceCodeTimestamp)|invalid(?:User(?:Email|Password)|AccessToken|Version|SourceCodeTimestamp|ProgrammingLanguage(?:Name|Version))?Format|loginCredentialsNotFound|accessTokenNotFound))""".r
+        """authenticated|error:(?:alreadyRegistered|blocked|need(?:User(?:Email|Password)|AccessToken|RobotVersion|SourceCodeTimestamp)|invalid(?:User(?:Email|Password)|AccessToken|Version|SourceCodeTimestamp|ProgrammingLanguage(?:Name|Version))?Format|loginCredentialsNotFound|accessTokenNotFound)""".r
       )
     val authorizationRequestResponse: Reads[String] =
       pattern(
-        """(?:authorized|error:(?:alreadyRegistered|blocked|need(?:User(?:Email|Password)|AccessToken|RobotVersion|SourceCodeTimestamp)|invalid(?:User(?:Email|Password)|AccessToken|Version|SourceCodeTimestamp|ProgrammingLanguage(?:Name|Version))?Format|loginCredentialsNotFound|accessTokenNotFound))""".r
+        """authorized|error:(?:alreadyRegistered|blocked|need(?:User(?:Email|Password)|AccessToken|RobotVersion|SourceCodeTimestamp)|invalid(?:User(?:Email|Password)|AccessToken|Version|SourceCodeTimestamp|ProgrammingLanguage(?:Name|Version))?Format|loginCredentialsNotFound|accessTokenNotFound)""".r
       )
   }
 
   val server2client: Reads[String] = pattern(
-    """(?:authorized|error:(?:invalidFormat|needAccessToken|accessTokenNotFound))""".r
+    """authorized|error:(?:invalidFormat|needAccessToken|accessTokenNotFound)""".r
   )
 }

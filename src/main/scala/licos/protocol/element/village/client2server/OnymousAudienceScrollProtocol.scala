@@ -1,9 +1,9 @@
 package licos.protocol.element.village.client2server
 
 import java.net.URL
-
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.client2server.JsonOnymousAudienceScroll
+import licos.protocol.element.village.client2server.server2logger.OnymousAudienceScrollProtocol4Logger
 import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import play.api.libs.json.{JsValue, Json}
 
@@ -18,18 +18,16 @@ final case class OnymousAudienceScrollProtocol(
 ) extends Client2ServerVillageMessageProtocol {
 
   private lazy val json: Option[JsonOnymousAudienceScroll] = {
-    server2logger
-      .OnymousAudienceScrollProtocol(
-        village,
-        nodeId,
-        scrollTop,
-        scrollHeight,
-        offsetHeight,
-        myAvatarName,
-        myAvatarImage,
-        Nil
-      )
-      .json
+    OnymousAudienceScrollProtocol4Logger(
+      village,
+      nodeId,
+      scrollTop,
+      scrollHeight,
+      offsetHeight,
+      myAvatarName,
+      myAvatarImage,
+      Nil
+    ).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
@@ -38,8 +36,8 @@ final case class OnymousAudienceScrollProtocol(
 
   def forLogger(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-  ): server2logger.OnymousAudienceScrollProtocol = {
-    server2logger.OnymousAudienceScrollProtocol(
+  ): OnymousAudienceScrollProtocol4Logger = {
+    OnymousAudienceScrollProtocol4Logger(
       village:                    VillageInfo,
       nodeId:                     String,
       scrollTop:                  Int,

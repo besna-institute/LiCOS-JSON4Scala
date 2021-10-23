@@ -46,8 +46,8 @@ import licos.json.element.lobby.server2client.{
 import licos.json.element.lobby.server2server.JsonPlayedWithToken
 import licos.json.element.village.{JsonName, JsonSubError}
 import licos.json.engine.BOX
-import licos.json.engine.analysis.lobby.client2server._
-import licos.json.engine.analysis.lobby.server2client._
+import licos.json.engine.analysis.lobby.client2server.*
+import licos.json.engine.analysis.lobby.server2client.*
 import licos.json.engine.analysis.lobby.server2server.PlayedWithTokenAnalysisEngine
 import licos.json.flow.LobbyFlowController
 import play.api.libs.json.{JsValue, Json}

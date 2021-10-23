@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class PongAE extends PongAnalysisEngine {
   override def process(box: LobbyBOX, pongProtocol: PongProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(Pong.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(Pong.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

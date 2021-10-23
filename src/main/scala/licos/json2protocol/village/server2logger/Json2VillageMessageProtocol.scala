@@ -17,29 +17,29 @@ import licos.json2protocol.Json2Protocol
 import licos.knowledge.{Morning, Night, Noon, PostMortemDiscussion}
 import licos.protocol.element.village.VillageMessageProtocol
 import licos.protocol.element.village.client2server.server2logger.{
-  AnonymousAudienceChatFromClientProtocol,
-  BoardProtocol,
-  ChatFromClientProtocol,
-  ErrorFromClientProtocol,
-  OnymousAudienceBoardProtocol,
-  OnymousAudienceChatFromClientProtocol,
-  OnymousAudienceScrollProtocol,
-  ScrollProtocol,
-  StarProtocol,
-  VoteProtocol
+  AnonymousAudienceChatFromClientProtocol4Logger,
+  BoardProtocol4Logger,
+  ChatFromClientProtocol4Logger,
+  ErrorFromClientProtocol4Logger,
+  OnymousAudienceBoardProtocol4Logger,
+  OnymousAudienceChatFromClientProtocol4Logger,
+  OnymousAudienceScrollProtocol4Logger,
+  ScrollProtocol4Logger,
+  StarProtocol4Logger,
+  VoteProtocol4Logger
 }
 import licos.protocol.element.village.server2client.server2logger.{
-  AnonymousAudienceChatFromServerProtocol,
-  ChatFromServerProtocol,
-  ErrorFromServerProtocol,
-  FirstMorningPhaseProtocol,
-  FlavorTextProtocol,
-  GameResultProtocol,
-  MorningPhaseProtocol,
-  NightPhaseProtocol,
-  NoonPhaseProtocol,
-  OnymousAudienceChatFromServerProtocol,
-  PostMortemDiscussionProtocol
+  AnonymousAudienceChatFromServerProtocol4Logger,
+  ChatFromServerProtocol4Logger,
+  ErrorFromServerProtocol4Logger,
+  FirstMorningPhaseProtocol4Logger,
+  FlavorTextProtocol4Logger,
+  GameResultProtocol4Logger,
+  MorningPhaseProtocol4Logger,
+  NightPhaseProtocol4Logger,
+  NoonPhaseProtocol4Logger,
+  OnymousAudienceChatFromServerProtocol4Logger,
+  PostMortemDiscussionProtocol4Logger
 }
 import play.api.libs.json.JsValue
 
@@ -50,60 +50,60 @@ object Json2VillageMessageProtocol extends Json2Protocol {
     flowController.flow(json) match {
       case Right(json: JsonAnonymousAudienceChat) =>
         if (json.isFromServer) {
-          AnonymousAudienceChatFromServerProtocol.read(json, villageInfoFromLobby)
+          AnonymousAudienceChatFromServerProtocol4Logger.read(json, villageInfoFromLobby)
         } else {
-          AnonymousAudienceChatFromClientProtocol.read(json, villageInfoFromLobby)
+          AnonymousAudienceChatFromClientProtocol4Logger.read(json, villageInfoFromLobby)
         }
       case Right(json: JsonBoard) =>
-        BoardProtocol.read(json, villageInfoFromLobby)
+        BoardProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonChatFromClient) =>
-        ChatFromClientProtocol.read(json, villageInfoFromLobby)
+        ChatFromClientProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonError) =>
         if (json.isFromServer) {
-          ErrorFromServerProtocol.read(json, villageInfoFromLobby)
+          ErrorFromServerProtocol4Logger.read(json, villageInfoFromLobby)
         } else {
-          ErrorFromClientProtocol.read(json, villageInfoFromLobby)
+          ErrorFromClientProtocol4Logger.read(json, villageInfoFromLobby)
         }
       case Right(json: JsonOnymousAudienceBoard) =>
-        OnymousAudienceBoardProtocol.read(json, villageInfoFromLobby)
+        OnymousAudienceBoardProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonOnymousAudienceChat) =>
         if (json.isFromServer) {
-          OnymousAudienceChatFromServerProtocol.read(json, villageInfoFromLobby)
+          OnymousAudienceChatFromServerProtocol4Logger.read(json, villageInfoFromLobby)
         } else {
-          OnymousAudienceChatFromClientProtocol.read(json, villageInfoFromLobby)
+          OnymousAudienceChatFromClientProtocol4Logger.read(json, villageInfoFromLobby)
         }
       case Right(json: JsonOnymousAudienceScroll) =>
-        OnymousAudienceScrollProtocol.read(json, villageInfoFromLobby)
+        OnymousAudienceScrollProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonScroll) =>
-        ScrollProtocol.read(json, villageInfoFromLobby)
+        ScrollProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonStar) =>
-        StarProtocol.read(json, villageInfoFromLobby)
+        StarProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonVote) =>
-        VoteProtocol.read(json, villageInfoFromLobby)
+        VoteProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonChatFromServer) =>
-        ChatFromServerProtocol.read(json, villageInfoFromLobby)
+        ChatFromServerProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonPhase) =>
         json.base.phase match {
           case Morning.label =>
-            import cats.implicits._
+            import cats.implicits.*
             if (json.base.day === 1) {
-              FirstMorningPhaseProtocol.read(json, villageInfoFromLobby)
+              FirstMorningPhaseProtocol4Logger.read(json, villageInfoFromLobby)
             } else {
-              MorningPhaseProtocol.read(json, villageInfoFromLobby)
+              MorningPhaseProtocol4Logger.read(json, villageInfoFromLobby)
             }
           case Noon.label =>
-            NoonPhaseProtocol.read(json, villageInfoFromLobby)
+            NoonPhaseProtocol4Logger.read(json, villageInfoFromLobby)
           case Night.label =>
-            NightPhaseProtocol.read(json, villageInfoFromLobby)
+            NightPhaseProtocol4Logger.read(json, villageInfoFromLobby)
           case PostMortemDiscussion.label =>
-            PostMortemDiscussionProtocol.read(json, villageInfoFromLobby)
+            PostMortemDiscussionProtocol4Logger.read(json, villageInfoFromLobby)
           case _ =>
             Option.empty[VillageMessageProtocol]
         }
       case Right(json: JsonFlavorText) =>
-        FlavorTextProtocol.read(json, villageInfoFromLobby)
+        FlavorTextProtocol4Logger.read(json, villageInfoFromLobby)
       case Right(json: JsonGameResult) =>
-        GameResultProtocol.read(json, villageInfoFromLobby)
+        GameResultProtocol4Logger.read(json, villageInfoFromLobby)
       case _ =>
         Option.empty[VillageMessageProtocol]
     }

@@ -14,9 +14,9 @@ final class OnymousAudienceChatFromClientAE extends OnymousAudienceChatFromClien
   override def process(
       box:                           VillageBOX,
       onymousAudienceChatFromClient: OnymousAudienceChatFromClientProtocol
-  )(implicit ec:                     ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:                     ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(OnymousAudienceChatFromClient.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(OnymousAudienceChatFromClient.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

@@ -11,7 +11,7 @@ trait ChangeUserEmailAnalysisEngine extends LobbyMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, changeUserEmailProtocol: ChangeUserEmailProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object ChangeUserEmailAnalysisEngine {

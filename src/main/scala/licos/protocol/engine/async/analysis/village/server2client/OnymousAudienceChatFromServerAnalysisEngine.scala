@@ -12,7 +12,7 @@ trait OnymousAudienceChatFromServerAnalysisEngine extends VillageMessageAnalysis
   def process(
       box:                           VillageBOX,
       onymousAudienceChatFromServer: OnymousAudienceChatFromServerProtocol
-  )(implicit ec:                     ExecutionContext): Future[VillageMessageProtocol]
+  )(implicit ec:                     ExecutionContext): Future[Option[VillageMessageProtocol]]
 }
 
 object OnymousAudienceChatFromServerAnalysisEngine {

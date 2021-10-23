@@ -6,13 +6,13 @@ sealed abstract class Status(val label: String) extends Product with Serializabl
 
   def toIntermediateStatus: Status
   def isAlive: Boolean = {
-    import cats.implicits._
+    import cats.implicits.*
     this.label === Alive.label
   }
   def isDead: Boolean = !isAlive
 
   override def equals(o: Any): Boolean = {
-    import cats.implicits._
+    import cats.implicits.*
     o match {
       case status: Status if status.label === this.label => true
       case _ => false

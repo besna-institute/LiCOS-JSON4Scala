@@ -11,7 +11,7 @@ trait AuthorizationRequestAnalysisEngine extends LobbyMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, authorizationRequestProtocol: AuthorizationRequestProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object AuthorizationRequestAnalysisEngine {

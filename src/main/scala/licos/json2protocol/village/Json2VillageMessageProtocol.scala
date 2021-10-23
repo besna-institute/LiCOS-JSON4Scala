@@ -112,7 +112,7 @@ object Json2VillageMessageProtocol extends Json2Protocol {
       case Right(json: JsonPhase) =>
         json.base.phase match {
           case Morning.label =>
-            import cats.implicits._
+            import cats.implicits.*
             if (json.base.day === 1) {
               FirstMorningPhaseProtocol.read(json, villageInfoFromLobby)
             } else {

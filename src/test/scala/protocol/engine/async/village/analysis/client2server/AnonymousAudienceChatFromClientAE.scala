@@ -14,9 +14,9 @@ final class AnonymousAudienceChatFromClientAE extends AnonymousAudienceChatFromC
   override def process(
       box:                             VillageBOX,
       anonymousAudienceChatFromClient: AnonymousAudienceChatFromClientProtocol
-  )(implicit ec:                       ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:                       ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(AnonymousAudienceChatFromClient.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(AnonymousAudienceChatFromClient.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

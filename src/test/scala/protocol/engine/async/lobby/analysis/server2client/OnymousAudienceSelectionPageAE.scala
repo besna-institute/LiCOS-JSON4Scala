@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class OnymousAudienceSelectionPageAE extends OnymousAudienceSelectionPageAnalysisEngine {
   override def process(box: LobbyBOX, onymousAudienceSelectionPageProtocol: OnymousAudienceSelectionPageProtocol)(
       implicit ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(OnymousAudienceSelectionPage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(OnymousAudienceSelectionPage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

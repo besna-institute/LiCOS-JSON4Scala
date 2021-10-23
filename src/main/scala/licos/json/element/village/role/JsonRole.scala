@@ -1,12 +1,12 @@
 package licos.json.element.village.role
 
-import java.util.{List => JList}
+import java.util.List as JList
 
 import licos.json.element.village.iri.RoleContext
 import licos.json.element.village.{JsonBoardResult, JsonName}
 import licos.json.validation.village.RoleValidation
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class JsonRole(
     `@context`:      String,
@@ -68,8 +68,8 @@ final case class JsonRole(
 
 object JsonRole {
 
-  import play.api.libs.json._
-  import play.api.libs.functional.syntax._
+  import play.api.libs.json.*
+  import play.api.libs.functional.syntax.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonRole] = (

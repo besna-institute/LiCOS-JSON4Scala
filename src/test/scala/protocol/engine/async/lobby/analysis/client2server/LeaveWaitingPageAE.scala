@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class LeaveWaitingPageAE extends LeaveWaitingPageAnalysisEngine {
   override def process(box: LobbyBOX, leaveWaitingPageProtocol: LeaveWaitingPageProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(LeaveWaitingPage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(LeaveWaitingPage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

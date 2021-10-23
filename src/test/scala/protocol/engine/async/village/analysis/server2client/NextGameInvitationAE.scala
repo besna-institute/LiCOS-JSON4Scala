@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class NextGameInvitationAE extends NextGameInvitationAnalysisEngine {
   override def process(box: VillageBOX, nextGameInvitation: NextGameInvitationProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(NextGameInvitation.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(NextGameInvitation.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

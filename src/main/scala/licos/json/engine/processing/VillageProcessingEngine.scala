@@ -3,12 +3,12 @@ package licos.json.engine.processing
 import com.typesafe.scalalogging.Logger
 import licos.json.element.lobby.client2server.{JsonBuildVillage, JsonLeaveWaitingPage, JsonReady}
 import licos.json.engine.BOX
-import licos.json.engine.analysis.lobby.client2server._
+import licos.json.engine.analysis.lobby.client2server.*
 import licos.json.engine.analysis.village
-import licos.json.engine.analysis.village.client2server._
-import licos.json.engine.analysis.village.server2client._
+import licos.json.engine.analysis.village.client2server.*
+import licos.json.engine.analysis.village.server2client.*
 import licos.json.flow.{FlowController, VillageFlowController}
-import licos.json.element.village._
+import licos.json.element.village.*
 import licos.json.element.village.client2server.{
   JsonBoard,
   JsonChatFromClient,

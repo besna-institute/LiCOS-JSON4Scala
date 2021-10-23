@@ -233,7 +233,7 @@ final class VillageBox(villageInfoFromLobby: VillageInfoFromLobby,
                        stringParameter: String) extends VillageBOX(villageInfoFromLobby)
 
 final class FlavorTextAE extends FlavorTextAnalysisEngine {
-  override def process(box: VillageBOX, flavorTextProtocol: FlavorTextProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, flavorTextProtocol: FlavorTextProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -243,7 +243,7 @@ final class FlavorTextAE extends FlavorTextAnalysisEngine {
 }
 
 final class ChatFromServerAE extends ChatAnalysisEngine {
-  override def process(box: VillageBOX, chatFromServerProtocol: ChatFromServerProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, chatFromServerProtocol: ChatFromServerProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -253,7 +253,7 @@ final class ChatFromServerAE extends ChatAnalysisEngine {
 }
 
 final class FirstMorningPhaseAE extends FirstMorningPhaseAnalysisEngine {
-  override def process(box: VillageBOX, firstMorningPhaseProtocol: FirstMorningPhaseProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, firstMorningPhaseProtocol: FirstMorningPhaseProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -263,7 +263,7 @@ final class FirstMorningPhaseAE extends FirstMorningPhaseAnalysisEngine {
 }
 
 final class MorningPhaseAE extends MorningPhaseAnalysisEngine {
-  override def process(box: VillageBOX, morningPhaseProtocol: MorningPhaseProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, morningPhaseProtocol: MorningPhaseProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -273,7 +273,7 @@ final class MorningPhaseAE extends MorningPhaseAnalysisEngine {
 }
 
 final class NoonPhaseAE extends NoonPhaseAnalysisEngine {
-  override def process(box: VillageBOX, noonPhaseProtocol: NoonPhaseProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, noonPhaseProtocol: NoonPhaseProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -283,7 +283,7 @@ final class NoonPhaseAE extends NoonPhaseAnalysisEngine {
 }
 
 final class NightPhaseAE extends NightPhaseAnalysisEngine {
-  override def process(box: VillageBOX, nightPhaseProtocol: NightPhaseProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, nightPhaseProtocol: NightPhaseProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -293,7 +293,7 @@ final class NightPhaseAE extends NightPhaseAnalysisEngine {
 }
 
 final class GameResultAE extends GameResultAnalysisEngine {
-  override def process(box: VillageBOX, gameResultProtocol: GameResultProtocol): Future[VillageMessageProtocol] = {
+  override def process(box: VillageBOX, gameResultProtocol: GameResultProtocol): Future[Option[VillageMessageProtocol]] = {
     box match {
       case x: VillageBox =>
       //TODO: Write here.
@@ -350,10 +350,10 @@ object Runner extends App {
       Await.ready(
         processingEngine
           .process(anExampleOfBOX, protocol)
-          .map { messageProtocol: VillageMessageProtocol =>
-            messageProtocol.toJsonOpt.foreach { json: JsValue =>
+          .map { messageProtocolOpt: Option[VillageMessageProtocol] =>
+            messageProtocolOpt.foreach(_.toJsonOpt.foreach { json: JsValue =>
               System.err.println(Json.prettyPrint(json))
-            }
+            })
           }
           .recover {
             case error: Throwable =>

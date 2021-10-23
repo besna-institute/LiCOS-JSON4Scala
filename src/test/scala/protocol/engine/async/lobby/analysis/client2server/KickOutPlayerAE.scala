@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class KickOutPlayerAE extends KickOutPlayerAnalysisEngine {
   override def process(box: LobbyBOX, kickOutPlayerProtocol: KickOutPlayerProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(KickOutPlayer.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(KickOutPlayer.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

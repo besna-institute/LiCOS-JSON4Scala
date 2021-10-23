@@ -2,11 +2,11 @@ package licos.protocol.engine.async.processing.lobby
 
 import com.typesafe.scalalogging.Logger
 import licos.protocol.element.lobby.LobbyMessageProtocol
-import licos.protocol.element.lobby.client2server._
-import licos.protocol.element.lobby.server2client._
+import licos.protocol.element.lobby.client2server.*
+import licos.protocol.element.lobby.server2client.*
 import licos.protocol.element.lobby.server2server.PlayedWithTokenProtocol
-import licos.protocol.engine.async.analysis.lobby.client2server._
-import licos.protocol.engine.async.analysis.lobby.server2client._
+import licos.protocol.engine.async.analysis.lobby.client2server.*
+import licos.protocol.engine.async.analysis.lobby.server2client.*
 import licos.protocol.engine.async.analysis.lobby.server2server.PlayedWithTokenAnalysisEngine
 import licos.protocol.engine.async.processing.ProcessingEngine
 import licos.protocol.engine.processing.lobby.LobbyBOX
@@ -65,7 +65,9 @@ final class LobbyProcessingEngine(
       "org.wartremover.warts.Overloading"
     )
   )
-  def process(box: LobbyBOX, msg: LobbyMessageProtocol)(implicit ec: ExecutionContext): Future[LobbyMessageProtocol] = {
+  def process(box: LobbyBOX, msg: LobbyMessageProtocol)(implicit
+      ec:          ExecutionContext
+  ): Future[Option[LobbyMessageProtocol]] = {
 
     def log(label: String): Unit = {
       val format: String = "process %s"

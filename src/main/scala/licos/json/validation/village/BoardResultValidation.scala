@@ -12,5 +12,5 @@ object BoardResultValidation {
       .stateRegex(s"""role#${RoleValidation.roleNamesInLowerCase}/board#${CharacterValidation.idStringPattern}""")
       .r
   )
-  val polarity: Reads[String] = pattern("""(?:positive|negative|[?ΔOX])""".r)
+  val polarity: Reads[String] = pattern("""positive|negative|[?ΔOX]""".r)
 }

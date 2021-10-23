@@ -21,9 +21,9 @@ final case class JsonAvatarInfo private (`type`: String, subAvatarInfo: JsonSubA
 object JsonAvatarInfo {
   val `type`: String = "avatar"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonAvatarInfo] = (
@@ -47,8 +47,8 @@ final case class JsonSubAvatarInfo(token: String, name: String, image: String, l
 
 object JsonSubAvatarInfo {
 
-  import play.api.libs.functional.syntax._
-  import play.api.libs.json._
+  import play.api.libs.functional.syntax.*
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonSubAvatarInfo] = (
@@ -74,9 +74,9 @@ final case class JsonGetAvatarInfo(`type`: String, token: String) extends TypeSy
 object JsonGetAvatarInfo {
   val `type`: String = "getAvatar"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonGetAvatarInfo] = (

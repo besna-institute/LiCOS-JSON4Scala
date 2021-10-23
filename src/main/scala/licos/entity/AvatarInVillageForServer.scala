@@ -37,7 +37,7 @@ final case class PlayerInVillageForServer(character: Character, role: Role, only
   def getOutcomeOpt: Option[Outcome] = outcomeOpt
 
   def getStatus(phase: Phase, day: Int): Status = {
-    import cats.implicits._
+    import cats.implicits.*
     if (
       updateDay === day &&
       updatePhase.label === Noon.label &&

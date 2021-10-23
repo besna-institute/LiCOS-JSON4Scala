@@ -1,7 +1,7 @@
 package licos.protocol.engine.async.processing.lobby
 
-import licos.protocol.engine.async.analysis.lobby.client2server._
-import licos.protocol.engine.async.analysis.lobby.server2client._
+import licos.protocol.engine.async.analysis.lobby.client2server.*
+import licos.protocol.engine.async.analysis.lobby.server2client.*
 import licos.protocol.engine.async.analysis.lobby.server2server.PlayedWithTokenAnalysisEngine
 import licos.protocol.engine.async.processing.ProcessingEngineFactory
 

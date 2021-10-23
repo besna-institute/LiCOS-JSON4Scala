@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class AdvancedSearchAE extends AdvancedSearchAnalysisEngine {
   override def process(box: LobbyBOX, advancedSearchProtocol: AdvancedSearchProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(AdvancedSearch.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(AdvancedSearch.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

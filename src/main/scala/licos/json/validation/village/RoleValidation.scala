@@ -5,7 +5,7 @@ import java.util.Locale
 import licos.util.{LiCOSOnline, WerewolfWorld}
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 import scala.util.matching.Regex
 
@@ -24,7 +24,7 @@ object RoleValidation {
   val `@id`: Reads[String] = pattern(`@idRegex`)
   object name {
     val en: Reads[String] = pattern(roleNames.r)
-    val ja: Reads[String] = pattern("""(?:狩人|狂人|共有者|霊媒師|占い師|村人|ハムスター人間|人狼)""".r)
+    val ja: Reads[String] = pattern("""狩人|狂人|共有者|霊媒師|占い師|村人|ハムスター人間|人狼""".r)
   }
   val image:           Reads[String] = pattern(WerewolfWorld.roleIcon(roleNamesInLowerCase).r)
   val numberOfPlayers: Reads[Int]    = min(0) keepAnd max(7)

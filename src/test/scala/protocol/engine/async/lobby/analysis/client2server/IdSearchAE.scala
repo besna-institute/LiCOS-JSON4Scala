@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class IdSearchAE extends IdSearchAnalysisEngine {
   override def process(box: LobbyBOX, idSearchProtocol: IdSearchProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(IdSearch.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(IdSearch.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

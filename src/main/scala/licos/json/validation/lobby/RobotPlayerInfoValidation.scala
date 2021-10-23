@@ -6,6 +6,6 @@ object RobotPlayerInfoValidation {
   import play.api.libs.json.Reads.pattern
 
   val status: Reads[String] = pattern(
-    """(?:(?:dis)?connected|awaiting (?:authorization|communication test)|running in the (?:back|fore)ground)""".r
+    """(?:dis)?connected|awaiting (?:authorization|communication test)|running in the (?:back|fore)ground""".r
   )
 }

@@ -3,7 +3,7 @@ package licos.json.validation.village
 import licos.util.{LiCOSOnline, WerewolfWorld}
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 import scala.util.matching.Regex
 
@@ -25,8 +25,8 @@ object BaseValidation {
   val phaseStartTime:    Reads[String] = timestamp
   val serverTimestamp:   Reads[String] = timestamp
   val clientTimestamp:   Reads[String] = timestamp
-  val directionality:    Reads[String] = pattern("""(?:client to server|server to client)""".r)
+  val directionality:    Reads[String] = pattern("""client to server|server to client""".r)
   val intensionalDisclosureRange: Reads[String] = pattern(
-    """(?:public|private|werewolf|seer|hunter|master|grave|onymousAudience|anonymousAudience)""".r
+    """public|private|werewolf|seer|hunter|master|grave|onymousAudience|anonymousAudience""".r
   )
 }

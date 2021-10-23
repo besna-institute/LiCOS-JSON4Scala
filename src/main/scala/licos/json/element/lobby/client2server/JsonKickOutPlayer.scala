@@ -18,9 +18,9 @@ object JsonKickOutPlayer {
 
   val `type`: String = "kickOutPlayer"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonKickOutPlayer] = (
@@ -37,7 +37,7 @@ final case class JsonPlayerTokenInKickOutPlayer(token: String)
 
 object JsonPlayerTokenInKickOutPlayer {
 
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   implicit val jsonReads: Reads[JsonPlayerTokenInKickOutPlayer] =
     (JsPath \ "token").read[String](AvatarValidation.token).map(JsonPlayerTokenInKickOutPlayer.apply)

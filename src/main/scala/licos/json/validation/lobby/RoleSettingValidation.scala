@@ -2,9 +2,9 @@ package licos.json.validation.lobby
 
 object RoleSettingValidation {
 
-  import play.api.libs.json._
-  import play.api.libs.json.Reads._
-  import play.api.libs.functional.syntax._
+  import play.api.libs.json.*
+  import play.api.libs.json.Reads.*
+  import play.api.libs.functional.syntax.*
 
   val hunter:      Reads[Int] = min(0) keepAnd max(15)
   val madman:      Reads[Int] = min(0) keepAnd max(15)

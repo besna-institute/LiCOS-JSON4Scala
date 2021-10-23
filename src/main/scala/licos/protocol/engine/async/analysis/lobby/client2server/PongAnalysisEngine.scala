@@ -9,7 +9,9 @@ import scala.concurrent.{ExecutionContext, Future}
 
 trait PongAnalysisEngine extends LobbyMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
-  def process(box: LobbyBOX, pongProtocol: PongProtocol)(implicit ec: ExecutionContext): Future[LobbyMessageProtocol]
+  def process(box: LobbyBOX, pongProtocol: PongProtocol)(implicit
+      ec:          ExecutionContext
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object PongAnalysisEngine {

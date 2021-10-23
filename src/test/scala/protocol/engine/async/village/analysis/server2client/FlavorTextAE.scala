@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class FlavorTextAE extends FlavorTextAnalysisEngine {
   override def process(box: VillageBOX, flavorText: FlavorTextProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(FlavorText.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(FlavorText.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

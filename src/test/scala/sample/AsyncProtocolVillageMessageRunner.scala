@@ -61,10 +61,10 @@ object AsyncProtocolVillageMessageRunner extends App {
       Await.ready(
         processingEngine
           .process(anExampleOfBOX, protocol)
-          .map { messageProtocol: VillageMessageProtocol =>
-            messageProtocol.toJsonOpt.foreach { json: JsValue =>
+          .map { messageProtocolOpt: Option[VillageMessageProtocol] =>
+            messageProtocolOpt.foreach(_.toJsonOpt.foreach { json: JsValue =>
               System.err.println(Json.prettyPrint(json))
-            }
+            })
           }
           .recover { case error: Throwable =>
             System.err.println(error.getMessage)

@@ -1,10 +1,10 @@
 package licos.protocol.element.village.client2server
 
 import java.net.URL
-
 import licos.entity.{VillageInfo, VillageInfoFactory, VillageInfoFromLobby}
 import licos.json.element.village.client2server.JsonOnymousAudienceBoard
 import licos.knowledge.{Character, Data2Knowledge, PolarityMark, Role}
+import licos.protocol.element.village.client2server.server2logger.OnymousAudienceBoardProtocol4Logger
 import licos.protocol.element.village.part.character.StatusCharacterProtocol
 import play.api.libs.json.{JsValue, Json}
 
@@ -18,9 +18,7 @@ final case class OnymousAudienceBoardProtocol(
 ) extends Client2ServerVillageMessageProtocol {
 
   private lazy val json: Option[JsonOnymousAudienceBoard] = {
-    server2logger
-      .OnymousAudienceBoardProtocol(village, character, role, prediction, myAvatarName, myAvatarImage, Nil)
-      .json
+    OnymousAudienceBoardProtocol4Logger(village, character, role, prediction, myAvatarName, myAvatarImage, Nil).json
   }
 
   override def toJsonOpt: Option[JsValue] = json.map { j =>
@@ -29,8 +27,8 @@ final case class OnymousAudienceBoardProtocol(
 
   def forLogger(
       extensionalDisclosureRange: Seq[StatusCharacterProtocol]
-  ): server2logger.OnymousAudienceBoardProtocol = {
-    server2logger.OnymousAudienceBoardProtocol(
+  ): OnymousAudienceBoardProtocol4Logger = {
+    OnymousAudienceBoardProtocol4Logger(
       village:                    VillageInfo,
       character:                  Character,
       role:                       Role,

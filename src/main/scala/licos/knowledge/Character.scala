@@ -21,7 +21,7 @@ sealed abstract class Character(val name: NameProtocol) extends Product with Ser
   override def equals(o: Any): Boolean = {
     o match {
       case character: Character =>
-        import cats.implicits._
+        import cats.implicits.*
         this.name.en === character.name.en
       case _ => false
     }

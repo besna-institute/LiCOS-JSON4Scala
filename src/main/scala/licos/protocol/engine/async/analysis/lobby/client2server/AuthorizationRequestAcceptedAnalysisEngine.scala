@@ -12,7 +12,7 @@ trait AuthorizationRequestAcceptedAnalysisEngine extends LobbyMessageAnalysisEng
   def process(
       box:                                  LobbyBOX,
       authorizationRequestAcceptedProtocol: AuthorizationRequestAcceptedProtocol
-  )(implicit ec:                            ExecutionContext): Future[LobbyMessageProtocol]
+  )(implicit ec:                            ExecutionContext): Future[Option[LobbyMessageProtocol]]
 }
 
 object AuthorizationRequestAcceptedAnalysisEngine {

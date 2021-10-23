@@ -3,7 +3,7 @@ package licos.json.validation.village
 import licos.util.{LiCOSOnline, WerewolfWorld}
 import play.api.libs.json.Reads
 import play.api.libs.json.Reads.{max, min, pattern}
-import play.api.libs.functional.syntax._
+import play.api.libs.functional.syntax.*
 
 import scala.util.matching.Regex
 
@@ -22,6 +22,6 @@ object CharacterValidation {
   val gender: Reads[String] = pattern("""(?:fe)?male""".r)
   val image:  Reads[String] = pattern(WerewolfWorld.characterIcon("""(?:[a-z]|anonymous)""").r)
   val id:     Reads[Int]    = min(1) keepAnd max(15)
-  val status: Reads[String] = pattern("""(?:alive|dead|death by (?:execution|attack|fear)|unnatural death)""".r)
-  val result: Reads[String] = pattern("""(?:win|lose)""".r)
+  val status: Reads[String] = pattern("""alive|dead|death by (?:execution|attack|fear)|unnatural death""".r)
+  val result: Reads[String] = pattern("""win|lose""".r)
 }

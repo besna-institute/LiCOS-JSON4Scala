@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class CreateRobotPlayerAE extends CreateRobotPlayerAnalysisEngine {
   override def process(box: LobbyBOX, createRobotPlayerProtocol: CreateRobotPlayerProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(CreateRobotPlayer.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(CreateRobotPlayer.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
 

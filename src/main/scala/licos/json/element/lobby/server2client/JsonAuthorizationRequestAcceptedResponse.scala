@@ -18,9 +18,9 @@ final case class JsonAuthorizationRequestAcceptedResponse(`type`: String, access
 object JsonAuthorizationRequestAcceptedResponse {
   val `type`: String = "authorizationRequestAcceptedResponse"
 
-  import play.api.libs.functional.syntax._
+  import play.api.libs.functional.syntax.*
   import play.api.libs.json.Reads.pattern
-  import play.api.libs.json._
+  import play.api.libs.json.*
 
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonReads: Reads[JsonAuthorizationRequestAcceptedResponse] = (

@@ -14,9 +14,9 @@ final class NextGameInvitationIsClosedAE extends NextGameInvitationIsClosedAnaly
   override def process(
       box:                        VillageBOX,
       nextGameInvitationIsClosed: NextGameInvitationIsClosedProtocol
-  )(implicit ec:                  ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:                  ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(NextGameInvitationIsClosed.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(NextGameInvitationIsClosed.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

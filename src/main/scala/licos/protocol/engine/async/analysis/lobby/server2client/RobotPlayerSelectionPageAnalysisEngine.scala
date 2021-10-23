@@ -11,7 +11,7 @@ trait RobotPlayerSelectionPageAnalysisEngine extends LobbyMessageAnalysisEngine 
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, robotPlayerSelectionPageProtocol: RobotPlayerSelectionPageProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object RobotPlayerSelectionPageAnalysisEngine {
