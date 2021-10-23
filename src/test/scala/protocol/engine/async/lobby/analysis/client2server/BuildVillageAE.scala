@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class BuildVillageAE extends BuildVillageAnalysisEngine {
   override def process(box: LobbyBOX, buildVillageProtocol: BuildVillageProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(BuildVillage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(BuildVillage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

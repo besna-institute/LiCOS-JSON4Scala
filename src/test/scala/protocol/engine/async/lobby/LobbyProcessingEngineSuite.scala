@@ -230,9 +230,9 @@ final class LobbyProcessingEngineSuite
           Await.ready(
             processingEngine
               .process(new LobbyBox(), protocol)
-              .map { messageProtocol: LobbyMessageProtocol =>
-                messageProtocol match {
-                  case p: LobbyMessageTestProtocol =>
+              .map { messageProtocolOpt: Option[LobbyMessageProtocol] =>
+                messageProtocolOpt match {
+                  case Some(p: LobbyMessageTestProtocol) =>
                     p.text shouldBe jsonType
                   case _ =>
                     fail("No LobbyMessageTestProtocol")

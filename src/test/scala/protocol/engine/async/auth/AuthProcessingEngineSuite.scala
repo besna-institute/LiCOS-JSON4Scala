@@ -66,9 +66,9 @@ final class AuthProcessingEngineSuite extends AnyFunSuite with Matchers with Tab
           Await.ready(
             processingEngine
               .process(new AuthBox(), protocol)
-              .map { messageProtocol: AuthMessageProtocol =>
-                messageProtocol match {
-                  case p: AuthMessageTestProtocol =>
+              .map { messageProtocolOpt: Option[AuthMessageProtocol] =>
+                messageProtocolOpt match {
+                  case Some(p: AuthMessageTestProtocol) =>
                     p.text shouldBe jsonType
                   case _ =>
                     fail("No AuthMessageTestProtocol")

@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class MorningPhaseAE extends MorningPhaseAnalysisEngine {
   override def process(box: VillageBOX, morningPhase: MorningPhaseProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(MorningPhase.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(MorningPhase.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

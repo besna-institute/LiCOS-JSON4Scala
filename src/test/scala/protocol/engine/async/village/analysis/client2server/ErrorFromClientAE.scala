@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ErrorFromClientAE extends ErrorFromClientAnalysisEngine {
   override def process(box: VillageBOX, errorFromClient: ErrorFromClientProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(ErrorFromClient.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(ErrorFromClient.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

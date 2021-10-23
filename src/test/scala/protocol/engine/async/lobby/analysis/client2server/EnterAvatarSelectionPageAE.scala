@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class EnterAvatarSelectionPageAE extends EnterAvatarSelectionPageAnalysisEngine {
   override def process(box: LobbyBOX, enterAvatarSelectionPageProtocol: EnterAvatarSelectionPageProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(EnterAvatarSelectionPage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(EnterAvatarSelectionPage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

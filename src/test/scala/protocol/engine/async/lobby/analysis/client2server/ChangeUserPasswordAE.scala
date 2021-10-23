@@ -14,9 +14,9 @@ final class ChangeUserPasswordAE extends ChangeUserPasswordAnalysisEngine {
   override def process(
       box:                        LobbyBOX,
       changeUserPasswordProtocol: ChangeUserPasswordProtocol
-  )(implicit ec:                  ExecutionContext): Future[LobbyMessageProtocol] = {
+  )(implicit ec:                  ExecutionContext): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(ChangeUserPassword.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(ChangeUserPassword.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

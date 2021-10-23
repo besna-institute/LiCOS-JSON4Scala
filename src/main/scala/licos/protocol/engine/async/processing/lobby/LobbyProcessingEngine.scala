@@ -65,7 +65,9 @@ final class LobbyProcessingEngine(
       "org.wartremover.warts.Overloading"
     )
   )
-  def process(box: LobbyBOX, msg: LobbyMessageProtocol)(implicit ec: ExecutionContext): Future[LobbyMessageProtocol] = {
+  def process(box: LobbyBOX, msg: LobbyMessageProtocol)(implicit
+      ec:          ExecutionContext
+  ): Future[Option[LobbyMessageProtocol]] = {
 
     def log(label: String): Unit = {
       val format: String = "process %s"

@@ -14,9 +14,9 @@ final class AuthenticationAndAuthorizationRequestAE extends AuthenticationAndAut
   override def process(
       box:                                           AuthBOX,
       authenticationAndAuthorizationRequestProtocol: AuthenticationAndAuthorizationRequestProtocol
-  )(implicit ec:                                     ExecutionContext): Future[AuthMessageProtocol] = {
+  )(implicit ec:                                     ExecutionContext): Future[Option[AuthMessageProtocol]] = {
     box match {
-      case _: AuthBox => Future.successful(AuthMessageTestProtocol(AuthenticationAndAuthorizationRequest.`type`))
+      case _: AuthBox => Future.successful(Some(AuthMessageTestProtocol(AuthenticationAndAuthorizationRequest.`type`)))
       case _ => Future.failed(new AuthBOXNotFoundException())
     }
   }

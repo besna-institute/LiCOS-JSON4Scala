@@ -14,9 +14,9 @@ final class OnymousAudienceBoardAE extends OnymousAudienceBoardAnalysisEngine {
   override def process(
       box:                  VillageBOX,
       onymousAudienceBoard: OnymousAudienceBoardProtocol
-  )(implicit ec:            ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:            ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(OnymousAudienceBoard.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(OnymousAudienceBoard.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

@@ -14,9 +14,9 @@ final class ReceivedChatMessageAE extends ReceivedChatMessageAnalysisEngine {
   override def process(
       box:                 VillageBOX,
       receivedChatMessage: ReceivedChatMessageProtocol
-  )(implicit ec:           ExecutionContext): Future[VillageMessageProtocol] = {
+  )(implicit ec:           ExecutionContext): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(ReceivedChatMessage.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(ReceivedChatMessage.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

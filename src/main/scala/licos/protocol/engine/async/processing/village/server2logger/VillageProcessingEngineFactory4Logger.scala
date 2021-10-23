@@ -41,8 +41,8 @@ final class VillageProcessingEngineFactory4Logger extends ProcessingEngineFactor
   private var postMortemDiscussionAnalysisEngine: Option[PostMortemDiscussionAnalysisEngine] =
     Option.empty[PostMortemDiscussionAnalysisEngine]
 
-  override def create: VillageProcessingEngine4Logger = {
-    new VillageProcessingEngine4Logger(
+  override def create: VillageProcessingEngine = {
+    new VillageProcessingEngine(
       anonymousAudienceChatFromClientAnalysisEngine,
       boardAnalysisEngine,
       chatFromClientAnalysisEngine,

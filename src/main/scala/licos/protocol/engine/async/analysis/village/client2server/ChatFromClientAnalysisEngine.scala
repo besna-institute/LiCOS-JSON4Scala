@@ -11,7 +11,7 @@ trait ChatFromClientAnalysisEngine extends VillageMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: VillageBOX, chatFromClient: ChatFromClientProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol]
+  ): Future[Option[VillageMessageProtocol]]
 }
 
 object ChatFromClientAnalysisEngine {

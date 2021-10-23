@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ReadyAE extends ReadyAnalysisEngine {
   override def process(box: VillageBOX, readyProtocol: ReadyProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(Ready.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(Ready.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

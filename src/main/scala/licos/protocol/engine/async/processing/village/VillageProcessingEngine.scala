@@ -86,7 +86,7 @@ final class VillageProcessingEngine(
   )
   def process(box: VillageBOX, msg: VillageMessageProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
 
     def log(label: String): Unit = {
       val format: String = "process %s"

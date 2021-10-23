@@ -10,7 +10,7 @@ trait CreateRobotPlayerAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, createRobotPlayerProtocol: CreateRobotPlayerProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object CreateRobotPlayerAnalysisEngine {

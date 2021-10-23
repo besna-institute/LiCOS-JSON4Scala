@@ -11,7 +11,7 @@ trait KickOutPlayerAnalysisEngine extends LobbyMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: LobbyBOX, kickOutPlayerProtocol: KickOutPlayerProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[LobbyMessageProtocol]
+  ): Future[Option[LobbyMessageProtocol]]
 }
 
 object KickOutPlayerAnalysisEngine {

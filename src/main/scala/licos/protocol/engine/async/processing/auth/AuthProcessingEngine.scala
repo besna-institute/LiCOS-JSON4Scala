@@ -33,7 +33,9 @@ final class AuthProcessingEngine(
       "org.wartremover.warts.Overloading"
     )
   )
-  def process(box: AuthBOX, msg: AuthMessageProtocol)(implicit ec: ExecutionContext): Future[AuthMessageProtocol] = {
+  def process(box: AuthBOX, msg: AuthMessageProtocol)(implicit
+      ec:          ExecutionContext
+  ): Future[Option[AuthMessageProtocol]] = {
 
     def log(label: String): Unit = {
       val format: String = "process %s"

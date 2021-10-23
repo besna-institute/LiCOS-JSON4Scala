@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class BoardAE extends BoardAnalysisEngine {
   override def process(box: VillageBOX, board: BoardProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(Board.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(Board.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

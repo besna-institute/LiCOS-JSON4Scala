@@ -10,7 +10,7 @@ import licos.knowledge.{Composition, HumanArchitecture, HumanPlayerLobby, Random
 import licos.protocol.element.village.VillageMessageProtocol
 import licos.protocol.engine.async.processing.{SpecificProcessingEngineFactory, VillagePE4Logger}
 import licos.protocol.engine.async.processing.village.server2logger.{
-  VillageProcessingEngine4Logger,
+  VillageProcessingEngine,
   VillageProcessingEngineFactory4Logger
 }
 import org.scalatest.funsuite.AnyFunSuite
@@ -48,7 +48,7 @@ final class VillageProcessingEngineSuite extends AnyFunSuite with Matchers with 
     .set(new ChatFromServerAE())
     .set(new MorningPhaseAE())
 
-  private val processingEngine: VillageProcessingEngine4Logger = processingEngineFactory.create
+  private val processingEngine: VillageProcessingEngine = processingEngineFactory.create
 
   test("protocol.async.villageProcessingEngineSuite") {
     forEvery(fractions) { jsonExample: VillageExample =>
@@ -88,9 +88,9 @@ final class VillageProcessingEngineSuite extends AnyFunSuite with Matchers with 
           Await.ready(
             processingEngine
               .process(box, protocol)
-              .map { messageProtocol: VillageMessageProtocol =>
-                messageProtocol match {
-                  case p: VillageMessageTestProtocol =>
+              .map { messageProtocolOpt: Option[VillageMessageProtocol] =>
+                messageProtocolOpt match {
+                  case Some(p: VillageMessageTestProtocol) =>
                     p.text shouldBe jsonType
                   case _ =>
                     fail("No VillageMessageTestProtocol")

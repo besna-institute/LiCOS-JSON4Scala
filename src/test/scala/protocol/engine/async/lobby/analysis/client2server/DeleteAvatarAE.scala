@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class DeleteAvatarAE extends DeleteAvatarAnalysisEngine {
   override def process(box: LobbyBOX, deleteAvatarProtocol: DeleteAvatarProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(DeleteAvatar.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(DeleteAvatar.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

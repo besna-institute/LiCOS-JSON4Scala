@@ -35,7 +35,7 @@ import licos.protocol.engine.processing.{JSON2ProtocolException, NoEngineExcepti
 
 import scala.concurrent.{ExecutionContext, Future}
 
-final class VillageProcessingEngine4Logger(
+final class VillageProcessingEngine(
     anonymousAudienceChatFromClientAnalysisEngine: Option[AnonymousAudienceChatFromClientAnalysisEngine],
     boardAnalysisEngine:                           Option[BoardAnalysisEngine],
     chatFromClientAnalysisEngine:                  Option[ChatFromClientAnalysisEngine],
@@ -59,7 +59,7 @@ final class VillageProcessingEngine4Logger(
     postMortemDiscussionAnalysisEngine:            Option[PostMortemDiscussionAnalysisEngine]
 ) extends ProcessingEngine {
 
-  private val logger: Logger = Logger[VillageProcessingEngine4Logger]
+  private val logger: Logger = Logger[VillageProcessingEngine]
 
   @SuppressWarnings(
     Array[String](
@@ -70,7 +70,7 @@ final class VillageProcessingEngine4Logger(
   )
   def process(box: VillageBOX, msg: VillageMessageProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
 
     def log(label: String): Unit = {
       val format: String = "process %s"

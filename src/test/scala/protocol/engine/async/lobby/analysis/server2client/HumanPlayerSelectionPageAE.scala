@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class HumanPlayerSelectionPageAE extends HumanPlayerSelectionPageAnalysisEngine {
   override def process(box: LobbyBOX, humanPlayerSelectionPageProtocol: HumanPlayerSelectionPageProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[LobbyMessageProtocol] = {
+  ): Future[Option[LobbyMessageProtocol]] = {
     box match {
-      case _: LobbyBox => Future.successful(LobbyMessageTestProtocol(HumanPlayerSelectionPage.`type`))
+      case _: LobbyBox => Future.successful(Some(LobbyMessageTestProtocol(HumanPlayerSelectionPage.`type`)))
       case _ => Future.failed(new LobbyBOXNotFoundException())
     }
   }

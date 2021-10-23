@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class VoteAE extends VoteAnalysisEngine {
   override def process(box: VillageBOX, vote: VoteProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(Vote.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(Vote.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }

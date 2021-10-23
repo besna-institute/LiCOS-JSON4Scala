@@ -11,7 +11,7 @@ trait NextGameInvitationAnalysisEngine extends VillageMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: VillageBOX, nextGameInvitation: NextGameInvitationProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol]
+  ): Future[Option[VillageMessageProtocol]]
 }
 
 object NextGameInvitationAnalysisEngine {

@@ -11,7 +11,7 @@ trait NightPhaseAnalysisEngine extends VillageMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: VillageBOX, nightPhase: NightPhaseProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol]
+  ): Future[Option[VillageMessageProtocol]]
 }
 
 object NightPhaseAnalysisEngine {

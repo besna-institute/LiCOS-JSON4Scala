@@ -12,7 +12,7 @@ trait PostMortemDiscussionAnalysisEngine extends VillageMessageAnalysisEngine {
   def process(
       box:                  VillageBOX,
       postMortemDiscussion: PostMortemDiscussionProtocol
-  )(implicit ec:            ExecutionContext): Future[VillageMessageProtocol]
+  )(implicit ec:            ExecutionContext): Future[Option[VillageMessageProtocol]]
 }
 
 object PostMortemDiscussionAnalysisEngine {

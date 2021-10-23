@@ -11,7 +11,7 @@ trait AuthenticationAndAuthorizationRequestAnalysisEngine {
   def process(
       box:                                           AuthBOX,
       authenticationAndAuthorizationRequestProtocol: AuthenticationAndAuthorizationRequestProtocol
-  )(implicit ec:                                     ExecutionContext): Future[AuthMessageProtocol]
+  )(implicit ec:                                     ExecutionContext): Future[Option[AuthMessageProtocol]]
 }
 
 object AuthenticationAndAuthorizationRequestAnalysisEngine {

@@ -195,9 +195,9 @@ final class VillageProcessingEngineSuite extends AnyFunSuite with Matchers with 
           Await.ready(
             processingEngine
               .process(box, protocol)
-              .map { messageProtocol: VillageMessageProtocol =>
-                messageProtocol match {
-                  case p: VillageMessageTestProtocol =>
+              .map { messageProtocolOpt: Option[VillageMessageProtocol] =>
+                messageProtocolOpt match {
+                  case Some(p: VillageMessageTestProtocol) =>
                     p.text shouldBe jsonType
                   case _ =>
                     fail("No VillageMessageTestProtocol")

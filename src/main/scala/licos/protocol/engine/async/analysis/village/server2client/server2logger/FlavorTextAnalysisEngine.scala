@@ -11,7 +11,7 @@ trait FlavorTextAnalysisEngine extends VillageMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: VillageBOX, flavorText: FlavorTextProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol]
+  ): Future[Option[VillageMessageProtocol]]
 }
 
 object FlavorTextAnalysisEngine {

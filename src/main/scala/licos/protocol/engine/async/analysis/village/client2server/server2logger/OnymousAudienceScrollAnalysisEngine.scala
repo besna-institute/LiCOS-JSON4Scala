@@ -11,7 +11,7 @@ trait OnymousAudienceScrollAnalysisEngine extends VillageMessageAnalysisEngine {
   @SuppressWarnings(Array[String]("org.wartremover.warts.ImplicitParameter"))
   def process(box: VillageBOX, onymousAudienceScroll: OnymousAudienceScrollProtocol)(implicit
       ec:          ExecutionContext
-  ): Future[VillageMessageProtocol]
+  ): Future[Option[VillageMessageProtocol]]
 }
 
 object OnymousAudienceScrollAnalysisEngine {

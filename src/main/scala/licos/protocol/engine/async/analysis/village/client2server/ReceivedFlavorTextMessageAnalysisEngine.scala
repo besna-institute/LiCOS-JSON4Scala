@@ -12,7 +12,7 @@ trait ReceivedFlavorTextMessageAnalysisEngine extends VillageMessageAnalysisEngi
   def process(
       box:                       VillageBOX,
       receivedFlavorTextMessage: ReceivedFlavorTextMessageProtocol
-  )(implicit ec:                 ExecutionContext): Future[VillageMessageProtocol]
+  )(implicit ec:                 ExecutionContext): Future[Option[VillageMessageProtocol]]
 }
 
 object ReceivedFlavorTextMessageAnalysisEngine {

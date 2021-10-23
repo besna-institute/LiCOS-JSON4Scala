@@ -13,9 +13,9 @@ import scala.concurrent.{ExecutionContext, Future}
 final class ChatFromServerAE extends ChatFromServerAnalysisEngine {
   override def process(box: VillageBOX, chatFromServer: ChatFromServerProtocol)(implicit
       ec:                   ExecutionContext
-  ): Future[VillageMessageProtocol] = {
+  ): Future[Option[VillageMessageProtocol]] = {
     box match {
-      case _: VillageBox => Future.successful(VillageMessageTestProtocol(ChatFromServer.`type`))
+      case _: VillageBox => Future.successful(Some(VillageMessageTestProtocol(ChatFromServer.`type`)))
       case _ => Future.failed(new VillageBOXNotFoundException())
     }
   }
