@@ -25,7 +25,7 @@ endif::[]
 
 === The latest version ===
 
-https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/0.5.1/api/index.html
+https://besna-institute.github.io/LiCOS-JSON4ScalaDoc/0.6.0/api/index.html
 
 === Old versions ===
 
