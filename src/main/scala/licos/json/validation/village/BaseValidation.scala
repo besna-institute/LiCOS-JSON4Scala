@@ -25,7 +25,7 @@ object BaseValidation {
   val phaseStartTime:    Reads[String] = timestamp
   val serverTimestamp:   Reads[String] = timestamp
   val clientTimestamp:   Reads[String] = timestamp
-  val directionality:    Reads[String] = pattern("""(?:client to server|server to client)""".r)
+  val directionality:    Reads[String] = pattern("""client to server|server to client""".r)
   val intensionalDisclosureRange: Reads[String] = pattern(
     """public|private|werewolf|seer|hunter|master|grave|onymousAudience|anonymousAudience""".r
   )
