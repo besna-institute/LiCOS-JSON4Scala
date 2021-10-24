@@ -29,6 +29,10 @@ final case class JsonError private (base: JsonBase, sub: JsonSubError) extends J
 
 object JsonError {
 
+  def apply(base: JsonBase, sub: JsonSubError): JsonError = {
+    new JsonError(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonError] = (
     JsPath.format[JsonBase] and

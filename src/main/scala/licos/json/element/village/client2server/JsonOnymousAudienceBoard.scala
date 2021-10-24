@@ -39,6 +39,10 @@ final case class JsonOnymousAudienceBoard private (base: JsonBase, sub: JsonSubO
 
 object JsonOnymousAudienceBoard {
 
+  def apply(base: JsonBase, sub: JsonSubOnymousAudienceBoard): JsonOnymousAudienceBoard = {
+    new JsonOnymousAudienceBoard(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonOnymousAudienceBoard] = (
     JsPath.format[JsonBase] and

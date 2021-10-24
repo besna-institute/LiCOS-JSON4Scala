@@ -23,6 +23,10 @@ final case class JsonVote private (base: JsonBase, sub: JsonSubVote) extends Jso
 
 object JsonVote {
 
+  def apply(base: JsonBase, sub: JsonSubVote): JsonVote = {
+    new JsonVote(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonVote] = (
     JsPath.format[JsonBase] and

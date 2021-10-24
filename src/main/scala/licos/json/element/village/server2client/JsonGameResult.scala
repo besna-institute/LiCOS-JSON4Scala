@@ -53,6 +53,11 @@ final case class JsonGameResult private (base: JsonBase, sub: JsonSubGameResult)
 }
 
 object JsonGameResult {
+
+  def apply(base: JsonBase, sub: JsonSubGameResult): JsonGameResult = {
+    new JsonGameResult(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonGameResult] = (
     JsPath.format[JsonBase] and

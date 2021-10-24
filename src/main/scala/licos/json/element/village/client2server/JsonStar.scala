@@ -22,6 +22,10 @@ final case class JsonStar(base: JsonBase, sub: JsonSubStar) extends JsonElement 
 
 object JsonStar {
 
+  def apply(base: JsonBase, sub: JsonSubStar): JsonStar = {
+    new JsonStar(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonStar] = (
     JsPath.format[JsonBase] and

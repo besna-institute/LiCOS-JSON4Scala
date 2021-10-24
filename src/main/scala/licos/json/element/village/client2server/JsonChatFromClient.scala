@@ -45,6 +45,10 @@ final case class JsonChatFromClient private (base: JsonBase, sub: JsonSubChatFro
 
 object JsonChatFromClient {
 
+  def apply(base: JsonBase, sub: JsonSubChatFromClient): JsonChatFromClient = {
+    new JsonChatFromClient(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonChatFromClient] = (
     JsPath.format[JsonBase] and

@@ -32,6 +32,10 @@ final case class JsonOnymousAudienceScroll private (base: JsonBase, sub: JsonSub
 
 object JsonOnymousAudienceScroll {
 
+  def apply(base: JsonBase, sub: JsonSubOnymousAudienceScroll): JsonOnymousAudienceScroll = {
+    new JsonOnymousAudienceScroll(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonOnymousAudienceScroll] = (
     JsPath.format[JsonBase] and

@@ -102,7 +102,7 @@ lazy val json = (project in file("."))
   )
   .settings(
     isSnapshot := true,
-    version := "0.6.0",
+    version := "0.6.1",
     name := jsonLibraryName,
     publishMavenStyle := true,
     Test / publishArtifact := false,

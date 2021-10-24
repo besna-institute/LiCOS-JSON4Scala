@@ -40,6 +40,10 @@ final case class JsonScroll private (base: JsonBase, sub: JsonSubScroll) extends
 
 object JsonScroll {
 
+  def apply(base: JsonBase, sub: JsonSubScroll): JsonScroll = {
+    new JsonScroll(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonScroll] = (
     JsPath.format[JsonBase] and
