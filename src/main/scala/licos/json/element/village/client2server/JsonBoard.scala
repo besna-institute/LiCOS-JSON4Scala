@@ -37,6 +37,10 @@ final case class JsonBoard private (base: JsonBase, sub: JsonSubBoard) extends J
 
 object JsonBoard {
 
+  def apply(base: JsonBase, sub: JsonSubBoard): JsonBoard = {
+    new JsonBoard(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonBoard] = (
     JsPath.format[JsonBase] and

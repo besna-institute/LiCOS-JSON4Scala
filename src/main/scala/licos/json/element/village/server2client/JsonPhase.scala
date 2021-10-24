@@ -59,6 +59,11 @@ final case class JsonPhase private (base: JsonBase, sub: JsonSubPhase) extends J
 }
 
 object JsonPhase {
+
+  def apply(base: JsonBase, sub: JsonSubPhase): JsonPhase = {
+    new JsonPhase(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonPhase] = (
     JsPath.format[JsonBase] and

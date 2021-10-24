@@ -36,6 +36,11 @@ final case class JsonFlavorText private (base: JsonBase, sub: JsonSubFlavorText)
 }
 
 object JsonFlavorText {
+
+  def apply(base: JsonBase, sub: JsonSubFlavorText): JsonFlavorText = {
+    new JsonFlavorText(base, sub)
+  }
+
   @SuppressWarnings(Array[String]("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   implicit val jsonFormat: Format[JsonFlavorText] = (
     JsPath.format[JsonBase] and
