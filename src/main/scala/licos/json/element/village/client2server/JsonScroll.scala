@@ -4,7 +4,7 @@ import licos.json.element.Element
 import licos.json.element.village.character.JsonRoleCharacter
 import licos.json.element.village.{JsonBase, JsonElement}
 import licos.json.validation.village.ScrollValidation
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 final case class JsonScroll private (base: JsonBase, sub: JsonSubScroll) extends JsonElement with Element {

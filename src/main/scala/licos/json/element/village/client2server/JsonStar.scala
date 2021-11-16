@@ -4,7 +4,7 @@ import licos.json.element.Element
 import licos.json.element.village.character.JsonRoleCharacter
 import licos.json.element.village.{JsonBase, JsonElement}
 import licos.json.validation.village.{AvatarValidation, BaseValidation, StarValidation}
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath, Json, OFormat}
 
 final case class JsonStar(base: JsonBase, sub: JsonSubStar) extends JsonElement with Element {

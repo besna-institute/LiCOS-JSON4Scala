@@ -5,7 +5,7 @@ import licos.json.element.village.character.{JsonRoleCharacter, JsonSimpleCharac
 import licos.json.element.village.role.JsonSimpleRole
 import licos.json.element.village.{JsonBase, JsonElement}
 import licos.json.validation.village.BoardValidation
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 final case class JsonBoard private (base: JsonBase, sub: JsonSubBoard) extends JsonElement with Element {

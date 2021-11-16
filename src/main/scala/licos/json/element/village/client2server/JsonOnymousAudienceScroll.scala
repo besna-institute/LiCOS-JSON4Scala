@@ -2,7 +2,7 @@ package licos.json.element.village.client2server
 
 import licos.json.element.Element
 import licos.json.element.village.{JsonAvatar, JsonBase, JsonElement}
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 final case class JsonOnymousAudienceScroll private (base: JsonBase, sub: JsonSubOnymousAudienceScroll)

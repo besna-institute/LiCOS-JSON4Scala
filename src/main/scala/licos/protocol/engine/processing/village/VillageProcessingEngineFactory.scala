@@ -1,7 +1,7 @@
 package licos.protocol.engine.processing.village
 
-import licos.protocol.engine.analysis.village.client2server._
-import licos.protocol.engine.analysis.village.server2client._
+import licos.protocol.engine.analysis.village.client2server.*
+import licos.protocol.engine.analysis.village.server2client.*
 import licos.protocol.engine.processing.ProcessingEngineFactory
 
 @SuppressWarnings(Array[String]("org.wartremover.warts.Overloading", "org.wartremover.warts.Var"))

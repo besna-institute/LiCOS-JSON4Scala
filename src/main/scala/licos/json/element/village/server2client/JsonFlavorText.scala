@@ -4,7 +4,7 @@ import java.util.List as JList
 
 import licos.json.element.Element
 import licos.json.element.village.{JsonBase, JsonElement}
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 import scala.jdk.CollectionConverters.*
