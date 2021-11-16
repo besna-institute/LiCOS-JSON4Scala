@@ -4,7 +4,7 @@ import licos.json.element.Element
 import licos.json.element.village.character.JsonSimpleCharacter
 import licos.json.element.village.{JsonBase, JsonChatText, JsonElement}
 import licos.json.validation.village.ChatValidation
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 final case class JsonChatFromServer private (base: JsonBase, sub: JsonSubChatFromServer)

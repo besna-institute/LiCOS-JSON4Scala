@@ -35,8 +35,8 @@ import licos.protocol.element.village.server2client.{
   OnymousAudienceChatFromServerProtocol,
   PostMortemDiscussionProtocol
 }
-import licos.protocol.engine.analysis.village.client2server._
-import licos.protocol.engine.analysis.village.server2client._
+import licos.protocol.engine.analysis.village.client2server.*
+import licos.protocol.engine.analysis.village.server2client.*
 import licos.protocol.engine.processing.{JSON2ProtocolException, NoEngineException, ProcessingEngine}
 
 import scala.util.{Failure, Try}

@@ -4,10 +4,10 @@ import java.nio.charset.StandardCharsets
 
 import com.typesafe.scalalogging.Logger
 import json.engine.VillageExample
-import json.engine.village.analysis.client2server._
-import json.engine.village.analysis.server2client._
-import json.engine.village.example.client2server._
-import json.engine.village.example.server2client._
+import json.engine.village.analysis.client2server.*
+import json.engine.village.analysis.server2client.*
+import json.engine.village.example.client2server.*
+import json.engine.village.example.server2client.*
 import json.element.JsonTest
 import licos.json.engine.processing.{
   SpecificProcessingEngineFactory,

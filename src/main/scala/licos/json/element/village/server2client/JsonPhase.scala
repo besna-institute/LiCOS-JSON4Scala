@@ -6,7 +6,7 @@ import licos.json.element.Element
 import licos.json.element.village.character.JsonCharacter
 import licos.json.element.village.role.JsonRole
 import licos.json.element.village.{JsonBase, JsonElement}
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath, Json, OFormat}
 
 import scala.jdk.CollectionConverters.*

@@ -2,11 +2,11 @@ package licos.protocol.engine.processing.lobby
 
 import com.typesafe.scalalogging.Logger
 import licos.protocol.element.lobby.LobbyMessageProtocol
-import licos.protocol.element.lobby.client2server._
-import licos.protocol.element.lobby.server2client._
+import licos.protocol.element.lobby.client2server.*
+import licos.protocol.element.lobby.server2client.*
 import licos.protocol.element.lobby.server2server.PlayedWithTokenProtocol
-import licos.protocol.engine.analysis.lobby.client2server._
-import licos.protocol.engine.analysis.lobby.server2client._
+import licos.protocol.engine.analysis.lobby.client2server.*
+import licos.protocol.engine.analysis.lobby.server2client.*
 import licos.protocol.engine.analysis.lobby.server2server.PlayedWithTokenAnalysisEngine
 import licos.protocol.engine.processing.{JSON2ProtocolException, NoEngineException, ProcessingEngine}
 

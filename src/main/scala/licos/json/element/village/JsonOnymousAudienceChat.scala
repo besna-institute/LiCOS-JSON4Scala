@@ -2,7 +2,7 @@ package licos.json.element.village
 
 import licos.json.element.Element
 import licos.json.validation.village.ChatValidation
-import play.api.libs.functional.syntax.{unlift, _}
+import play.api.libs.functional.syntax.{unlift, *}
 import play.api.libs.json.{Format, JsPath}
 
 final case class JsonOnymousAudienceChat(base: JsonBase, sub: JsonSubOnymousAudienceChat)

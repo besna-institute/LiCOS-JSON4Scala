@@ -16,11 +16,11 @@ lazy val wartremoverSettings = Seq(
 
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,
-  version := "3.0.7"
+  version := "3.1.1"
 )
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.6",
+  scalaVersion := "2.13.7",
   organization := "online.licos",
   run / fork := true
 ) ++ {
@@ -122,18 +122,6 @@ lazy val json = (project in file("."))
         "ch.qos.logback" % "logback-classic" % "1.2.6",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
         "org.typelevel" %% "cats-core" % "2.6.1"
-      )
-    }
-  )
-  .settings(
-    dependencyOverrides ++= {
-      Seq(
-        "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.10.2",
-        "com.fasterxml.jackson.core" % "jackson-annotations" % "2.9.8",
-        "com.fasterxml.jackson.core" % "jackson-core" % "2.10.2",
-        "com.fasterxml.jackson.core" % "jackson-databind" % "2.10.2",
-        "com.fasterxml.jackson.datatype" % "jackson-datatype-jdk8" % "2.10.2",
-        "org.slf4j" % "slf4j-api" % "1.7.30"
       )
     }
   )
