@@ -16,11 +16,11 @@ lazy val wartremoverSettings = Seq(
 
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,
-  version := "3.1.1"
+  version := "3.4.0"
 )
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.7",
+  scalaVersion := "2.13.8",
   organization := "online.licos",
   run / fork := true
 ) ++ {
@@ -102,7 +102,7 @@ lazy val json = (project in file("."))
   )
   .settings(
     isSnapshot := true,
-    version := "0.6.1",
+    version := "0.6.2",
     name := jsonLibraryName,
     publishMavenStyle := true,
     Test / publishArtifact := false,
@@ -118,10 +118,10 @@ lazy val json = (project in file("."))
       Seq(
         "com.typesafe.play" %% "play-json" % "2.9.2",
         "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
-        "org.slf4j" % "slf4j-api" % "1.7.32" % Compile,
-        "ch.qos.logback" % "logback-classic" % "1.2.6",
+        "org.slf4j" % "slf4j-api" % "1.7.35" % Compile,
+        "ch.qos.logback" % "logback-classic" % "1.2.10",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
-        "org.typelevel" %% "cats-core" % "2.6.1"
+        "org.typelevel" %% "cats-core" % "2.7.0"
       )
     }
   )
