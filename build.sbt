@@ -10,10 +10,6 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val javaVersion: String = "8"
 
-lazy val wartremoverSettings = Seq(
-  Compile / compile / wartremoverWarnings ++= Warts.allBut(Wart.Throw)
-)
-
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,
   version := "3.4.0"
@@ -22,7 +18,9 @@ lazy val scalafmtSettings = Seq(
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.8",
   organization := "online.licos",
-  run / fork := true
+  run / fork := true,
+  semanticdbEnabled := true,
+  semanticdbVersion := scalafixSemanticdb.revision // only required for Scala 2.x
 ) ++ {
   scalacOptions ++= Seq(
     "-deprecation",
@@ -35,6 +33,8 @@ lazy val commonSettings = Seq(
     "-Xsource:3",
     s"-target:jvm-1.$javaVersion"
   )
+  scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explain-types", "-Ykind-projector")
+  else Seq("-explaintypes",  "-Wunused"))
 } ++ {
   javacOptions ++= Seq(
     "-source",
@@ -89,7 +89,6 @@ val pomExtraTemplate = {
 
 lazy val json = (project in file("."))
   .settings(commonSettings: _*)
-  .settings(wartremoverSettings: _*)
   .settings(scalafmtSettings: _*)
   .settings(
     Compile / doc / scalacOptions ++= Seq(
@@ -121,7 +120,7 @@ lazy val json = (project in file("."))
         "org.slf4j" % "slf4j-api" % "1.7.35" % Compile,
         "ch.qos.logback" % "logback-classic" % "1.2.10",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
-        "org.typelevel" %% "cats-core" % "2.7.0"
+        "org.typelevel" %% "cats-core" % "2.7.0",
       )
     }
   )

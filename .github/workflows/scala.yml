@@ -14,4 +14,8 @@ jobs:
         with:
           java-version: 1.8
       - name: Run tests
-        run: sbt test
+        run: sbt Test/test
+      - name: Migrate scalac options
+        run: sbt "migrate-scalacOptions json"
+      - name: Migrate libraries
+        run: sbt "migrate-libs json"
