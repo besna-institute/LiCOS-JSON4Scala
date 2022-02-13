@@ -31,10 +31,10 @@ lazy val commonSettings = Seq(
     "-unchecked",
     "-Xlint",
     "-Xsource:3",
-    s"-target:jvm-1.$javaVersion"
+    s"-target:jvm-1.$javaVersion",
+    "-explaintypes",
+    "-Wunused"
   )
-  scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explain-types", "-Ykind-projector")
-  else Seq("-explaintypes",  "-Wunused"))
 } ++ {
   javacOptions ++= Seq(
     "-source",
